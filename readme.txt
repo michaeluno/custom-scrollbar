@@ -16,6 +16,8 @@ Do you have too long elements sticking out and breaking the web site layout?
 
 If you have such a problem, fix their height by adding a scrollbar to the element with this plugin.
 
+After installing it, go to Dashboard -> Appearance -> Scrollbars. Set a selector and height. That's it.
+
 Nots: you need a basic understanding of CSS (jQuery) selectors to use this plugin.
 
 = Features =
@@ -32,7 +34,7 @@ Nots: you need a basic understanding of CSS (jQuery) selectors to use this plugi
 1. Upload **`custom-scrollbar.php`** and other files compressed in the zip folder to the **`/wp-content/plugins/`** directory.
 1. Activate the plugin through the 'Plugins' menu in WordPress.
 1. Go to **Dashboard** -> **Appearance** -> **Scrollbars**.
-1. Configure the options.
+1. Configure the options by setting a selector and height.
 
 == Frequently asked questions ==
 
