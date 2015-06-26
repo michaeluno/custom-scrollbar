@@ -4,8 +4,18 @@
 
 Custom Scrollbar is an open source WordPress plugin that lets you add custom scrollbars to specified HTML elements.
 
+<p align="center">
+    <img src="https://lh3.googleusercontent.com/-ifoBNxO0fBQ/VY2ZiH-3mYI/AAAAAAAACBM/nh9CawjMYSo/s0/screenshot.png" alt="Custom Scrollbar" />
+</p>
+
 ## Screenshots ##
-Coming soon..
+
+<div style="margin:20px; float:left">
+	<a href="https://lh3.googleusercontent.com/-LmnXX-qM8SQ/VY2ZiMIVAGI/AAAAAAAACBM/wqJx5Ce1qsw/s800/screenshot-2.png" title="Custom Scrollbar - Settings">
+		<img src="https://lh3.googleusercontent.com/-LmnXX-qM8SQ/VY2ZiMIVAGI/AAAAAAAACBM/wqJx5Ce1qsw/s400/screenshot-2.png" alt="Custom Scrollbar - Settings" width="320" />
+	</a>
+	&nbsp;
+</div>
 
 ## Installation ##
 

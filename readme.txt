@@ -24,7 +24,7 @@ Nots: you need a basic understanding of CSS (jQuery) selectors to use this plugi
 * **Multiple Selectors** - by specifying selectors, you can define multiple scrollbars.
 * **Custom Colors** - pick custom colors for the scrollbar elements.
 * **Custom CSS** - define custom CSS rules.
-
+* **Predefined Styles** - pick you favorite style from a list.
   
 = Supported Language =
 * English
