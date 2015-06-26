@@ -2,7 +2,7 @@
 
 ### Welcome to our GitHub Repository
 
-Custom Scrollbar is an open source WordPress plugin that inserts Amazon products in WordPress powered web sites.
+Custom Scrollbar is an open source WordPress plugin that lets you add custom scrollbars to specified HTML elements.
 
 ## Screenshots ##
 Coming soon..
@@ -19,9 +19,8 @@ Coming soon..
 
 1. Upload **`custom-scrollbar.php`** and other files compressed in the zip folder to the **`/wp-content/plugins/`** directory.
 2. Activate the plugin through the 'Plugins' menu in WordPress.
-3. Go to **Dashboard** -> **Custom Scrollbar** -> **Add Unit by Category**.
-4. Configure the options and select categories.
-5. After saving the unit option, go to **'Manage Units'** to get the shortcode or if you check one of the insert option, the links will automatically appear in posts or feeds depending on your choice. The widget is avaiable in the **Apparence** -> **Widgets** page as well.
+3. Go to **Dashboard** -> **Appearance** -> **Scrollbars**.
+4. Configure the options.
 
 ## Bugs ##
 If you find an issue, let us know [here](https://github.com/michaeluno/custom-scrollbar/issues)!

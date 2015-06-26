@@ -8,7 +8,7 @@ Stable tag:         1.0
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
-Adds a custom scrollbar to specified elements.
+Adds a custom scrollbar to specified HTML elements.
 
 == Description ==
 

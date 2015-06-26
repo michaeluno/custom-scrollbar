@@ -2,7 +2,7 @@
 /*
 	Plugin Name:    Custom Scrollbar
 	Plugin URI:     http://en.michaeluno.jp/custom-scrollbar
-	Description:    Adds a custom scrollbar to specified elements.
+	Description:    Adds a custom scrollbar to specified HTML elements.
 	Author:         Michael Uno (miunosoft)
 	Author URI:     http://michaeluno.jp
 	Version:        1b02
@@ -17,7 +17,7 @@ class CustomScrollbar_Registry_Base {
  
 	const VERSION        = '1b02';    // <--- DON'T FORGET TO CHANGE THIS AS WELL!!
 	const NAME           = 'Custom Scrollbar';
-	const DESCRIPTION    = 'Adds a custom scrollbar to specified elements.';
+	const DESCRIPTION    = 'Adds a custom scrollbar to specified HTML elements.';
 	const URI            = 'http://en.michaeluno.jp/custom-scrollbar';
 	const AUTHOR         = 'miunosoft (Michael Uno)';
 	const AUTHOR_URI     = 'http://en.michaeluno.jp/';
