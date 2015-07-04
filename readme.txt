@@ -47,5 +47,5 @@ Notes: you need a basic understanding of CSS (jQuery) selectors to use this plug
 
 == Changelog ==
 
-= 1 =
+= 1 - 07/05/2015 =
 - Released. 
