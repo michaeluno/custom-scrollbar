@@ -18,30 +18,48 @@
             if ( _aScrollbar[ 'width' ][ 'size' ] ) {
                 _sAxis += 'x';
             }            
-            var _sWidth = _aScrollbar[ 'width' ][ 'size' ]
+            var _bisWidth = _aScrollbar[ 'width' ][ 'size' ]
                 ? ( 'px' === _aScrollbar[ 'width' ][ 'unit' ] 
                     ? Number( _aScrollbar[ 'width' ][ 'size' ] )
                     : String( _aScrollbar[ 'width' ][ 'size' ] )
                 )
                 : false;
-            var _sHeight = _aScrollbar[ 'height' ][ 'size' ]
+            var _bisHeight = _aScrollbar[ 'height' ][ 'size' ]
                 ? ( 'px' === _aScrollbar[ 'height' ][ 'unit' ] 
                     ? Number( _aScrollbar[ 'height' ][ 'size' ] )
                     : String( _aScrollbar[ 'height' ][ 'size' ] )
                 )
                 : false;   
             var _aOptions = {
-                axis: _sAxis, // vertical/horizontal scrollbar
-                theme: _aScrollbar[ 'theme' ],
-                // setWidth: _sWidth,  // integer - px, string - %
-                setHeight: _sHeight, // integer - px, string - %
-                scrollbarPosition: _aScrollbar[ 'position' ],
+                axis                : _sAxis, // vertical/horizontal scrollbar. e.g. 'x', 'y', 'xy'
+                // axis: 'x',
+                theme               : _aScrollbar[ 'theme' ],
+                setWidth            : _bisWidth,  // (integer) px, (string) %, (boolean) false
+                setHeight           : _bisHeight, // (integer) px, (string) %, (boolean) false
+                scrollbarPosition   : _aScrollbar[ 'position' ],
+                advanced            : {
+                    autoExpandHorizontalScroll  : true  // required for horizontal scrollbar
+                } 
             };
+                      
 
             // We add custom class name to the target element.
             var _sElementClassName = 'custom_scrollbar_' + String( _iIndex );
             $( _aScrollbar[ 'selector' ] ).addClass( _sElementClassName );
-            
+
+            // Custom inline CSS rules.
+            $.each( _aScrollbar[ 'inline_css' ], function( _iIndex, _aInlineCSS ) {
+                
+                if ( 'undefined' === typeof _aInlineCSS[ 'property' ] ) {
+                    return true; // continue
+                }                
+                if ( 'undefined' === typeof _aInlineCSS[ 'value' ] ) {
+                    return true; // continue
+                }                                
+                $( _aScrollbar[ 'selector' ] ).css( _aInlineCSS[ 'property' ], _aInlineCSS[ 'value' ] );
+                
+            } );            
+                            
             // Initialize the scrollbar.
             $( _aScrollbar[ 'selector' ] ).mCustomScrollbar( 
                 _aOptions 

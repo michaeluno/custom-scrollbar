@@ -47,11 +47,14 @@ class CustomScrollbar_InlineCSSLoader extends CustomScrollbar_PluginUtility {
          * @return      string
          */
         private function getScrollbarCSSRules( array $aScrollbars ) {
+            
             $_sDelimiter = $this->oOption->isDebug()
                 ? PHP_EOL
                 : ' ';
-            $_aCSS = array();
+            $_aCSS       = array();
+            
             foreach( $aScrollbars as $_aScrollbar ) {
+                
                 $_aScrollbar = $_aScrollbar + $this->oOption->aDefault[ 'scrollbars' ][ 0 ];
                 if ( ! $_aScrollbar[ 'status' ] ) {
                     continue;
@@ -75,13 +78,14 @@ class CustomScrollbar_InlineCSSLoader extends CustomScrollbar_PluginUtility {
                     $_aEach[] = "overflow-y: hidden;";
                 }
                 
-                // x (width)
+                // x (width)                           
                 if ( $_aScrollbar[ 'width' ][ 'size' ] ) {
-                    $_aEach[] = "max-width: {$_aScrollbar[ 'height' ][ 'size' ]}{$_aScrollbar[ 'width' ][ 'unit' ]};";
+                    $_aEach[] = "max-width: {$_aScrollbar[ 'width' ][ 'size' ]}{$_aScrollbar[ 'width' ][ 'unit' ]};";
+                    $_aEach[] = "white-space: pre-wrap;";
                     $_aEach[] = "overflow-x: auto;";
                 } else {
                     $_aEach[] = "overflow-x: hidden;";
-                }             
+                }           
                 
                 // End
                 $_aCSSEach[] = implode( $_sDelimiter, $_aEach ) . "}";

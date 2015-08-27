@@ -90,7 +90,7 @@ class CustomScrollbar_ScriptLoader extends CustomScrollbar_PluginUtility {
             true    // in footer? yes
         );
         wp_localize_script( 
-            'custom_scrollbar_enabler',  // handle id - the above used enqueue handl id
+            'custom_scrollbar_enabler',  // handle id - the above used enqueue handle id
             'custom_scrollbar_enabler',  // name of the data loaded in the script
             $this->aScrollbars // translation array
         );         

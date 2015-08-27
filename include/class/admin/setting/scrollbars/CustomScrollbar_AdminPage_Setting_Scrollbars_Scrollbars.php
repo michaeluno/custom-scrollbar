@@ -36,6 +36,11 @@ class CustomScrollbar_AdminPage_Setting_Scrollbars_Scrollbars extends CustomScro
                 'before_input'     => "<strong>"
                     . __( 'Name', 'custom-scrollbar' ) 
                     . "</strong>:&nbsp; ",
+                'attributes'       => array(              
+                    'size'          => 80,
+                    'style'         => 'width: 92%;',
+                    'placeholder'   => __( 'Enter a scrollbar name', 'custom-scrollbar' ),
+                ),
             ),            
             array(
                 'field_id'         => 'status',
@@ -64,7 +69,9 @@ class CustomScrollbar_AdminPage_Setting_Scrollbars_Scrollbars extends CustomScro
             array(
                 'field_id'          => 'height',
                 'type'              => 'size',
-                'title'             => __( 'Height', 'custom-scrollbar' ),
+                'title'             => __( 'Element Height', 'custom-scrollbar' ),
+                'description'       => __( 'The target element maximum height.', 'custom-scrollbar' )
+                    . ' ' . __( 'HTMNL elements that exceed this value will have a scrollbar.', 'custom-scrollbar' ),
                 'units'             => array(
                     'px'    => 'px',
                     '%'    => '%',
@@ -73,7 +80,9 @@ class CustomScrollbar_AdminPage_Setting_Scrollbars_Scrollbars extends CustomScro
             array(
                 'field_id'          => 'width',
                 'type'              => 'size',
-                'title'             => __( 'Width', 'custom-scrollbar' ),
+                'title'             => __( 'Element Width', 'custom-scrollbar' ),
+                'description'       => __( 'The target element maximum width.', 'custom-scrollbar' )
+                    . ' ' . __( 'HTMNL elements that exceed this value will have a scrollbar.', 'custom-scrollbar' ),
                 'units'             => array(
                     'px'    => 'px',
                     '%'    => '%',
@@ -88,7 +97,26 @@ class CustomScrollbar_AdminPage_Setting_Scrollbars_Scrollbars extends CustomScro
                     'outside'    => 'outside',
                 ),
                 'default'           => 'inside',
-            ),                
+            ),    
+            array(
+                'field_id'          => 'inline_css',
+                'type'              => 'text',
+                'title'             => __( 'Inline CSS', 'custom-scrollbar' ),
+                'label'             => array(
+                    'property' => __( 'Property', 'custom-scrollbar' ),
+                    'value'    => __( 'Value', 'custom-scrollbar' ),
+                ),
+                'attributes'        => array(
+                    'field' => array(
+                        'style' => 'width: 100%;'
+                    ),
+                ),
+                'description'      => array(
+                    __( 'Apply these inline CSS rules to the target elements.', 'custom-scrollbar' ),
+                    'e.g. ' . '<code>white-space</code>: <code>nowrap</code>',
+                ),
+                'repeatable'        => true,
+            ),               
             array(
                 'field_id'          => 'theme',
                 'type'              => 'select',

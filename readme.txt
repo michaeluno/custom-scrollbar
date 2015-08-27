@@ -47,5 +47,10 @@ Notes: you need a basic understanding of CSS (jQuery) selectors to use this plug
 
 == Changelog ==
 
+= 1.1 =
+- Added the ability to set inline CSS rules wit the `Inline CSS` option.
+- Tweaked the styling of setting forms.
+- Fixed a bug that the `Width` option did not take effect.
+
 = 1 - 07/05/2015 =
 - Released. 

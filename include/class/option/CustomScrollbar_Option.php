@@ -50,7 +50,11 @@ class CustomScrollbar_Option extends CustomScrollbar_Option_Base {
                     'unit'  => null,
                 ),     
                 'position'  => 'inside', // or outside
-                'theme'     => 'light', // @see http://manos.malihu.gr/repository/custom-scrollbar/demo/examples/scrollbar_themes_demo.html
+                
+                'inline_css'    => array(), // 1.1+ 
+                
+                // @see http://manos.malihu.gr/repository/custom-scrollbar/demo/examples/scrollbar_themes_demo.html
+                'theme'     => 'light', 
                 
                 // custom colors
                 'mCSB_draggerContainer' => '',

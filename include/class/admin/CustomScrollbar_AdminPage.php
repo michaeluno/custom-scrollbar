@@ -51,7 +51,7 @@ class CustomScrollbar_AdminPage extends CustomScrollbar_AdminPageFramework {
             array(
                 'page_slug'     => CustomScrollbar_Registry::$aAdminPages[ 'setting' ],
                 'title'         => __( 'Scrollbars', 'custom-scrollbar' ),
-                'screen_icon'   => CustomScrollbar_Registry::getPluginURL( "asset/image/screen_icon_32x32.png" ),
+                // 'screen_icon'   => CustomScrollbar_Registry::getPluginURL( "asset/image/screen_icon_32x32.png" ),
             )
         );
 

@@ -38,6 +38,7 @@ class CustomScrollbar_AdminPage_Setting_Scrollbars extends CustomScrollbar_Admin
                     'is_collapsed'      => false,
                 ),
                 'repeatable'        => true, // this makes the section repeatable
+                'sortable'          => true,
             )
         );
       
