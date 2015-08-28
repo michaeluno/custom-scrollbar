@@ -1,7 +1,7 @@
 === Custom Scrollbar ===
 Contributors:       Michael Uno, miunosoft
 Donate link:        http://en.michaeluno.jp/donate
-Tags:               scroll, scrollbar, scroll bar, appearance, custom scrollbar, custom scroll, custom scroll bar 
+Tags:               scroll, scrollbar, scrollbars, scroll bar, scroll bars, appearance, custom scrollbar, custom scrollbars, custom scroll, custom scroll bar, custom scroll bars
 Requires at least:  3.3
 Tested up to:       4.3
 Stable tag:         1
