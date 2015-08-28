@@ -10,29 +10,31 @@
             if ( 'undefined' === typeof _aScrollbar[ 'selector' ] ) {
                 return true; // continue
             }
-                        
+            
+            var _iWidth  = Number( _aScrollbar[ 'width' ][ 'size' ] );                        
+            var _iHeight = Number( _aScrollbar[ 'height' ][ 'size' ] );
             var _sAxis = '';
-            if ( _aScrollbar[ 'height' ][ 'size' ] ) {
+            if ( _iHeight ) {
                 _sAxis += 'y';
             }
-            if ( _aScrollbar[ 'width' ][ 'size' ] ) {
+            if ( _iWidth ) {
                 _sAxis += 'x';
-            }            
-            var _bisWidth = _aScrollbar[ 'width' ][ 'size' ]
+            }    
+            
+            var _bisWidth = _iWidth
                 ? ( 'px' === _aScrollbar[ 'width' ][ 'unit' ] 
-                    ? Number( _aScrollbar[ 'width' ][ 'size' ] )
-                    : String( _aScrollbar[ 'width' ][ 'size' ] )
+                    ? _iWidth
+                    : String( _iWidth )
                 )
                 : false;
-            var _bisHeight = _aScrollbar[ 'height' ][ 'size' ]
+            var _bisHeight = _iHeight
                 ? ( 'px' === _aScrollbar[ 'height' ][ 'unit' ] 
-                    ? Number( _aScrollbar[ 'height' ][ 'size' ] )
-                    : String( _aScrollbar[ 'height' ][ 'size' ] )
+                    ? _iHeight
+                    : String( _iHeight )
                 )
                 : false;   
             var _aOptions = {
                 axis                : _sAxis, // vertical/horizontal scrollbar. e.g. 'x', 'y', 'xy'
-                // axis: 'x',
                 theme               : _aScrollbar[ 'theme' ],
                 setWidth            : _bisWidth,  // (integer) px, (string) %, (boolean) false
                 setHeight           : _bisHeight, // (integer) px, (string) %, (boolean) false
@@ -41,8 +43,7 @@
                     autoExpandHorizontalScroll  : true  // required for horizontal scrollbar
                 } 
             };
-                      
-
+            
             // We add custom class name to the target element.
             var _sElementClassName = 'custom_scrollbar_' + String( _iIndex );
             $( _aScrollbar[ 'selector' ] ).addClass( _sElementClassName );
