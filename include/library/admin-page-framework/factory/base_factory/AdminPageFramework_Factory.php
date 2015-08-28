@@ -1,0 +1,3 @@
+<?php
+abstract class CustomScrollbar_AdminPageFramework_Factory extends CustomScrollbar_AdminPageFramework_Factory_Controller {
+}

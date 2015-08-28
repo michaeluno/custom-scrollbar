@@ -1,0 +1,3 @@
+<?php
+class CustomScrollbar_AdminPageFramework_Resource_UserMeta extends CustomScrollbar_AdminPageFramework_Resource_MetaBox {
+}
