@@ -5,7 +5,7 @@ abstract class CustomScrollbar_AdminPageFramework_Form_Model extends CustomScrol
     protected $_sTargetPageSlug = null;
     protected $_sTargetTabSlug = null;
     protected $_sTargetSectionTabSlug = null;
-    public function __construct($sOptionKey = null, $sCallerPath = null, $sCapability = 'manage_options', $sTextDomain = 'admin-page-framework') {
+    public function __construct($sOptionKey = null, $sCallerPath = null, $sCapability = 'manage_options', $sTextDomain = 'custom-scrollbar') {
         parent::__construct($sOptionKey, $sCallerPath, $sCapability, $sTextDomain);
         if ($this->oProp->bIsAdminAjax) {
             return;

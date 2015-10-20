@@ -1,3 +1,0 @@
-<?php
-class CustomScrollbar_AdminPageFramework_HelpPane_UserMeta extends CustomScrollbar_AdminPageFramework_HelpPane_MetaBox {
-}

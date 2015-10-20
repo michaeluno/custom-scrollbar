@@ -1,7 +1,7 @@
 <?php
 abstract class CustomScrollbar_AdminPageFramework_NetworkAdmin extends CustomScrollbar_AdminPageFramework {
     protected $_aBuiltInRootMenuSlugs = array('dashboard' => 'index.php', 'sites' => 'sites.php', 'themes' => 'themes.php', 'plugins' => 'plugins.php', 'users' => 'users.php', 'settings' => 'settings.php', 'updates' => 'update-core.php',);
-    public function __construct($sOptionKey = null, $sCallerPath = null, $sCapability = 'manage_network', $sTextDomain = 'admin-page-framework') {
+    public function __construct($sOptionKey = null, $sCallerPath = null, $sCapability = 'manage_network', $sTextDomain = 'custom-scrollbar') {
         if (!$this->_isInstantiatable()) {
             return;
         }

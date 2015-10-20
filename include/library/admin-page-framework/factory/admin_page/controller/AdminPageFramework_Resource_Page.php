@@ -69,7 +69,7 @@ class CustomScrollbar_AdminPageFramework_Resource_Page extends CustomScrollbar_A
         if (empty($sSRC)) {
             return '';
         }
-        $sSRC = $this->oUtil->resolveSRC($sSRC);
+        $sSRC = $this->oUtil->getResolvedSRC($sSRC);
         $_sContainerPropertyName = $this->_getContainerPropertyNameByType($sType);
         $_sEnqueuedIndexPropertyName = $this->_getEnqueuedIndexPropertyNameByType($sType);
         $_sSRCHash = md5($sSRC);

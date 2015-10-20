@@ -1,6 +1,6 @@
 <?php
 abstract class CustomScrollbar_AdminPageFramework extends CustomScrollbar_AdminPageFramework_Controller {
-    public function __construct($isOptionKey = null, $sCallerPath = null, $sCapability = 'manage_options', $sTextDomain = 'admin-page-framework') {
+    public function __construct($isOptionKey = null, $sCallerPath = null, $sCapability = 'manage_options', $sTextDomain = 'custom-scrollbar') {
         if (!$this->_isInstantiatable()) {
             return;
         }

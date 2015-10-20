@@ -33,7 +33,7 @@ class CustomScrollbar_AdminPageFramework_Property_Page extends CustomScrollbar_A
     public $sWrapperClassAttribute = 'wrap';
     public $sOptionType = 'options_table';
     public $iOptionTransientDuration = 0;
-    public function __construct($oCaller, $sCallerPath, $sClassName, $aisOptionKey, $sCapability = 'manage_options', $sTextDomain = 'admin-page-framework') {
+    public function __construct($oCaller, $sCallerPath, $sClassName, $aisOptionKey, $sCapability = 'manage_options', $sTextDomain = 'custom-scrollbar') {
         parent::__construct($oCaller, $sCallerPath, $sClassName, $sCapability, $sTextDomain, $this->sFieldsType);
         $this->sTargetFormPage = $_SERVER['REQUEST_URI'];
         $this->_setOptionsProperties($aisOptionKey, $sClassName);

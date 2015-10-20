@@ -1,6 +1,6 @@
 <?php
 abstract class CustomScrollbar_AdminPageFramework_Router extends CustomScrollbar_AdminPageFramework_Factory {
-    function __construct($sOptionKey = null, $sCallerPath = null, $sCapability = 'manage_options', $sTextDomain = 'admin-page-framework') {
+    function __construct($sOptionKey = null, $sCallerPath = null, $sCapability = 'manage_options', $sTextDomain = 'custom-scrollbar') {
         $this->oProp = isset($this->oProp) ? $this->oProp : new CustomScrollbar_AdminPageFramework_Property_Page($this, $sCallerPath, get_class($this), $sOptionKey, $sCapability, $sTextDomain);
         parent::__construct($this->oProp);
         if ($this->oProp->bIsAdminAjax) {
@@ -69,9 +69,6 @@ abstract class CustomScrollbar_AdminPageFramework_Router extends CustomScrollbar
             return false;
         }
         return true;
-    }
-    public function _sortByOrder($a, $b) {
-        return isset($a['order'], $b['order']) ? $a['order'] - $b['order'] : 1;
     }
     protected function _isInstantiatable() {
         if (isset($GLOBALS['pagenow']) && 'admin-ajax.php' === $GLOBALS['pagenow']) {

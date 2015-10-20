@@ -1,6 +1,6 @@
 <?php
 abstract class CustomScrollbar_AdminPageFramework_Menu_Controller extends CustomScrollbar_AdminPageFramework_Menu_View {
-    public function __construct($sOptionKey = null, $sCallerPath = null, $sCapability = 'manage_options', $sTextDomain = 'admin-page-framework') {
+    public function __construct($sOptionKey = null, $sCallerPath = null, $sCapability = 'manage_options', $sTextDomain = 'custom-scrollbar') {
         parent::__construct($sOptionKey, $sCallerPath, $sCapability, $sTextDomain);
         if ($this->oProp->bIsAdminAjax) {
             return;
@@ -10,7 +10,7 @@ abstract class CustomScrollbar_AdminPageFramework_Menu_Controller extends Custom
     public function setRootMenuPage($sRootMenuLabel, $sIcon16x16 = null, $iMenuPosition = null) {
         $sRootMenuLabel = trim($sRootMenuLabel);
         $_sSlug = $this->_isBuiltInMenuItem($sRootMenuLabel);
-        $this->oProp->aRootMenu = array('sTitle' => $sRootMenuLabel, 'sPageSlug' => $_sSlug ? $_sSlug : $this->oProp->sClassName, 'sIcon16x16' => $this->oUtil->resolveSRC($sIcon16x16), 'iPosition' => $iMenuPosition, 'fCreateRoot' => empty($_sSlug),);
+        $this->oProp->aRootMenu = array('sTitle' => $sRootMenuLabel, 'sPageSlug' => $_sSlug ? $_sSlug : $this->oProp->sClassName, 'sIcon16x16' => $this->oUtil->getResolvedSRC($sIcon16x16), 'iPosition' => $iMenuPosition, 'fCreateRoot' => empty($_sSlug),);
     }
     private function _isBuiltInMenuItem($sMenuLabel) {
         $_sMenuLabelLower = strtolower($sMenuLabel);
@@ -21,8 +21,8 @@ abstract class CustomScrollbar_AdminPageFramework_Menu_Controller extends Custom
         $this->oProp->aRootMenu['fCreateRoot'] = false;
     }
     public function addSubMenuItems($aSubMenuItem1, $aSubMenuItem2 = null, $_and_more = null) {
-        foreach (func_get_args() as $aSubMenuItem) {
-            $this->addSubMenuItem($aSubMenuItem);
+        foreach (func_get_args() as $_aSubMenuItem) {
+            $this->addSubMenuItem($_aSubMenuItem);
         }
     }
     public function addSubMenuItem(array $aSubMenuItem) {
@@ -39,18 +39,21 @@ abstract class CustomScrollbar_AdminPageFramework_Menu_Controller extends Custom
         if (!filter_var($aSubMenuLink['href'], FILTER_VALIDATE_URL)) {
             return;
         }
-        $this->oProp->aPages[$aSubMenuLink['href']] = $this->_formatSubmenuLinkArray($aSubMenuLink);
+        $_oFormatter = new CustomScrollbar_AdminPageFramework_Format_SubMenuLink($aSubMenuLink, $this);
+        $_aSubMenuLink = $_oFormatter->get();
+        $this->oProp->aPages[$_aSubMenuLink['href']] = $_aSubMenuLink;
     }
     public function addSubMenuPages() {
-        foreach (func_get_args() as $aSubMenuPage) {
-            $this->addSubMenuPage($aSubMenuPage);
+        foreach (func_get_args() as $_aSubMenuPage) {
+            $this->addSubMenuPage($_aSubMenuPage);
         }
     }
     public function addSubMenuPage(array $aSubMenuPage) {
         if (!isset($aSubMenuPage['page_slug'])) {
             return;
         }
-        $aSubMenuPage['page_slug'] = $this->oUtil->sanitizeSlug($aSubMenuPage['page_slug']);
-        $this->oProp->aPages[$aSubMenuPage['page_slug']] = $this->_formatSubMenuPageArray($aSubMenuPage);
+        $_oFormatter = new CustomScrollbar_AdminPageFramework_Format_SubMenuPage($aSubMenuPage, $this);
+        $_aSubMenuPage = $_oFormatter->get();
+        $this->oProp->aPages[$_aSubMenuPage['page_slug']] = $_aSubMenuPage;
     }
 }

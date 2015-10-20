@@ -27,7 +27,7 @@ class CustomScrollbar_AdminPage_Setting_Scrollbars_Scrollbars extends CustomScro
      * @return      void
      */
     public function addFields( $oFactory, $sSectionID ) {
-    
+
         $oFactory->addSettingFields(
             $sSectionID, // the target section id
             array(
@@ -41,7 +41,7 @@ class CustomScrollbar_AdminPage_Setting_Scrollbars_Scrollbars extends CustomScro
                     'style'         => 'width: 92%;',
                     'placeholder'   => __( 'Enter a scrollbar name', 'custom-scrollbar' ),
                 ),
-            ),            
+            ),   
             array(
                 'field_id'         => 'status',
                 'type'             => 'radio',

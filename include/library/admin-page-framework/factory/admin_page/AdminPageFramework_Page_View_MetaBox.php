@@ -1,6 +1,6 @@
 <?php
 abstract class CustomScrollbar_AdminPageFramework_Page_View_MetaBox extends CustomScrollbar_AdminPageFramework_Page_Model {
-    public function __construct($sOptionKey = null, $sCallerPath = null, $sCapability = 'manage_options', $sTextDomain = 'admin-page-framework') {
+    public function __construct($sOptionKey = null, $sCallerPath = null, $sCapability = 'manage_options', $sTextDomain = 'custom-scrollbar') {
         parent::__construct($sOptionKey, $sCallerPath, $sCapability, $sTextDomain);
         if ($this->oProp->bIsAdminAjax) {
             return;
@@ -77,6 +77,6 @@ jQuery( document).ready( function(){
     postboxes.add_postbox_toggles( pagenow ); 
 });
 JAVASCRIPTS;
-        echo '<script class="admin-page-framework-insert-metabox-script">' . $_sScript . '</script>';
+        echo '<script class="custom-scrollbar-insert-metabox-script">' . $_sScript . '</script>';
     }
 }

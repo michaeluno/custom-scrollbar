@@ -1,3 +1,0 @@
-<?php
-abstract class CustomScrollbar_AdminPageFramework_MetaBox_Page_View extends CustomScrollbar_AdminPageFramework_MetaBox_Page_Model {
-}

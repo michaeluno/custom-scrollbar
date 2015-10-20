@@ -8,7 +8,7 @@ abstract class CustomScrollbar_AdminPageFramework_Page_View extends CustomScroll
         $sContentTop.= $this->_getPageHeadingTabs($sPageSlug, $this->oProp->sPageHeadingTabTag);
         $sContentTop.= $this->_getInPageTabs($sPageSlug, $this->oProp->sInPageTabTag);
         echo $this->oUtil->addAndApplyFilters($this, $this->oUtil->getFilterArrayByPrefix('content_top_', $this->oProp->sClassName, $sPageSlug, $sTabSlug, false), $sContentTop); ?>
-            <div class="admin-page-framework-container">    
+            <div class="custom-scrollbar-container">    
                 <?php
         $this->oUtil->addAndDoActions($this, $this->oUtil->getFilterArrayByPrefix('do_form_', $this->oProp->sClassName, $sPageSlug, $sTabSlug, true), $this);
         $this->_printFormOpeningTag($this->oProp->bEnableForm); ?>
@@ -23,7 +23,7 @@ abstract class CustomScrollbar_AdminPageFramework_Page_View extends CustomScroll
                 </div><!-- #poststuff -->
                 
             <?php echo $this->_printFormClosingTag($sPageSlug, $sTabSlug, $this->oProp->bEnableForm); ?>
-            </div><!-- .admin-page-framework-container -->
+            </div><!-- .custom-scrollbar-container -->
                 
             <?php echo $this->oUtil->addAndApplyFilters($this, $this->oUtil->getFilterArrayByPrefix('content_bottom_', $this->oProp->sClassName, $sPageSlug, $sTabSlug, false), ''); ?>
         </div><!-- .wrap -->
@@ -33,7 +33,7 @@ abstract class CustomScrollbar_AdminPageFramework_Page_View extends CustomScroll
     private function _printMainPageContent($sPageSlug, $sTabSlug) {
         $_bSideMetaboxExists = (isset($GLOBALS['wp_meta_boxes'][$GLOBALS['page_hook']]['side']) && count($GLOBALS['wp_meta_boxes'][$GLOBALS['page_hook']]['side']) > 0);
         echo "<!-- main admin page content -->";
-        echo "<div class='admin-page-framework-content'>";
+        echo "<div class='custom-scrollbar-content'>";
         if ($_bSideMetaboxExists) {
             echo "<div id='post-body-content'>";
         }
@@ -43,7 +43,7 @@ abstract class CustomScrollbar_AdminPageFramework_Page_View extends CustomScroll
         if ($_bSideMetaboxExists) {
             echo "</div><!-- #post-body-content -->";
         }
-        echo "</div><!-- .admin-page-framework-content -->";
+        echo "</div><!-- .custom-scrollbar-content -->";
     }
     private function _getMainPageContentOutput($sPageSlug) {
         ob_start();
@@ -67,7 +67,7 @@ abstract class CustomScrollbar_AdminPageFramework_Page_View extends CustomScroll
         if (!$fEnableForm) {
             return;
         }
-        echo "<form " . $this->oUtil->generateAttributes(array('method' => 'post', 'enctype' => $this->oProp->sFormEncType, 'id' => 'admin-page-framework-form', 'action' => wp_unslash(remove_query_arg('settings-updated', $this->oProp->sTargetFormPage)),)) . " >" . PHP_EOL;
+        echo "<form " . $this->oUtil->getAttributes(array('method' => 'post', 'enctype' => $this->oProp->sFormEncType, 'id' => 'custom-scrollbar-form', 'action' => wp_unslash(remove_query_arg('settings-updated', $this->oProp->sTargetFormPage)),)) . " >" . PHP_EOL;
         echo "<input type='hidden' name='admin_page_framework_start' value='1' />" . PHP_EOL;
         settings_fields($this->oProp->sOptionKey);
     }
@@ -107,7 +107,7 @@ abstract class CustomScrollbar_AdminPageFramework_Page_View extends CustomScroll
     private function _getDefaultScreenIcon() {
         $_oScreen = get_current_screen();
         $_sIconIDAttribute = $this->_getScreenIDAttribute($_oScreen);
-        $_aAttributes = array('class' => $this->oUtil->generateClassAttribute($this->oUtil->getAOrB(empty($_sIconIDAttribute) && $_oScreen->post_type, sanitize_html_class('icon32-posts-' . $_oScreen->post_type), ''), $this->oUtil->getAOrB(empty($_sIconIDAttribute) || $_sIconIDAttribute == $this->oProp->sClassName, 'generic', '')), 'id' => "icon-" . $_sIconIDAttribute,);
+        $_aAttributes = array('class' => $this->oUtil->getClassAttribute($this->oUtil->getAOrB(empty($_sIconIDAttribute) && $_oScreen->post_type, sanitize_html_class('icon32-posts-' . $_oScreen->post_type), ''), $this->oUtil->getAOrB(empty($_sIconIDAttribute) || $_sIconIDAttribute == $this->oProp->sClassName, 'generic', '')), 'id' => "icon-" . $_sIconIDAttribute,);
         return $this->_getScreenIconByAttributes($_aAttributes);
     }
     private function _getScreenIDAttribute($oScreen) {
@@ -120,8 +120,8 @@ abstract class CustomScrollbar_AdminPageFramework_Page_View extends CustomScroll
         return esc_attr($oScreen->base);
     }
     private function _getScreenIconByAttributes(array $aAttributes) {
-        $aAttributes['class'] = $this->oUtil->generateClassAttribute('icon32', $this->oUtil->getElement($aAttributes, 'class'));
-        return "<div " . $this->oUtil->generateAttributes($aAttributes) . ">" . "<br />" . "</div>";
+        $aAttributes['class'] = $this->oUtil->getClassAttribute('icon32', $this->oUtil->getElement($aAttributes, 'class'));
+        return "<div " . $this->oUtil->getAttributes($aAttributes) . ">" . "<br />" . "</div>";
     }
     private function _getPageHeadingTabs($sCurrentPageSlug, $sTag = 'h2') {
         $_aPage = $this->oProp->aPages[$sCurrentPageSlug];
@@ -140,7 +140,7 @@ abstract class CustomScrollbar_AdminPageFramework_Page_View extends CustomScroll
     private function _getPageHeadingtabNavigationBar(array $aPages, $sTag, $sCurrentPageSlug) {
         $_oTabBar = new CustomScrollbar_AdminPageFramework_TabNavigationBar($aPages, $sCurrentPageSlug, $sTag, array(), array('format' => array($this, '_replyToFormatNavigationTabItem_PageHeadingTab'),));
         $_sTabBar = $_oTabBar->get();
-        return $_sTabBar ? "<div class='admin-page-framework-page-heading-tab'>" . $_sTabBar . "</div>" : '';
+        return $_sTabBar ? "<div class='custom-scrollbar-page-heading-tab'>" . $_sTabBar . "</div>" : '';
     }
     public function _replyToFormatNavigationTabItem_PageHeadingTab($aSubPage, $aStructure, $aPages, $aArguments = array()) {
         switch ($aSubPage['type']) {
@@ -187,25 +187,22 @@ abstract class CustomScrollbar_AdminPageFramework_Page_View extends CustomScroll
     private function _getInPageTabNavigationBar(array $aTabs, $sActiveTab, $sCurrentPageSlug, $sTag) {
         $_oTabBar = new CustomScrollbar_AdminPageFramework_TabNavigationBar($aTabs, $sActiveTab, $sTag, array('class' => 'in-page-tab',), array('format' => array($this, '_replyToFormatNavigationTabItem_InPageTab'), 'arguments' => array('page_slug' => $sCurrentPageSlug,),));
         $_sTabBar = $_oTabBar->get();
-        return $_sTabBar ? "<div class='admin-page-framework-in-page-tab'>" . $_sTabBar . "</div>" : '';
+        return $_sTabBar ? "<div class='custom-scrollbar-in-page-tab'>" . $_sTabBar . "</div>" : '';
     }
     public function _replyToFormatNavigationTabItem_InPageTab(array $aTab, array $aStructure, array $aTabs, array $aArguments = array()) {
-        $_sSlug = isset($aTab['parent_tab_slug'], $aTabs[$aTab['parent_tab_slug']]) ? $aTab['parent_tab_slug'] : $aTab['tab_slug'];
-        if (!$aTab['show_in_page_tab'] && !isset($aTab['parent_tab_slug'])) {
-            return array();
-        }
-        $aTab = array('slug' => $_sSlug, 'title' => $aTabs[$_sSlug]['title'], 'href' => $aTab['disabled'] ? null : esc_url($this->oUtil->getElement($aTab, 'url', $this->oUtil->getQueryAdminURL(array('page' => $aArguments['page_slug'], 'tab' => $_sSlug,), $this->oProp->aDisallowedQueryKeys))),) + $this->oUtil->uniteArrays($aTab, array('attributes' => array('data-tab-slug' => $_sSlug,),), $aStructure);
-        return $aTab;
+        $_oFormatter = new CustomScrollbar_AdminPageFramework_Format_NavigationTab_InPageTab($aTab, $aStructure, $aTabs, $aArguments, $this);
+        return $_oFormatter->get();
     }
     private function _getInPageTabTag($sTag, array $aPage) {
         return tag_escape($aPage['in_page_tab_tag'] ? $aPage['in_page_tab_tag'] : $sTag);
     }
     private function _getCurrentTabSlug($sCurrentPageSlug) {
         $_sCurrentTabSlug = $this->oUtil->getElement($_GET, 'tab', $this->oProp->getDefaultInPageTab($sCurrentPageSlug));
-        return $this->_getParentTabSlug($sCurrentPageSlug, $_sCurrentTabSlug);
+        $_sTabSlug = $this->_getParentTabSlug($sCurrentPageSlug, $_sCurrentTabSlug);
+        return $_sTabSlug;
     }
     private function _getParentTabSlug($sPageSlug, $sTabSlug) {
         $_sParentTabSlug = $this->oUtil->getElement($this->oProp->aInPageTabs, array($sPageSlug, $sTabSlug, 'parent_tab_slug'), $sTabSlug);
-        return isset($this->oProp->aInPageTabs[$sPageSlug][$_sParentTabSlug]['show_in_page_tab']) && $this->oProp->aInPageTabs[$sPageSlug][$_sParentTabSlug]['show_in_page_tab'] ? $_sParentTabSlug : '';
+        return isset($this->oProp->aInPageTabs[$sPageSlug][$_sParentTabSlug]['show_in_page_tab']) && $this->oProp->aInPageTabs[$sPageSlug][$_sParentTabSlug]['show_in_page_tab'] ? $_sParentTabSlug : $sTabSlug;
     }
 }
