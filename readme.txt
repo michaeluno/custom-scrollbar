@@ -47,6 +47,9 @@ Notes: you need a basic understanding of CSS (jQuery) selectors to use this plug
 
 == Changelog ==
 
+= 1.1.2 =
+- Fixed a bug that percentages for width and height could not be set.
+
 = 1.1.1 - 10/20/2015 = 
 - Tweaked the setting pages.
 - Updated the [Admin Page Framework](https://wordpress.org/plugins/admin-page-framework/) library.
