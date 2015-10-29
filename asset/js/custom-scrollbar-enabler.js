@@ -10,7 +10,7 @@
             if ( 'undefined' === typeof _aScrollbar[ 'selector' ] ) {
                 return true; // continue
             }
-            
+
             var _iWidth  = Number( _aScrollbar[ 'width' ][ 'size' ] );                        
             var _iHeight = Number( _aScrollbar[ 'height' ][ 'size' ] );
             var _sAxis = '';
@@ -24,15 +24,16 @@
             var _bisWidth = _iWidth
                 ? ( 'px' === _aScrollbar[ 'width' ][ 'unit' ] 
                     ? _iWidth
-                    : String( _iWidth )
+                    : String( _iWidth ) + '%'
                 )
                 : false;
             var _bisHeight = _iHeight
                 ? ( 'px' === _aScrollbar[ 'height' ][ 'unit' ] 
                     ? _iHeight
-                    : String( _iHeight )
+                    : String( _iHeight ) + '%'
                 )
                 : false;   
+                
             var _aOptions = {
                 axis                : _sAxis, // vertical/horizontal scrollbar. e.g. 'x', 'y', 'xy'
                 theme               : _aScrollbar[ 'theme' ],
@@ -65,7 +66,7 @@
             $( _aScrollbar[ 'selector' ] ).mCustomScrollbar( 
                 _aOptions 
             );
-            
+
             // Custom colors 
             var _sSelector = '.' + _sElementClassName;
             if ( _aScrollbar[ 'mCSB_draggerContainer' ] ) {
