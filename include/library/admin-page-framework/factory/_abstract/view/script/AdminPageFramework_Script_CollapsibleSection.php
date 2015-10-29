@@ -66,14 +66,12 @@ class CustomScrollbar_AdminPageFramework_Script_CollapsibleSection extends Custo
                 }                
                 
                 // Expand or collapse this panel
-                _oButton.click( function(){
-                   
-                    _oButton.toggleClass( 'flipped' );
-                    if ( _oButton.hasClass( 'flipped' ) && _oButton.hasClass( 'dashicons' ) ) {
-                        _oButton.css( 'transform', 'rotateY( 180deg )' );
-                    } else {
-                        _oButton.css( 'transform', '' );
-                    }
+                _oButton.click( function(){                  
+                    
+                    var _oButtons = _bForSections
+                        ? jQuery( this ).closest( '.custom-scrollbar-sectionset' ).siblings().andSelf().find( '> .custom-scrollbar-collapsible-toggle-all-button-container' )
+                        : jQuery( this ).siblings( '.custom-scrollbar-collapsible-toggle-all-button-container' ).andSelf();
+                    _oButtons.toggleClass( 'flipped' );
                     if ( _bForSections ) {
                         _oButton.parent().parent().children().children( '* > .custom-scrollbar-collapsible-title' ).each( function() {
                             jQuery( this ).trigger( 'click', [ 'by_toggle_all_button' ] );
@@ -83,6 +81,7 @@ class CustomScrollbar_AdminPageFramework_Script_CollapsibleSection extends Custo
                             jQuery( this ).trigger( 'click', [ 'by_toggle_all_button' ] );
                         } );
                     }
+                    
                 } );                
                              
             });                  

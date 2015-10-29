@@ -21,9 +21,6 @@ class CustomScrollbar_AdminPageFramework_FormPart_Table extends CustomScrollbar_
         }
     }
     private function _getFormTable(array $aFieldsInSections, $sSectionTabSlug, array $aSectionsBySectionTab, $hfSectionCallback, $hfFieldCallback) {
-        if (!count($aFieldsInSections[$sSectionTabSlug])) {
-            return '';
-        }
         $_sSectionSet = $this->_getSectionsTables($aSectionsBySectionTab, $aFieldsInSections[$sSectionTabSlug], $hfSectionCallback, $hfFieldCallback);
         return $_sSectionSet ? "<div " . $this->getAttributes(array('class' => 'custom-scrollbar-sectionset', 'id' => "sectionset-{$sSectionTabSlug}_" . md5(serialize($aSectionsBySectionTab)),)) . ">" . $_sSectionSet . "</div>" : '';
     }
@@ -32,23 +29,37 @@ class CustomScrollbar_AdminPageFramework_FormPart_Table extends CustomScrollbar_
         $_aFieldsBySectionTab = array();
         $_iIndex = 0;
         foreach ($aSections as $_sSectionID => $_aSection) {
-            if (!isset($aFields[$_sSectionID])) {
+            if (!isset($aFields[$_sSectionID]) && !$this->_isCustomContentSet($_aSection)) {
                 continue;
             }
             $_sSectionTaqbSlug = $this->getAOrB($_aSection['section_tab_slug'], $_aSection['section_tab_slug'], '_default_' . (++$_iIndex));
             $_aSectionsBySectionTab[$_sSectionTaqbSlug][$_sSectionID] = $_aSection;
-            $_aFieldsBySectionTab[$_sSectionTaqbSlug][$_sSectionID] = $aFields[$_sSectionID];
+            $_aFieldsBySectionTab[$_sSectionTaqbSlug][$_sSectionID] = $this->getElement($aFields, $_sSectionID);
         }
         $aSections = $_aSectionsBySectionTab;
         $aFields = $_aFieldsBySectionTab;
+    }
+    private function _isCustomContentSet(array $aSection, array $aKeys = array('content')) {
+        foreach ($aKeys as $_sKey) {
+            if (!isset($aSection[$_sKey])) {
+                continue;
+            }
+            if (is_scalar($aSection[$_sKey])) {
+                return true;
+            }
+        }
+        return false;
     }
     private function _getSectionsTables($aSections, $aFieldsInSections, $hfSectionCallback, $hfFieldCallback) {
         if (empty($aSections)) {
             return '';
         }
+        $_aFirstSectionset = $this->getFirstEelement($aSections);
+        if (!count($aFieldsInSections)) {
+            return '';
+        }
         $_sSectionTabSlug = '';
         $_aOutputs = array('section_tab_list' => array(), 'section_contents' => array(), 'count_subsections' => 0,);
-        $_aFirstSectionset = $this->getFirstEelement($aSections);
         $_sThisSectionID = $_aFirstSectionset['section_id'];
         $_sSectionsID = 'sections-' . $_sThisSectionID;
         $_aCollapsible = $this->_getCollapsibleArgumentForSections($_aFirstSectionset);
@@ -72,11 +83,11 @@ class CustomScrollbar_AdminPageFramework_FormPart_Table extends CustomScrollbar_
         if ($_aOutputs['count_subsections']) {
             if (!empty($_aSection['repeatable'])) {
                 $_aOutputs['section_contents'][] = CustomScrollbar_AdminPageFramework_Script_RepeatableSection::getEnabler($_sSectionsID, $_aOutputs['count_subsections'], $_aSection['repeatable'], $this->oMsg);
-                $_aOutputs['section_contents'][] = $this->_getDynamicElementFlagFieldInputTag($_aSection);
+                $_aOutputs['section_contents'][] = $this->_getRepeatableSectionFlagTag($_aSection);
             }
             if (!empty($_aSection['sortable'])) {
                 $_aOutputs['section_contents'][] = CustomScrollbar_AdminPageFramework_Script_SortableSection::getEnabler($_sSectionsID, $_aSection['sortable'], $this->oMsg);
-                $_aOutputs['section_contents'][] = $this->_getDynamicElementFlagFieldInputTag($_aSection);
+                $_aOutputs['section_contents'][] = $this->_getSortableSectionFlagTag($_aSection);
             }
             $_aSubSections = $this->numerizeElements($_aSubSections);
             foreach ($_aSubSections as $_iIndex => $_aFields) {
@@ -89,8 +100,11 @@ class CustomScrollbar_AdminPageFramework_FormPart_Table extends CustomScrollbar_
         $_aOutputs = $this->_getSectionTableWithTabList($_aOutputs, $_oEachSectionArguments->get(), $this->getElementAsArray($aFieldsInSections, $_aSection['section_id'], array()), $hfSectionCallback, $hfFieldCallback);
         return $_aOutputs;
     }
-    private function _getDynamicElementFlagFieldInputTag(array $aSection) {
-        return $this->getHTMLTag('input', array('type' => 'hidden', 'name' => '__dynamic_elements_' . $aSection['_fields_type'] . '[' . $aSection['section_id'] . ']', 'class' => 'dynamic-element-names element-address', 'value' => $aSection['section_id'],));
+    private function _getRepeatableSectionFlagTag(array $aSection) {
+        return $this->getHTMLTag('input', array('class' => 'element-address', 'type' => 'hidden', 'name' => '__repeatable_elements_' . $aSection['_fields_type'] . '[' . $aSection['section_id'] . ']', 'value' => $aSection['section_id'],));
+    }
+    private function _getSortableSectionFlagTag(array $aSection) {
+        return $this->getHTMLTag('input', array('class' => 'element-address', 'type' => 'hidden', 'name' => '__sortable_elements_' . $aSection['_fields_type'] . '[' . $aSection['section_id'] . ']', 'value' => $aSection['section_id'],));
     }
     private function _getUnsetFlagSectionInputTag(array $aSection) {
         if (false !== $aSection['save']) {
@@ -127,15 +141,12 @@ class CustomScrollbar_AdminPageFramework_FormPart_Table extends CustomScrollbar_
         return "<li " . $this->getAttributes($_aTabAttributes) . ">" . "<a href='#{$_sSectionTagID}'>" . $_oSectionTitle->get() . "</a>" . "</li>";
     }
     private function _getSectionTable($aSection, $aFields, $hfSectionCallback, $hfFieldCallback) {
-        if (count($aFields) <= 0) {
-            return '';
-        }
         $iSectionIndex = $aSection['_index'];
         $_oTableCaption = new CustomScrollbar_AdminPageFramework_FormPart_TableCaption($aSection, $hfSectionCallback, $iSectionIndex, $aFields, $hfFieldCallback, $this->aFieldErrors, $this->aFieldTypeDefinitions, $this->oMsg);
         $_oSectionTableAttributes = new CustomScrollbar_AdminPageFramework_Attribute_SectionTable($aSection);
         $_oSectionTableBodyAttributes = new CustomScrollbar_AdminPageFramework_Attribute_SectionTableBody($aSection);
         $_aOutput = array();
-        $_aOutput[] = "<table " . $_oSectionTableAttributes->get() . ">" . $_oTableCaption->get() . "<tbody " . $_oSectionTableBodyAttributes->get() . ">" . $this->getFieldsetRows($aFields, $hfFieldCallback, $iSectionIndex) . "</tbody>" . "</table>";
+        $_aOutput[] = "<table " . $_oSectionTableAttributes->get() . ">" . $_oTableCaption->get() . "<tbody " . $_oSectionTableBodyAttributes->get() . ">" . ($aSection['content'] ? "<tr>" . "<td>" . $aSection['content'] . "</td>" . "</tr>" : $this->getFieldsetRows($aFields, $hfFieldCallback, $iSectionIndex)) . "</tbody>" . "</table>";
         $_oSectionTableContainerAttributes = new CustomScrollbar_AdminPageFramework_Attribute_SectionTableContainer($aSection);
         return "<div " . $_oSectionTableContainerAttributes->get() . ">" . implode(PHP_EOL, $_aOutput) . "</div>";
     }

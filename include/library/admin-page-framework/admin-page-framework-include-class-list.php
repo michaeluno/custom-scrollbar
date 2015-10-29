@@ -112,8 +112,9 @@ $aClassFiles = array(
 	"CustomScrollbar_AdminPageFramework_FormDefinition"	=>	CustomScrollbar_AdminPageFramework_Registry::$sDirPath . "/factory/_abstract/model/form_definition/AdminPageFramework_FormDefinition.php", 
 	"CustomScrollbar_AdminPageFramework_FormDefinition_Base"	=>	CustomScrollbar_AdminPageFramework_Registry::$sDirPath . "/factory/_abstract/model/form_definition/AdminPageFramework_FormDefinition_Base.php", 
 	"CustomScrollbar_AdminPageFramework_FormDefinition_Meta"	=>	CustomScrollbar_AdminPageFramework_Registry::$sDirPath . "/factory/_abstract/model/form_definition/AdminPageFramework_FormDefinition_Meta.php", 
-	"CustomScrollbar_AdminPageFramework_Sort_Base"	=>	CustomScrollbar_AdminPageFramework_Registry::$sDirPath . "/factory/_abstract/model/sort/AdminPageFramework_Sort_Base.php", 
-	"CustomScrollbar_AdminPageFramework_Sort_Input"	=>	CustomScrollbar_AdminPageFramework_Registry::$sDirPath . "/factory/_abstract/model/sort/AdminPageFramework_Sort_Input.php", 
+	"CustomScrollbar_AdminPageFramework_Modifier_Base"	=>	CustomScrollbar_AdminPageFramework_Registry::$sDirPath . "/factory/_abstract/model/modifier/AdminPageFramework_Modifier_Base.php", 
+	"CustomScrollbar_AdminPageFramework_Modifier_FilterRepeatableElements"	=>	CustomScrollbar_AdminPageFramework_Registry::$sDirPath . "/factory/_abstract/model/modifier/AdminPageFramework_Modifier_FilterRepeatableElements.php", 
+	"CustomScrollbar_AdminPageFramework_Modifier_SortInput"	=>	CustomScrollbar_AdminPageFramework_Registry::$sDirPath . "/factory/_abstract/model/modifier/AdminPageFramework_Modifier_SortInput.php", 
 	"CustomScrollbar_AdminPageFramework_ArrayHandler"	=>	CustomScrollbar_AdminPageFramework_Registry::$sDirPath . "/factory/_abstract/utility/AdminPageFramework_ArrayHandler.php", 
 	"CustomScrollbar_AdminPageFramework_Debug"	=>	CustomScrollbar_AdminPageFramework_Registry::$sDirPath . "/factory/_abstract/utility/AdminPageFramework_Debug.php", 
 	"CustomScrollbar_AdminPageFramework_ErrorReporting"	=>	CustomScrollbar_AdminPageFramework_Registry::$sDirPath . "/factory/_abstract/utility/AdminPageFramework_ErrorReporting.php", 
@@ -221,4 +222,5 @@ $aClassFiles = array(
 	"CustomScrollbar_AdminPageFramework_WPReadmeParser"	=>	CustomScrollbar_AdminPageFramework_Registry::$sDirPath . "/utility/AdminPageFramework_WPReadmeParser/AdminPageFramework_WPReadmeParser.php", 
 	"CustomScrollbar_AdminPageFramework_Parsedown"	=>	CustomScrollbar_AdminPageFramework_Registry::$sDirPath . "/utility/AdminPageFramework_WPReadmeParser/library/AdminPageFramework_Parsedown/AdminPageFramework_Parsedown.php", 
 	"CustomScrollbar_AdminPageFramework_Form_Model_Import"	=>	CustomScrollbar_AdminPageFramework_Registry::$sDirPath . "/factory/admin_page/AdminPageFramework_Form_Model_Imort.php", 
+
 );

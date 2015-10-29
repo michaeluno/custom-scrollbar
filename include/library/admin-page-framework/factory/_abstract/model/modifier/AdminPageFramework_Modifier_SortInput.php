@@ -1,5 +1,5 @@
 <?php
-class CustomScrollbar_AdminPageFramework_Sort_Input extends CustomScrollbar_AdminPageFramework_Sort_Base {
+class CustomScrollbar_AdminPageFramework_Modifier_SortInput extends CustomScrollbar_AdminPageFramework_Modifier_Base {
     public $aInput = array();
     public $aSortDimensionalKeys = array();
     public function __construct() {

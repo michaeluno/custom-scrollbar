@@ -1,18 +1,24 @@
 <?php
 class CustomScrollbar_AdminPageFramework_WPReadmeParser {
-    static private $_aStructure_Callbacks = array('code_block' => null, '%PLUGIN_DIR_URL%' => null, '%WP_ADMIN_URL%' => null,);
-    public function __construct($sFilePath = '', array $aReplacements = array(), array $aCallbacks = array()) {
-        $this->sText = file_exists($sFilePath) ? file_get_contents($sFilePath) : '';
-        $this->_aSections = $this->sText ? $this->_getSplitContentsBySection($this->sText) : array();
-        $this->aReplacements = $aReplacements;
+    static private $_aStructure_Callbacks = array('code_block' => null, 'content_before_parsing' => null,);
+    static private $_aStructure_Replacements = array();
+    public $sText = '';
+    protected $_aSections = array();
+    public $aReplacements = array();
+    public $aCallbacks = array();
+    public function __construct($sFilePathOrContent = '', array $aReplacements = array(), array $aCallbacks = array()) {
+        $this->sText = file_exists($sFilePathOrContent) ? file_get_contents($sFilePathOrContent) : $sFilePathOrContent;
+        $this->aReplacements = $aReplacements + self::$_aStructure_Replacements;
         $this->aCallbacks = $aCallbacks + self::$_aStructure_Callbacks;
+        $this->_aSections = $this->sText ? $this->_getSplitContentsBySection($this->sText) : array();
     }
     public function setText($sText) {
         $this->sText = $sText;
         $this->_aSections = $this->sText ? $this->_getSplitContentsBySection($this->sText) : array();
     }
     private function _getSplitContentsBySection($sText) {
-        return preg_split('/^[\s]*==[\s]*(.+?)[\s]*==/m', $sText, -1, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
+        $_aSections = preg_split('/^[\s]*==[\s]*(.+?)[\s]*==/m', $sText, -1, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
+        return $_aSections;
     }
     public function get($sSectionName = '') {
         return $sSectionName ? $this->getSection($sSectionName) : $this->_getParsedText($this->sText);
@@ -22,7 +28,8 @@ class CustomScrollbar_AdminPageFramework_WPReadmeParser {
         return $this->_getParsedText($_sContent);
     }
     private function _getParsedText($sContent) {
-        $_sContent = preg_replace('/`(.*?)`/', '<code>\\1</code>', $sContent);
+        $_sContent = is_callable($this->aCallbacks['content_before_parsing']) ? call_user_func_array($this->aCallbacks['content_before_parsing'], array($sContent)) : $sContent;
+        $_sContent = preg_replace('/`(.*?)`/', '<code>\\1</code>', $_sContent);
         $_sContent = preg_replace_callback('/`(.*?)`/ms', array($this, '_replyToReplaceCodeBlocks'), $_sContent);
         $_sContent = preg_replace('/= (.*?) =/', '<h4>\\1</h4>', $_sContent);
         $_sContent = str_replace(array_keys($this->aReplacements), array_values($this->aReplacements), $_sContent);

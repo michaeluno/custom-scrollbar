@@ -1,6 +1,6 @@
 <?php
 abstract class CustomScrollbar_AdminPageFramework_Registry_Base {
-    const VERSION = '3.6.0b14';
+    const VERSION = '3.6.2b03';
     const NAME = 'Admin Page Framework';
     const DESCRIPTION = 'Facilitates WordPress plugin and theme development.';
     const URI = 'http://en.michaeluno.jp/admin-page-framework';

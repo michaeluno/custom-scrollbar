@@ -3,28 +3,52 @@ class CustomScrollbar_AdminPageFramework_Script_Tab extends CustomScrollbar_Admi
     static public function getScript() {
         return <<<JAVASCRIPTS
 ( function( $ ) {
-    
+        
     $.fn.createTabs = function( asOptions ) {
         
         var _bIsRefresh = ( typeof asOptions === 'string' && asOptions === 'refresh' );
-        if ( typeof asOptions === 'object' )
-            var aOptions = $.extend( {
-            }, asOptions );
-        
+        if ( typeof asOptions === 'object' ) {
+            var aOptions = $.extend( 
+                {}, 
+                asOptions 
+            );
+        }
+             
+        var _sURLHash = 'undefined' !== typeof window.location.hash
+            ? window.location.hash
+            : '';
+
         this.children( 'ul' ).each( function () {
+                 
+            // First, check if the url has a hash that exists in this tab group. 
+            // Consider the possibility that multiple tab groups are in one page.
+            var _bSetActive = false;
+            $( this ).children( 'li' ).each( function( i ) {     
+                var sTabContentID = $( this ).children( 'a' ).attr( 'href' );
+                if ( '' !== _sURLHash && sTabContentID === _sURLHash ) {
+                    _bSetActive = true;
+                    return false;
+                }
+            });
             
-            var bSetActive = false;
+            // Second iteration
             $( this ).children( 'li' ).each( function( i ) {     
                 
                 var sTabContentID = $( this ).children( 'a' ).attr( 'href' );
-                if ( ! _bIsRefresh && ! bSetActive && $( this ).is( ':visible' ) ) {
+
+                // If the url hash is set, compare the content id with it. If it matches, activate it.
+                if ( '' !== _sURLHash && sTabContentID === _sURLHash ) {
                     $( this ).addClass( 'active' );
-                    bSetActive = true;
+                }
+                
+                if ( ! _bIsRefresh && ! _bSetActive ) {
+                    $( this ).addClass( 'active' );
+                    _bSetActive = true;
                 }
                 
                 if ( $( this ).hasClass( 'active' ) ) {
                     $( sTabContentID ).show();
-                } else {                            
+                } else {                           
                     $( sTabContentID ).css( 'display', 'none' );
                 }
                 
@@ -45,11 +69,15 @@ class CustomScrollbar_AdminPageFramework_Script_Tab extends CustomScrollbar_Admi
                     var _oActiveContent = $( this ).parent().parent().find( sTabContentID ).css( 'display', 'block' ); 
                     _oActiveContent.siblings( ':not( ul )' ).css( 'display', 'none' );
                     
-                });
+                });                        
+
             });
-        });
-                        
+
+        });      
+                                
     };
+
+    
 }( jQuery ));
 JAVASCRIPTS;
         

@@ -45,8 +45,14 @@ class CustomScrollbar_AdminPageFramework_FormFieldset extends CustomScrollbar_Ad
     }
     private function _getFinalOutput(array $aFieldset, array $aFieldsOutput, $iFieldsCount) {
         $_oFieldsetAttributes = new CustomScrollbar_AdminPageFramework_Attribute_Fieldset($aFieldset);
+        return $aFieldset['before_fieldset'] . "<fieldset " . $_oFieldsetAttributes->get() . ">" . $this->_getFieldsetContent($aFieldset, $aFieldsOutput, $iFieldsCount) . $this->_getExtras($aFieldset, $iFieldsCount) . "</fieldset>" . $aFieldset['after_fieldset'];
+    }
+    private function _getFieldsetContent($aFieldset, $aFieldsOutput, $iFieldsCount) {
+        if (is_scalar($aFieldset['content'])) {
+            return $aFieldset['content'];
+        }
         $_oFieldsAttributes = new CustomScrollbar_AdminPageFramework_Attribute_Fields($aFieldset, array(), $iFieldsCount);
-        return $aFieldset['before_fieldset'] . "<fieldset " . $_oFieldsetAttributes->get() . ">" . "<div " . $_oFieldsAttributes->get() . ">" . $aFieldset['before_fields'] . implode(PHP_EOL, $aFieldsOutput) . $aFieldset['after_fields'] . "</div>" . $this->_getExtras($aFieldset, $iFieldsCount) . "</fieldset>" . $aFieldset['after_fieldset'];
+        return "<div " . $_oFieldsAttributes->get() . ">" . $aFieldset['before_fields'] . implode(PHP_EOL, $aFieldsOutput) . $aFieldset['after_fields'] . "</div>";
     }
     private function _getExtras($aField, $iFieldsCount) {
         $_aOutput = array();
@@ -57,10 +63,19 @@ class CustomScrollbar_AdminPageFramework_FormFieldset extends CustomScrollbar_Ad
         return implode(PHP_EOL, array_filter($_aOutput));
     }
     private function _getDynamicElementFlagFieldInputTag(array $aFieldset) {
-        if (!$aFieldset['sortable'] && !$aFieldset['repeatable']) {
-            return '';
+        if ($aFieldset['repeatable']) {
+            return $this->_getRepeatableFieldFlagTag($aFieldset);
         }
-        return $this->getHTMLTag('input', array('type' => 'hidden', 'name' => '__dynamic_elements_' . $aFieldset['_fields_type'] . '[' . $aFieldset['_field_address'] . ']', 'class' => 'dynamic-element-names element-address', 'value' => $aFieldset['_field_address'], 'data-field_address_model' => $aFieldset['_field_address_model'],));
+        if ($aFieldset['sortable']) {
+            return $this->_getSortableFieldFlagTag($aFieldset);
+        }
+        return '';
+    }
+    private function _getRepeatableFieldFlagTag(array $aFieldset) {
+        return $this->getHTMLTag('input', array('type' => 'hidden', 'name' => '__repeatable_elements_' . $aFieldset['_fields_type'] . '[' . $aFieldset['_field_address'] . ']', 'class' => 'element-address', 'value' => $aFieldset['_field_address'], 'data-field_address_model' => $aFieldset['_field_address_model'],));
+    }
+    private function _getSortableFieldFlagTag(array $aFieldset) {
+        return $this->getHTMLTag('input', array('type' => 'hidden', 'name' => '__sortable_elements_' . $aFieldset['_fields_type'] . '[' . $aFieldset['_field_address'] . ']', 'class' => 'element-address', 'value' => $aFieldset['_field_address'], 'data-field_address_model' => $aFieldset['_field_address_model'],));
     }
     private function _getFieldScripts($aField, $iFieldsCount) {
         $_aOutput = array();
