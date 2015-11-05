@@ -1,5 +1,5 @@
 <?php
-abstract class CustomScrollbar_AdminPageFramework_Utility_String extends CustomScrollbar_AdminPageFramework_Utility_Deprecated {
+abstract class CustomScrollbar_AdminPageFramework_Utility_String extends CustomScrollbar_AdminPageFramework_Utility_VariableType {
     public static function sanitizeSlug($sSlug) {
         return is_null($sSlug) ? null : preg_replace('/[^a-zA-Z0-9_\x7f-\xff]/', '_', trim($sSlug));
     }

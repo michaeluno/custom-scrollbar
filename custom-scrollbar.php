@@ -5,7 +5,7 @@
 	Description:    Adds a custom scrollbar to specified HTML elements.
 	Author:         Michael Uno (miunosoft)
 	Author URI:     http://michaeluno.jp
-	Version:        1.1.2
+	Version:        1.1.3
 */
 
 /**
@@ -15,7 +15,7 @@
  */
 class CustomScrollbar_Registry_Base {
  
-	const VERSION        = '1.1.2';    // <--- DON'T FORGET TO CHANGE THIS AS WELL!!
+	const VERSION        = '1.1.3';    // <--- DON'T FORGET TO CHANGE THIS AS WELL!!
 	const NAME           = 'Custom Scrollbar';
 	const DESCRIPTION    = 'Adds a custom scrollbar to specified HTML elements.';
 	const URI            = 'http://en.michaeluno.jp/custom-scrollbar';
@@ -154,7 +154,7 @@ final class CustomScrollbar_Registry extends CustomScrollbar_Registry_Base {
             'error'     => 'The plugin requires the PHP version %1$s or higher.',
         ),
         'wordpress'         => array(
-            'version'   => '3.3',
+            'version'   => '3.4',
             'error'     => 'The plugin requires the WordPress version %1$s or higher.',
         ),
         // 'mysql'             => array(

@@ -10,6 +10,9 @@ abstract class CustomScrollbar_AdminPageFramework_Factory_Model extends CustomSc
         }
         $this->oProp->aFieldTypeDefinitions = $this->oUtil->addAndApplyFilters($this, array('field_types_admin_page_framework', "field_types_{$this->oProp->sClassName}",), self::$_aFieldTypeDefinitions);
     }
+    public function loadFieldTypeDefinitions() {
+        $this->_loadFieldTypeDefinitions();
+    }
     protected function _registerFields(array $aFields) {
         foreach ($aFields as $_sSecitonID => $_aFields) {
             $_bIsSubSectionLoaded = false;
@@ -39,13 +42,19 @@ abstract class CustomScrollbar_AdminPageFramework_Factory_Model extends CustomSc
             call_user_func_array($_oCallableDoOnRegistration, array($aField));
         }
     }
+    public function registerFields(array $aFields) {
+        $this->_registerFields($aFields);
+    }
+    public function registerField(array $aField) {
+        $this->_registerField($aField);
+    }
     public function getSavedOptions() {
         return $this->oProp->aOptions;
     }
     public function getFieldErrors() {
         return $this->_getFieldErrors();
     }
-    protected function _getFieldErrors($sID = 'deprecated', $bDelete = true) {
+    public function _getFieldErrors($sID = 'deprecated', $bDelete = true) {
         static $_aFieldErrors;
         $_sTransientKey = "apf_field_erros_" . get_current_user_id();
         $_sID = md5($this->oProp->sClassName);
@@ -87,5 +96,8 @@ abstract class CustomScrollbar_AdminPageFramework_Factory_Model extends CustomSc
         }
         $_oInputSorter = new CustomScrollbar_AdminPageFramework_Modifier_SortInput($aInput, $_aDynamicFieldAddressKeys);
         return $_oInputSorter->get();
+    }
+    public function getSortedInputs(array $aInput) {
+        return $this->_getSortedInputs($aInput);
     }
 }

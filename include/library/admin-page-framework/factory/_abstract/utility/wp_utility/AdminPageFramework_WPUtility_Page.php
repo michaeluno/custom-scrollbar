@@ -127,4 +127,7 @@ class CustomScrollbar_AdminPageFramework_WPUtility_Page extends CustomScrollbar_
         }
         return '';
     }
+    static public function getNumberOfScreenColumns() {
+        return get_current_screen()->get_columns();
+    }
 }

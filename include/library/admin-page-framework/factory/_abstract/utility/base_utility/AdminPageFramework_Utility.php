@@ -1,5 +1,12 @@
 <?php
 abstract class CustomScrollbar_AdminPageFramework_Utility extends CustomScrollbar_AdminPageFramework_Utility_SystemInformation {
+    static public function getOutputBuffer($oCallable, array $aParameters = array()) {
+        ob_start();
+        echo call_user_func_array($oCallable, $aParameters);
+        $_sContent = ob_get_contents();
+        ob_end_clean();
+        return $_sContent;
+    }
     static public function sortArrayByKey($a, $b, $sKey = 'order') {
         return isset($a[$sKey], $b[$sKey]) ? $a[$sKey] - $b[$sKey] : 1;
     }
@@ -69,8 +76,5 @@ abstract class CustomScrollbar_AdminPageFramework_Utility extends CustomScrollba
     }
     static public function getAOrB($mValue, $mTrue = null, $mFalse = null) {
         return $mValue ? $mTrue : $mFalse;
-    }
-    static public function isNumericInteger($mValue) {
-        return is_numeric($mValue) && is_int($mValue + 0);
     }
 }

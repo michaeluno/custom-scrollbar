@@ -1,6 +1,6 @@
 <?php
 abstract class CustomScrollbar_AdminPageFramework_Page_Model extends CustomScrollbar_AdminPageFramework_Form_Controller {
-    protected function _finalizeInPageTabs() {
+    public function _replyToFinalizeInPageTabs() {
         if (!$this->oProp->isPageAdded()) {
             return;
         }
@@ -13,6 +13,9 @@ abstract class CustomScrollbar_AdminPageFramework_Page_Model extends CustomScrol
             $this->oProp->aDefaultInPageTabs[$_sPageSlug] = $this->_getDefaultInPageTab($_sPageSlug, $this->oProp->aInPageTabs[$_sPageSlug]);
         }
     }
+    protected function _finalizeInPageTabs() {
+        $this->_replyToFinalizeInPageTabs();
+    }
     private function _getDefaultInPageTab($sPageSlug, $aInPageTabs) {
         foreach ($aInPageTabs as $_aInPageTab) {
             if (!isset($_aInPageTab['tab_slug'])) {
@@ -20,9 +23,6 @@ abstract class CustomScrollbar_AdminPageFramework_Page_Model extends CustomScrol
             }
             return $_aInPageTab['tab_slug'];
         }
-    }
-    public function _replyToFinalizeInPageTabs() {
-        $this->_finalizeInPageTabs();
     }
     public function _getPageCapability($sPageSlug) {
         return $this->oUtil->getElement($this->oProp->aPages, array($sPageSlug, 'capability'));
