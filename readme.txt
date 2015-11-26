@@ -16,6 +16,9 @@ Do you have too long elements sticking out and breaking the web site layout?
 
 If you have such a problem, fix their height by adding a scrollbar to the element with this plugin.
 
+<h4>How It Works</h4>
+[youtube https://youtu.be/_MRQOXW1UTU]
+
 After installing it, go to `Dashboard` -> `Appearance` -> `Scrollbars`. Set a selector and height. That's it.
 
 Notes: you need a basic understanding of CSS (jQuery) selectors to use this plugin.
