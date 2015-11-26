@@ -5,7 +5,7 @@
 	Description:    Adds a custom scrollbar to specified HTML elements.
 	Author:         Michael Uno (miunosoft)
 	Author URI:     http://michaeluno.jp
-	Version:        1.1.3
+	Version:        1.1.4b01
 */
 
 /**
@@ -15,7 +15,7 @@
  */
 class CustomScrollbar_Registry_Base {
  
-	const VERSION        = '1.1.3';    // <--- DON'T FORGET TO CHANGE THIS AS WELL!!
+	const VERSION        = '1.1.4b01';    // <--- DON'T FORGET TO CHANGE THIS AS WELL!!
 	const NAME           = 'Custom Scrollbar';
 	const DESCRIPTION    = 'Adds a custom scrollbar to specified HTML elements.';
 	const URI            = 'http://en.michaeluno.jp/custom-scrollbar';
@@ -183,7 +183,7 @@ final class CustomScrollbar_Registry extends CustomScrollbar_Registry_Base {
 CustomScrollbar_Registry::setUp( __FILE__ );
 
 
-include( dirname( __FILE__ ).'/include/library/admin-page-framework/admin-page-framework.php' );
+include( dirname( __FILE__ ).'/include/library/apf/admin-page-framework.php' );
 include( dirname( __FILE__ ).'/include/class/boot/CustomScrollbar_Bootstrap.php' );
 new CustomScrollbar_Bootstrap(
     CustomScrollbar_Registry::$sFilePath,

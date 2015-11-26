@@ -56,12 +56,14 @@ class CustomScrollbar_AdminPage_Setting_Scrollbars_Scrollbars extends CustomScro
                 'field_id'         => 'selector',
                 'type'             => 'text',
                 'title'            => __( 'Target Element Selector', 'custom-scrollbar' ),
-                'description'      => array(
-                    __( 'Define the CSS (jQuery) target selector of the element.', 'custom-scrollbar' ),
-                    ' e.g. <code>aside.widget</code>',
-                    __( 'For multiple selectors, delimit them by commas.', 'custom-scrollbar' ),
-                    ' e.g. <code>div.widget > ul, div.widget > div</code>',
-                ),
+                'tip'              => "<p>"
+                        . __( 'Define the CSS (jQuery) target selector of the element.', 'custom-scrollbar' )
+                        . ' e.g. <code>aside.widget</code>'
+                    . "</p>"
+                    . "<p>"
+                        . __( 'For multiple selectors, delimit them by commas.', 'custom-scrollbar' )
+                        . ' e.g. <code>div.widget > ul, div.widget > div</code>'
+                    . "</p>",
                 'attributes'       => array(
                     'size'  => 52,
                 ),
@@ -70,7 +72,7 @@ class CustomScrollbar_AdminPage_Setting_Scrollbars_Scrollbars extends CustomScro
                 'field_id'          => 'height',
                 'type'              => 'size',
                 'title'             => __( 'Element Height', 'custom-scrollbar' ),
-                'description'       => __( 'The target element maximum height.', 'custom-scrollbar' )
+                'tip'               => __( 'The target element maximum height.', 'custom-scrollbar' )
                     . ' ' . __( 'HTMNL elements that exceed this value will have a scrollbar.', 'custom-scrollbar' ),
                 'units'             => array(
                     'px'    => 'px',
@@ -81,7 +83,7 @@ class CustomScrollbar_AdminPage_Setting_Scrollbars_Scrollbars extends CustomScro
                 'field_id'          => 'width',
                 'type'              => 'size',
                 'title'             => __( 'Element Width', 'custom-scrollbar' ),
-                'description'       => __( 'The target element maximum width.', 'custom-scrollbar' )
+                'tip'               => __( 'The target element maximum width.', 'custom-scrollbar' )
                     . ' ' . __( 'HTMNL elements that exceed this value will have a scrollbar.', 'custom-scrollbar' ),
                 'units'             => array(
                     'px'    => 'px',
@@ -111,10 +113,10 @@ class CustomScrollbar_AdminPage_Setting_Scrollbars_Scrollbars extends CustomScro
                         'style' => 'width: 100%;'
                     ),
                 ),
-                'description'      => array(
-                    __( 'Apply these inline CSS rules to the target elements.', 'custom-scrollbar' ),
-                    'e.g. ' . '<code>white-space</code>: <code>nowrap</code>',
-                ),
+                'tip'               => "<p>"
+                        . __( 'Apply these inline CSS rules to the target elements.', 'custom-scrollbar' )
+                        . ' e.g. ' . '<code>white-space</code>: <code>nowrap</code>'
+                    . "</p>",
                 'repeatable'        => true,
             ),               
             array(

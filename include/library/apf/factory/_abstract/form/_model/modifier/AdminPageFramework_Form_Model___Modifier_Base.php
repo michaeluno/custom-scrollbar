@@ -1,0 +1,3 @@
+<?php
+abstract class CustomScrollbar_AdminPageFramework_Form_Model___Modifier_Base extends CustomScrollbar_AdminPageFramework_WPUtility {
+}

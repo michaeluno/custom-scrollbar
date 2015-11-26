@@ -34,10 +34,10 @@ class CustomScrollbar_AdminPage_Setting_CSS_CSS extends CustomScrollbar_AdminPag
             array(
                 'field_id'        => 'custom_css',
                 'type'            => 'textarea',
-                'title'          => __( 'CSS Rules', 'custom-scrollbar' ),
-                'description'    => array(
-                    __( 'Define custom CSS rules.', 'custom-scrollbar' ),
-                ),
+                'title'           => __( 'CSS Rules', 'custom-scrollbar' ),
+                'tip'             => "<p>"
+                        . __( 'Define custom CSS rules like <code>.my-selector { width: 100%; } </code>', 'custom-scrollbar' )
+                    . "</p>",
             )
         );
     
