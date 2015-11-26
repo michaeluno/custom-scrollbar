@@ -4,7 +4,7 @@ Donate link:        http://en.michaeluno.jp/donate
 Tags:               scroll, scrollbar, scrollbars, scroll bar, scroll bars, appearance, custom scrollbar, custom scrollbars, custom scroll, custom scroll bar, custom scroll bars
 Requires at least:  3.4
 Tested up to:       4.3.1
-Stable tag:         1.1.3
+Stable tag:         1.1.4
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -17,7 +17,8 @@ Do you have too long elements sticking out and breaking the web site layout?
 If you have such a problem, fix their height by adding a scrollbar to the element with this plugin.
 
 <h4>How It Works</h4>
-[youtube https://youtu.be/_MRQOXW1UTU]
+
+[youtube https://www.youtube.com/watch?v=_MRQOXW1UTU]
 
 After installing it, go to `Dashboard` -> `Appearance` -> `Scrollbars`. Set a selector and height. That's it.
 
