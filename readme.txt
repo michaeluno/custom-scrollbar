@@ -12,6 +12,7 @@ Adds a custom scrollbar to specified HTML elements.
 
 == Description ==
 
+<h4>Change the Look of Too Long Vertical Elements</h4>
 Do you have too long elements sticking out and breaking the web site layout? 
 
 If you have such a problem, fix their height by adding a scrollbar to the element with this plugin.
@@ -22,7 +23,7 @@ If you have such a problem, fix their height by adding a scrollbar to the elemen
 
 After installing it, go to `Dashboard` -> `Appearance` -> `Scrollbars`. Set a selector and height. That's it.
 
-Notes: you need a basic understanding of CSS (jQuery) selectors to use this plugin.
+Notes: you need a basic understanding of CSS/jQuery selectors to use this plugin.
 
 = Features =
 * **Multiple Selectors** - by specifying selectors, you can define multiple scrollbars.
@@ -50,6 +51,9 @@ Notes: you need a basic understanding of CSS (jQuery) selectors to use this plug
 2. **Setting Page**
 
 == Changelog ==
+
+= 1.1.5 - 12/15/2015 =
+- Fixed an issue with jQuery v2.1.4.
 
 = 1.1.4 - 11/27/2015 =
 - Tweaked the setting pages.

@@ -54,11 +54,15 @@
                 
                 if ( 'undefined' === typeof _aInlineCSS[ 'property' ] ) {
                     return true; // continue
-                }                
+                }   
+                if ( '' === _aInlineCSS[ 'property' ] ) {
+                    return true; // continue
+                }                      
                 if ( 'undefined' === typeof _aInlineCSS[ 'value' ] ) {
                     return true; // continue
-                }                                
+                }
                 $( _aScrollbar[ 'selector' ] ).css( _aInlineCSS[ 'property' ], _aInlineCSS[ 'value' ] );
+                
                 
             } );            
                             
