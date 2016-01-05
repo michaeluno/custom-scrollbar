@@ -4,7 +4,7 @@ Donate link:        http://en.michaeluno.jp/donate
 Tags:               scroll, scrollbar, scrollbars, scroll bar, scroll bars, appearance, custom scrollbar, custom scrollbars, custom scroll, custom scroll bar, custom scroll bars
 Requires at least:  3.4
 Tested up to:       4.4
-Stable tag:         1.1.5
+Stable tag:         1.1.6
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -25,7 +25,7 @@ After installing it, go to `Dashboard` -> `Appearance` -> `Scrollbars`. Set a se
 
 Notes: you need a basic understanding of CSS/jQuery selectors to use this plugin.
 
-<h4>Multiple Selectors<h4>
+<h4>Multiple Selectors</h4>
 By specifying selectors, you can define multiple scrollbars.
 
 <h4>Custom Colors</h4>
