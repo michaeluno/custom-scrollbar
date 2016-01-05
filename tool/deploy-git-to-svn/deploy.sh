@@ -125,14 +125,14 @@ echo "$MAINFILE version: $PLUGINVERSION"
 READMEVERSION=`grep "^Stable tag:" $GITPATH/readme.txt | awk -F' ' '{print $NF}' | tr -d '\r'`
 echo "readme.txt version: $READMEVERSION"
 
-if [ "$READMEVERSION" = "trunk" ]; then
-	echo "Version in readme.txt & $MAINFILE don't match, but Stable tag is trunk. Let's proceed..."
-elif [ "$PLUGINVERSION" != "$READMEVERSION" ]; then
-	echo "Version in readme.txt & $MAINFILE don't match. Exiting...."
-	exit 1;
-elif [ "$PLUGINVERSION" = "$READMEVERSION" ]; then
-	echo "Versions match in readme.txt and $MAINFILE. Let's proceed..."
-fi
+# if [ "$READMEVERSION" = "trunk" ]; then
+	# echo "Version in readme.txt & $MAINFILE don't match, but Stable tag is trunk. Let's proceed..."
+# elif [ "$PLUGINVERSION" != "$READMEVERSION" ]; then
+	# echo "Version in readme.txt & $MAINFILE don't match. Exiting...."
+	# exit 1;
+# elif [ "$PLUGINVERSION" = "$READMEVERSION" ]; then
+	# echo "Versions match in readme.txt and $MAINFILE. Let's proceed..."
+# fi
 
 # GaryJ: Ignore check for git tag, as git flow release finish creates this.
 #if git show-ref --tags --quiet --verify -- "refs/tags/$PLUGINVERSION"
@@ -143,7 +143,7 @@ fi
 #		echo "Git version does not exist. Let's proceed..."
 #fi
 
-echo "Changing to $GITPATH"
+echo "# Changing to $GITPATH"
 cd $GITPATH
 # GaryJ: Commit message variable not needed . Hard coded for SVN trunk commit for consistency.
 #echo -e "Enter a commit message for this new version: \c"
@@ -155,22 +155,22 @@ cd $GITPATH
 #echo "Tagging new version in git"
 #git tag -a "$PLUGINVERSION" -m "Tagging version $PLUGINVERSION"
 
-echo "Pushing git master to origin, with tags"
+echo "# Pushing git master to origin, with tags"
 git push origin master
 git push origin master --tags
 
 echo 
-echo "Creating local copy of SVN repository trunk ..."
+echo "# Creating local copy of SVN repository trunk ..."
 svn checkout $SVNURL $SVNPATH --depth immediates
 svn update --quiet $SVNPATH/trunk --set-depth infinity
 
-echo "Ignoring GitHub specific files"
+echo "# Ignoring GitHub specific files"
 svn propset svn:ignore "README.md
 Thumbs.db
 .git
 .gitignore" "$SVNPATH/trunk/"
 
-echo "Exporting the HEAD of master from git to the trunk of SVN"
+echo "# Exporting the HEAD of master from git to the trunk of SVN"
 # The below checkout-index command does not respect export-ignore items so we are going to archive files first and unzip it.
 # git checkout-index -a -f --prefix=$SVNPATH/trunk/
 ARCHIVE_FILE_PATH=$SVNPATH/$PLUGINSLUG.zip
@@ -184,7 +184,7 @@ rm -f "$ARCHIVE_FILE_PATH"  # remove the archive file
 # If submodule exist, recursively check out their indexes
 if [ -f ".gitmodules" ]
 	then
-		echo "Exporting the HEAD of each submodule from git to the trunk of SVN"
+		echo "# Exporting the HEAD of each submodule from git to the trunk of SVN"
 		git submodule init
 		git submodule update
 		git config -f .gitmodules --get-regexp '^submodule\..*\.path$' |
@@ -201,31 +201,33 @@ if [ -f ".gitmodules" ]
 fi
 
 # Support for the /assets folder on the .org repo.
-echo "Moving assets"
+echo "# Moving assets"
 # Make the directory if it doesn't already exist
 mkdir -p $SVNPATH/assets/
 mv $SVNPATH/trunk/assets/* $SVNPATH/assets/
 svn add --force $SVNPATH/assets/
 svn delete --force $SVNPATH/trunk/assets
 
-echo "Changing directory to SVN and committing to trunk"
+echo "# Changing directory to SVN and committing to trunk"
 cd $SVNPATH/trunk/
 # Delete all files that should not now be added.
-svn status | grep -v "^.[ \t]*\..*" | grep "^\!" | awk '{print $2}' | xargs svn del
+# (`sed` converts \ to /)
+svn status | grep -v "^.[ \t]*\..*" | grep "^\!" | sed 's/\\/\//g' | awk '{print $2}' | xargs svn del
 # Add all new files that are not set to be ignored
-svn status | grep -v "^.[ \t]*\..*" | grep "^?" | awk '{print $2}' | xargs svn add
+svn status | grep -v "^.[ \t]*\..*" | grep "^?" | sed 's/\\/\//g' | awk '{print $2}' | xargs svn add
 svn commit --username=$SVNUSER --password=$SVNPASS -m "Preparing for $PLUGINVERSION release"
 
-echo "Updating WordPress plugin repo assets and committing"
+echo "# Updating WordPress plugin repository assets and committing"
 cd $SVNPATH/assets/
 # Delete all new files that are not set to be ignored
-svn status | grep -v "^.[ \t]*\..*" | grep "^\!" | awk '{print $2}' | xargs svn del
+svn status | grep -v "^.[ \t]*\..*" | grep "^\!" | sed 's/\\/\//g' | awk '{print $2}' | xargs svn del
+
 # Add all new files that are not set to be ignored
-svn status | grep -v "^.[ \t]*\..*" | grep "^?" | awk '{print $2}' | xargs svn add
+svn status | grep -v "^.[ \t]*\..*" | grep "^?" | sed 's/\\/\//g' | awk '{print $2}' | xargs svn add
 svn update --accept mine-full $SVNPATH/assets/*
 svn commit --username=$SVNUSER --password=$SVNPASS -m "Updating assets"
 
-echo "Creating new SVN tag and committing it"
+echo "# Creating new SVN tag and committing it"
 cd $SVNPATH
 svn update --quiet $SVNPATH/tags/$PLUGINVERSION
 svn copy --quiet trunk/ tags/$PLUGINVERSION/
@@ -235,9 +237,13 @@ svn delete --force --quiet $SVNPATH/tags/$PLUGINVERSION/trunk
 cd $SVNPATH/tags/$PLUGINVERSION
 svn commit --username=$SVNUSER --password=$SVNPASS -m "Tagging version $PLUGINVERSION"
 
-echo "Removing temporary directory $SVNPATH"
+$SHELL
+exit
+
+echo "# Removing temporary directory $SVNPATH"
 cd $SVNPATH
 cd ..
 rm -fr $SVNPATH/
 
 echo "*** FIN ***"
+$SHELL
