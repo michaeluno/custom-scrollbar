@@ -4,7 +4,7 @@ Donate link:        http://en.michaeluno.jp/donate
 Tags:               scroll, scrollbar, scrollbars, scroll bar, scroll bars, appearance, custom scrollbar, custom scrollbars, custom scroll, custom scroll bar, custom scroll bars
 Requires at least:  3.4
 Tested up to:       4.4
-Stable tag:         1.1.5
+Stable tag:         1.1.6
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -58,8 +58,9 @@ Pick you favorite style from a list.
 
 == Changelog ==
 
-= 1.1.6 =
+= 1.1.6 - 01/06/2015 =
 - Added the minified version for the enabler script.
+- Improved performance of the setting page.
 
 = 1.1.5 - 12/15/2015 =
 - Fixed an issue with jQuery v2.1.4.
