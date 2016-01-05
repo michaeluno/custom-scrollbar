@@ -1,5 +1,11 @@
 ## CHange Log
 
+### 1.0.8 - 2015/12/10
+- Added a method to format a path.
+
+### 1.0.7 - 2015/11/19
+- Fixed a bug with the `exclude_dir_names` argument.
+
 ### 1.0.6 - 2015/02/26
 - Added the `output()` method.
 - Added the `exclude_file_names` argument to filter out files with certain names.
