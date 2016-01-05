@@ -3,8 +3,8 @@ Contributors:       Michael Uno, miunosoft
 Donate link:        http://en.michaeluno.jp/donate
 Tags:               scroll, scrollbar, scrollbars, scroll bar, scroll bars, appearance, custom scrollbar, custom scrollbars, custom scroll, custom scroll bar, custom scroll bars
 Requires at least:  3.4
-Tested up to:       4.3.1
-Stable tag:         1.1.4
+Tested up to:       4.4
+Stable tag:         1.1.5
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,12 +12,12 @@ Adds a custom scrollbar to specified HTML elements.
 
 == Description ==
 
-<h4>Change the Look of Too Long Vertical Elements</h4>
+<h4>Change the Look of Too Long Vertical Elements width a Scroolbar</h4>
 Do you have too long elements sticking out and breaking the web site layout? 
 
 If you have such a problem, fix their height by adding a scrollbar to the element with this plugin.
 
-<h4>How It Works</h4>
+<h4>See How a Scrollbar is Created</h4>
 
 [youtube https://www.youtube.com/watch?v=_MRQOXW1UTU]
 
@@ -25,11 +25,17 @@ After installing it, go to `Dashboard` -> `Appearance` -> `Scrollbars`. Set a se
 
 Notes: you need a basic understanding of CSS/jQuery selectors to use this plugin.
 
-= Features =
-* **Multiple Selectors** - by specifying selectors, you can define multiple scrollbars.
-* **Custom Colors** - pick custom colors for the scrollbar elements.
-* **Custom CSS** - define custom CSS rules.
-* **Predefined Styles** - pick you favorite style from a list.
+<h4>Multiple Selectors<h4>
+By specifying selectors, you can define multiple scrollbars.
+
+<h4>Custom Colors</h4>
+Pick custom colors for the scrollbar elements.
+
+<h4>Custom CSS</h4>
+Define custom CSS rules.
+
+<h4>Predefined Styles</h4>
+Pick you favorite style from a list.
   
 = Supported Language =
 * English
@@ -51,6 +57,9 @@ Notes: you need a basic understanding of CSS/jQuery selectors to use this plugin
 2. **Setting Page**
 
 == Changelog ==
+
+= 1.1.6 =
+- Added the minified version for the enabler script.
 
 = 1.1.5 - 12/15/2015 =
 - Fixed an issue with jQuery v2.1.4.

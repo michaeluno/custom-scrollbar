@@ -62,29 +62,38 @@ class CustomScrollbar_ScriptLoader extends CustomScrollbar_PluginUtility {
      */
     public function replyToEnqueueScripts() {
 
+        $_iDebugMode = ( integer ) $this->oOption->isDebug();
+        $_aFiles     = array(
+            0 => '/asset/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css',
+            1 => '/asset/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css',
+        );
+        $_sPath       = $_aFiles[ $_iDebugMode ];
         wp_enqueue_style( 
             'malihu-custom-scrollbar-css',     // handle id
-            CustomScrollbar_Registry::getPluginURL( 
-                $this->oOption->isDebug()
-                    ? '/asset/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css' 
-                    : '/asset/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css' 
-            ) // file url
+            CustomScrollbar_Registry::getPluginURL( $_sPath ) // file url
         );
       
+        $_aFiles     = array(
+            0 => '/asset/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js',
+            1 => '/asset/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.js',
+        );
+        $_sPath       = $_aFiles[ $_iDebugMode ];      
         wp_enqueue_script( 
             'malihu-custom-scrollbar',     // handle id
-            CustomScrollbar_Registry::getPluginURL( 
-                $this->oOption->isDebug()
-                    ? '/asset/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.js' 
-                    : '/asset/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js' 
-            ), // file url            
+            CustomScrollbar_Registry::getPluginURL( $_sPath ),  // file url
             array( 'jquery' ),   // dependencies
             '',     // version
             true    // in footer? yes
         );
+        
+        $_aFiles     = array(
+            0 => '/asset/js/custom-scrollbar-enabler.min.js',
+            1 => '/asset/js/custom-scrollbar-enabler.js',
+        );
+        $_sPath       = $_aFiles[ $_iDebugMode ];          
         wp_enqueue_script( 
             'custom_scrollbar_enabler',     // handle id
-            CustomScrollbar_Registry::getPluginURL( '/asset/js/custom-scrollbar-enabler.js' ), // script url
+            CustomScrollbar_Registry::getPluginURL( $_sPath ), // script url
             array( 'malihu-custom-scrollbar' ),   // dependencies
             '',     // version
             true    // in footer? yes
