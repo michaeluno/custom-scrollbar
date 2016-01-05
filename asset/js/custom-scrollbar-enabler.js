@@ -1,3 +1,10 @@
+/**
+ * Custom Scrollbar
+ * 
+ * http://en.michaeluno.jp/custom-scrollbar/
+ * Copyright (c) 2015 Michael Uno
+ * 
+ */
 (function($){
     $( document ).ready( function() {
         
