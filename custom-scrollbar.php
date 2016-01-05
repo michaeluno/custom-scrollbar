@@ -5,7 +5,7 @@
 	Description:    Adds a custom scrollbar to specified HTML elements.
 	Author:         Michael Uno (miunosoft)
 	Author URI:     http://michaeluno.jp
-	Version:        1.1.6b01
+	Version:        1.1.6b02
 */
 
 /**
@@ -15,7 +15,7 @@
  */
 class CustomScrollbar_Registry_Base {
  
-	const VERSION        = '1.1.6b01';    // <--- DON'T FORGET TO CHANGE THIS AS WELL!!
+	const VERSION        = '1.1.6b02';    // <--- DON'T FORGET TO CHANGE THIS AS WELL!!
 	const NAME           = 'Custom Scrollbar';
 	const DESCRIPTION    = 'Adds a custom scrollbar to specified HTML elements.';
 	const URI            = 'http://en.michaeluno.jp/custom-scrollbar';
@@ -141,8 +141,16 @@ final class CustomScrollbar_Registry extends CustomScrollbar_Registry_Base {
      * @return      string
      */
 	public static function getPluginURL( $sRelativePath='' ) {
-		return plugins_url( $sRelativePath, self::$sFilePath );
+        if ( isset( self::$_sPluginURLCache ) ) {
+            return self::$_sPluginURLCache . $sRelativePath;
+        }
+        self::$_sPluginURLCache = trailingslashit( plugins_url( '', self::$sFilePath ) );
+        return self::$_sPluginURLCache . $sRelativePath;
 	}
+        /**
+         * @since       1.1.6
+         */
+        static private $_sPluginURLCache;
 
     /**
      * Requirements.
@@ -184,7 +192,7 @@ CustomScrollbar_Registry::setUp( __FILE__ );
 
 
 include( dirname( __FILE__ ).'/include/library/apf/admin-page-framework.php' );
-include( dirname( __FILE__ ).'/include/class/boot/CustomScrollbar_Bootstrap.php' );
+include( dirname( __FILE__ ).'/include/class/CustomScrollbar_Bootstrap.php' );
 new CustomScrollbar_Bootstrap(
     CustomScrollbar_Registry::$sFilePath,
     CustomScrollbar_Registry::HOOK_SLUG    // hook prefix    
