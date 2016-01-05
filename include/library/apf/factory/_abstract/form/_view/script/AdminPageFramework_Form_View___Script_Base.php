@@ -1,3 +1,0 @@
-<?php
-class CustomScrollbar_AdminPageFramework_Form_View___Script_Base extends CustomScrollbar_AdminPageFramework_Factory___Script_Base {
-}

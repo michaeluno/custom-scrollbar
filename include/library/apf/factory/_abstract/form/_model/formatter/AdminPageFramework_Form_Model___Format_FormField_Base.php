@@ -1,3 +1,0 @@
-<?php
-abstract class CustomScrollbar_AdminPageFramework_Form_Model___Format_FormField_Base extends CustomScrollbar_AdminPageFramework_Form_Utility {
-}
