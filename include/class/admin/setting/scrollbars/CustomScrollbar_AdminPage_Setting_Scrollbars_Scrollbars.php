@@ -37,20 +37,21 @@ class CustomScrollbar_AdminPage_Setting_Scrollbars_Scrollbars extends CustomScro
                     . __( 'Name', 'custom-scrollbar' ) 
                     . "</strong>:&nbsp; ",
                 'attributes'       => array(              
-                    'size'          => 80,
-                    'style'         => 'width: 92%;',
+                    'size'          => 48,
+                    'style'         => 'width: auto;',
                     'placeholder'   => __( 'Enter a scrollbar name', 'custom-scrollbar' ),
                 ),
             ),   
             array(
                 'field_id'         => 'status',
                 'type'             => 'radio',
-                'title'            => __( 'Status', 'custom-scrollbar' ),
                 'label'            => array(
                     1    => __( 'On', 'custom-scrollbar' ),
                     0    => __( 'Off', 'custom-scrollbar' ),
                 ),
                 'default'          => 1,
+                'placement'        => 'section_title',
+                'label_min_width'  => 40,
             ),                        
             array(
                 'field_id'         => 'selector',
