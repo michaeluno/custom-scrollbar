@@ -31,15 +31,21 @@ class CustomScrollbar_AdminPage_Setting__Reset__Reset extends CustomScrollbar_Ad
         $_oOption = CustomScrollbar_Option::getInstance();    
         $oFactory->addSettingFields(
             $sSectionID, // the target section id
+            array( 
+                'field_id'          => 'reset_confirmation_check',
+                'title'             => __( 'Setting Initialization', 'custom-scrollbar' ),
+                'type'              => 'checkbox',
+                'label'             => __( 'I understand the options will be erased by pressing the reset button.', 'custom-scrollbar' ),
+                'save'              => false,
+                'value'             => false,
+            ),            
             array(
                 'field_id'          => 'reset',
                 'type'              => 'submit',
                 'reset'             => true,
                 'save'              => false,
-                'title'             => __( 'Setting Initialization', 'custom-scrollbar' ),
-                // 'show_title_column' => false,
+                'skip_confirmation' => true,
                 'value'             => __( 'Reset', 'custom-scrollbar' ),
-                'description'       => __( 'Reset settings.', 'custom-scrollbar' ),
             ),            
             array()            
         );
@@ -52,19 +58,29 @@ class CustomScrollbar_AdminPage_Setting__Reset__Reset extends CustomScrollbar_Ad
      * 
      * @since        1
      */
-    public function validate( $aInput, $aOldInput, $oAdminPage, $aSubmitInfo ) {
+    public function validate( $aInputs, $aOldInputs, $oAdminPage, $aSubmitInfo ) {
     
         $_bVerified = true;
         $_aErrors   = array();
         
+        // If the pressed button is not the one with the check box, do not set a field error.
+        if ( 'reset' !== $aSubmitInfo[ 'field_id' ] ) {
+            return $aInputs;
+        }
+
+        if ( ! $aInputs[ 'reset_confirmation_check' ] ) {
+            $_bVerified = false;
+            $_aErrors[ $this->sSectionID ][ 'reset_confirmation_check' ] = __( 'Please check the check box to confirm you want to reset the settings.', 'custom-scrollbar' );
+        }
+        
         // An invalid value is found. Set a field error array and an admin notice and return the old values.
         if ( ! $_bVerified ) {
             $oAdminPage->setFieldErrors( $_aErrors );     
-            $oAdminPage->setSettingNotice( __( 'There was something wrong with your input.', 'custom-scrollbar' ) );
-            return $aOldInput;
+            $oAdminPage->setSettingNotice( __( 'There was something wrong with your Inputs.', 'custom-scrollbar' ) );
+            return $aOldInputs;
         }
                 
-        return $aInput;     
+        return $aInputs;     
         
     }
    
