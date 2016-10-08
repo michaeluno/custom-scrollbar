@@ -7,11 +7,11 @@
  */
 
 /**
- * Adds the 'Reset' form section to the 'Reset' tab.
+ * Adds the 'Reset' form section to the 'Data' tab.
  * 
  * @since        1.2.0
  */
-class CustomScrollbar_AdminPage_Setting__Reset__Reset extends CustomScrollbar_AdminPage_Section_Base {
+class CustomScrollbar_AdminPage_Setting__Data__Reset extends CustomScrollbar_AdminPage_Section_Base {
     
     /**
      * A user constructor.
@@ -33,7 +33,7 @@ class CustomScrollbar_AdminPage_Setting__Reset__Reset extends CustomScrollbar_Ad
             $sSectionID, // the target section id
             array( 
                 'field_id'          => 'reset_confirmation_check',
-                'title'             => __( 'Setting Initialization', 'custom-scrollbar' ),
+                'title'             => __( 'Initialization', 'custom-scrollbar' ),
                 'type'              => 'checkbox',
                 'label'             => __( 'I understand the options will be erased by pressing the reset button.', 'custom-scrollbar' ),
                 'save'              => false,
