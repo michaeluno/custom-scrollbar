@@ -41,7 +41,7 @@ class CustomScrollbar_AdminPage_Setting extends CustomScrollbar_AdminPage_Page_B
             )        
         );
         
-        new CustomScrollbar_AdminPage_Setting_General( 
+        new CustomScrollbar_AdminPage_Setting__General( 
             $this->oFactory,
             $this->sPageSlug,
             array( 
@@ -50,6 +50,15 @@ class CustomScrollbar_AdminPage_Setting extends CustomScrollbar_AdminPage_Page_B
             )
         );
 
+        new CustomScrollbar_AdminPage_Setting__Reset(
+            $this->oFactory,
+            $this->sPageSlug,
+            array( 
+                'tab_slug'  => 'reset',
+                'title'     => __( 'Reset', 'custom-scrollbar' ),
+            )        
+        );
+        
     }   
     
     /**

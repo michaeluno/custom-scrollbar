@@ -7,23 +7,23 @@
  */
 
 /**
- * Adds the 'Reet' form section to the 'General' tab.
+ * Adds the 'Reset' form section to the 'Reset' tab.
  * 
- * @since        1
+ * @since        1.2.0
  */
-class CustomScrollbar_AdminPage_Setting_General_Reset extends CustomScrollbar_AdminPage_Section_Base {
+class CustomScrollbar_AdminPage_Setting__Reset__Reset extends CustomScrollbar_AdminPage_Section_Base {
     
     /**
      * A user constructor.
      * 
-     * @since        1
+     * @since       1.2.0
      * @return      void
      */
     protected function construct( $oFactory ) {}
     
     /**
      * Adds form fields.
-     * @since        1
+     * @since       1.2.0
      * @return      void
      */
     public function addFields( $oFactory, $sSectionID ) {
@@ -35,15 +35,12 @@ class CustomScrollbar_AdminPage_Setting_General_Reset extends CustomScrollbar_Ad
                 'field_id'          => 'reset',
                 'type'              => 'submit',
                 'reset'             => true,
-                'show_title_column' => false,
+                'save'              => false,
+                'title'             => __( 'Setting Initialization', 'custom-scrollbar' ),
+                // 'show_title_column' => false,
                 'value'             => __( 'Reset', 'custom-scrollbar' ),
+                'description'       => __( 'Reset settings.', 'custom-scrollbar' ),
             ),            
-            array(
-                'field_id'          => 'reset_on_uninstall',
-                'type'              => 'checkbox',
-                'show_title_column' => false,
-                'label'             => __( 'Delete options on uninstall.', 'custom-scrollbar' ),
-            ),
             array()            
         );
     

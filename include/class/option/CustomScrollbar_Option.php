@@ -28,6 +28,11 @@ class CustomScrollbar_Option extends CustomScrollbar_Option_Base {
      */
     public $aDefault = array(
     
+        // 1.2.0+ 
+        'load'     => array(
+            'ajax_initialization'   => false,
+        ),
+    
         'reset'    => array(
             'reset_on_uninstall'    => false,
         ),

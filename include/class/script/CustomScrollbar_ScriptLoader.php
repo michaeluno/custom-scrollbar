@@ -98,10 +98,17 @@ class CustomScrollbar_ScriptLoader extends CustomScrollbar_PluginUtility {
             '',     // version
             true    // in footer? yes
         );
+        
+        $_aData = array(
+            'scrollbars' => $this->aScrollbars,
+            'css'        => '__dropped',
+            'reset'      => '__dropped',
+        ) + $this->oOption->get();
+        
         wp_localize_script( 
             'custom_scrollbar_enabler',  // handle id - the above used enqueue handle id
             'custom_scrollbar_enabler',  // name of the data loaded in the script
-            $this->aScrollbars // translation array
+            $_aData // translation array
         );         
         
     }

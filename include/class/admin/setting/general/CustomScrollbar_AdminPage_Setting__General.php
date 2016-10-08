@@ -14,7 +14,7 @@
  * @since        1
  * @extends     CustomScrollbar_AdminPage_Tab_Base
  */
-class CustomScrollbar_AdminPage_Setting_General extends CustomScrollbar_AdminPage_Tab_Base {
+class CustomScrollbar_AdminPage_Setting__General extends CustomScrollbar_AdminPage_Tab_Base {
     
     /**
      * Triggered when the tab is loaded.
@@ -22,7 +22,19 @@ class CustomScrollbar_AdminPage_Setting_General extends CustomScrollbar_AdminPag
     public function replyToLoadTab( $oAdminPage ) {
         
         // Form sections
-        new CustomScrollbar_AdminPage_Setting_General_Reset( 
+        
+        // 1.2.0+
+        new CustomScrollbar_AdminPage_Setting__General__Load( 
+            $oAdminPage,
+            $this->sPageSlug, 
+            array(
+                'section_id'    => 'load',
+                'tab_slug'      => $this->sTabSlug,
+                'title'         => __( 'Load', 'custom-scrollbar' ),
+            )
+        );       
+        
+        new CustomScrollbar_AdminPage_Setting__General__Reset( 
             $oAdminPage,
             $this->sPageSlug, 
             array(

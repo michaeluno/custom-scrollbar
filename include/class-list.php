@@ -1,11 +1,15 @@
 <?php 
 $_aClassFiles = array( 
+	"CustomScrollbar_Bootstrap"	=>	CustomScrollbar_Registry::$sDirPath . "/include/class/CustomScrollbar_Bootstrap.php", 
 	"CustomScrollbar_AdminPage"	=>	CustomScrollbar_Registry::$sDirPath . "/include/class/admin/CustomScrollbar_AdminPage.php", 
 	"CustomScrollbar_AdminPage_Setting"	=>	CustomScrollbar_Registry::$sDirPath . "/include/class/admin/setting/CustomScrollbar_AdminPage_Setting.php", 
 	"CustomScrollbar_AdminPage_Setting_CSS"	=>	CustomScrollbar_Registry::$sDirPath . "/include/class/admin/setting/css/CustomScrollbar_AdminPage_Setting_CSS.php", 
 	"CustomScrollbar_AdminPage_Setting_CSS_CSS"	=>	CustomScrollbar_Registry::$sDirPath . "/include/class/admin/setting/css/CustomScrollbar_AdminPage_Setting_CSS_CSS.php", 
-	"CustomScrollbar_AdminPage_Setting_General"	=>	CustomScrollbar_Registry::$sDirPath . "/include/class/admin/setting/general/CustomScrollbar_AdminPage_Setting_General.php", 
-	"CustomScrollbar_AdminPage_Setting_General_Reset"	=>	CustomScrollbar_Registry::$sDirPath . "/include/class/admin/setting/general/CustomScrollbar_AdminPage_Setting_General_Reset.php", 
+	"CustomScrollbar_AdminPage_Setting__General"	=>	CustomScrollbar_Registry::$sDirPath . "/include/class/admin/setting/general/CustomScrollbar_AdminPage_Setting__General.php", 
+	"CustomScrollbar_AdminPage_Setting__General__Load "	=>	CustomScrollbar_Registry::$sDirPath . "/include/class/admin/setting/general/CustomScrollbar_AdminPage_Setting__General__Load .php", 
+	"CustomScrollbar_AdminPage_Setting__General__Reset"	=>	CustomScrollbar_Registry::$sDirPath . "/include/class/admin/setting/general/CustomScrollbar_AdminPage_Setting__General__Reset.php", 
+	"CustomScrollbar_AdminPage_Setting__Reset"	=>	CustomScrollbar_Registry::$sDirPath . "/include/class/admin/setting/reset/CustomScrollbar_AdminPage_Setting__Reset.php", 
+	"CustomScrollbar_AdminPage_Setting__Reset__Reset"	=>	CustomScrollbar_Registry::$sDirPath . "/include/class/admin/setting/reset/CustomScrollbar_AdminPage_Setting__Reset__Reset.php", 
 	"CustomScrollbar_AdminPage_Setting_Scrollbars"	=>	CustomScrollbar_Registry::$sDirPath . "/include/class/admin/setting/scrollbars/CustomScrollbar_AdminPage_Setting_Scrollbars.php", 
 	"CustomScrollbar_AdminPage_Setting_Scrollbars_Scrollbars"	=>	CustomScrollbar_Registry::$sDirPath . "/include/class/admin/setting/scrollbars/CustomScrollbar_AdminPage_Setting_Scrollbars_Scrollbars.php", 
 	"CustomScrollbar_AdminPage_Page_Base"	=>	CustomScrollbar_Registry::$sDirPath . "/include/class/admin/_abstract/CustomScrollbar_AdminPage_Page_Base.php", 
@@ -15,7 +19,6 @@ $_aClassFiles = array(
 	"CustomScrollbar_AdminPage_Tab_ReadMeBase"	=>	CustomScrollbar_Registry::$sDirPath . "/include/class/admin/_abstract/CustomScrollbar_AdminPage_Tab_ReadMeBase.php", 
 	"CustomScrollbar_SimpleWizardAdminPage"	=>	CustomScrollbar_Registry::$sDirPath . "/include/class/admin/_abstract/CustomScrollbar_SimpleWizardAdminPage.php", 
 	"CustomScrollbar_FormFields_Base"	=>	CustomScrollbar_Registry::$sDirPath . "/include/class/admin/_form_fields/CustomScrollbar_FormFields_Base.php", 
-	"CustomScrollbar_Bootstrap"	=>	CustomScrollbar_Registry::$sDirPath . "/include/class/boot/CustomScrollbar_Bootstrap.php", 
 	"CustomScrollbar_InlineCSSLoader"	=>	CustomScrollbar_Registry::$sDirPath . "/include/class/css/CustomScrollbar_InlineCSSLoader.php", 
 	"CustomScrollbar_Event"	=>	CustomScrollbar_Registry::$sDirPath . "/include/class/event/CustomScrollbar_Event.php", 
 	"CustomScrollbar_Event_Action_Base"	=>	CustomScrollbar_Registry::$sDirPath . "/include/class/event/action/CustomScrollbar_Event_Action_Base.php", 
@@ -27,4 +30,5 @@ $_aClassFiles = array(
 	"CustomScrollbar_Utility"	=>	CustomScrollbar_Registry::$sDirPath . "/include/class/utility/CustomScrollbar_Utility.php", 
 	"CustomScrollbar_WPUtility"	=>	CustomScrollbar_Registry::$sDirPath . "/include/class/utility/CustomScrollbar_WPUtility.php", 
 	"CustomScrollbar_WPUtility_Transient"	=>	CustomScrollbar_Registry::$sDirPath . "/include/class/utility/CustomScrollbar_WPUtility_Transient.php", 
+	"CustomScrollbar_AdminPage_Setting__General__Load"	=>	CustomScrollbar_Registry::$sDirPath . "/include/class/admin/setting/general/CustomScrollbar_AdminPage_Setting__General__Load .php", 
 );
