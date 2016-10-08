@@ -3,7 +3,7 @@ Contributors:       Michael Uno, miunosoft
 Donate link:        http://en.michaeluno.jp/donate
 Tags:               scroll, scrollbar, scrollbars, scroll bar, scroll bars, appearance, custom scrollbar, custom scrollbars, custom scroll, custom scroll bar, custom scroll bars
 Requires at least:  3.4
-Tested up to:       4.5.3
+Tested up to:       4.6.1
 Stable tag:         1.1.7
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
@@ -57,6 +57,11 @@ Pick you favorite style from a list.
 2. **Setting Page**
 
 == Changelog ==
+
+= 1.2.0 =
+- Added the `Ajax Handling` option that determines whether to initialize plugin scripts on Ajax page loads.
+- Added the ability to export and import settings.
+- Refined the setting pages.
 
 = 1.1.7 - 07/07/2016 = 
 - Tweaked the setting UI to improve the usability.
