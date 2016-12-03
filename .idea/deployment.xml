@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" serverName="WordPress 4.6">
+  <component name="PublishConfigData" autoUpload="Always" serverName="WordPress 4.6">
     <serverData>
-      <paths name="Amazon Auto Links - WP46">
-        <serverdata>
-          <mappings>
-            <mapping local="$PROJECT_DIR$" web="/" />
-          </mappings>
-        </serverdata>
-      </paths>
       <paths name="WordPress 4.6">
         <serverdata>
           <mappings>
@@ -16,6 +9,14 @@
           </mappings>
         </serverdata>
       </paths>
+      <paths name="XAMPP">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
     </serverData>
+    <option name="myAutoUpload" value="ALWAYS" />
   </component>
 </project>
