@@ -37,7 +37,7 @@ class CustomScrollbar_AdminPage extends CustomScrollbar_AdminPageFramework {
             $_oOption    = CustomScrollbar_Option::getInstance();
             return $aOptions + $_oOption->aDefault;            
         }
-        
+
     /**
      * Sets up admin pages.
      */
@@ -56,7 +56,11 @@ class CustomScrollbar_AdminPage extends CustomScrollbar_AdminPageFramework {
         );
 
         $this->_doPageSettings();
-        
+
+        $this->addLinkToPluginDescription(
+           "<a href='http://en.michaeluno.jp/contact/custom-order/'>" . __( 'Custom Order', 'custom-scrollbar' ) . "</a>"
+        );
+
     }
 
         /**
