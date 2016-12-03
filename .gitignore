@@ -1,6 +1,9 @@
 # Externals
 # /tool
-/v2
+
+# Editor Files
+.idea/workspace.xml
+.idea/tasks.xml
 
 # backup files.
 *.old

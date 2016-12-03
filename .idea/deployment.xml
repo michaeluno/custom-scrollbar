@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" serverName="WordPress 4.6">
+    <serverData>
+      <paths name="Amazon Auto Links - WP46">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="WordPress 4.6">
+        <serverdata>
+          <mappings>
+            <mapping deploy="wp-content/plugins/custom-scrollbar" local="$PROJECT_DIR$" web="/wp-content/plugins/custom-scrollbar" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
+</project>
