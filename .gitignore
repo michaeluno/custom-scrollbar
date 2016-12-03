@@ -2,8 +2,7 @@
 # /tool
 
 # Editor Files
-.idea/workspace.xml
-.idea/tasks.xml
+/.idea
 
 # backup files.
 *.old
