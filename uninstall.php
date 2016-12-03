@@ -52,14 +52,14 @@ foreach( $_aPrefixes as $_sPrefix ) {
 
 // 2. Delete options
 $_aOptions = get_option( CustomScrollbar_Registry::$aOptionKeys[ 'setting' ], array() );
-$_bDelete  = isset( $_aOptions[ 'reset' ][ 'reset_on_uninstall' ] ) 
-    ? $_aOptions[ 'reset' ][ 'reset_on_uninstall' ]
+$_bDelete  = isset( $_aOptions[ 'delete' ][ 'delete_upon_uninstall' ] )
+    ? $_aOptions[ 'delete' ][ 'delete_upon_uninstall' ]
     : false;
 if ( ! $_bDelete ) {
     return;
 }
 
-array_walk_recursive( 
-    CustomScrollbar_Registry::$aOptionKeys, // subject array
+array_walk_recursive(
+    array_keys( CustomScrollbar_Registry::$aOptions ),    // subject array
     'delete_option'   // function name
 );

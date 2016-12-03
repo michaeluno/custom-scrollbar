@@ -19,62 +19,56 @@ class CustomScrollbar_Option_Base extends CustomScrollbar_PluginUtility {
      * 
      * @access      public      Let the data being modified from outside.
      */
-    public $aOptions = array(        
-    );  
-    
-    /**
-     * Represents the options array structure and their default values.
-     * 
-     * @remark      Override this value in an extended class.
-     */
-    public $aDefault = array(
-    );
-    
+    protected $_aOptions = array();
+
     /**
      * stores the option key for this plugin. 
      */
-    protected $sOptionKey = '';        
-         
+    protected $_sOptionKey = '';
+
     /**
      * Stores whether the currently loading page is in the network admin area.
      */
-    protected $bIsNetworkAdmin = false;     
-         
+    protected $_bIsNetworkAdmin = false;
+
     /**
      * Sets up properties.
      */
-    public function __construct( $sOptionKey ) {
-        
-        $this->bIsNetworkAdmin  = false; // disabled.
-        $this->sOptionKey       = $sOptionKey;
-        $this->aOptions         = $this->_getFormattedOptions( $sOptionKey );
+    public function __construct( $_sOptionKey ) {
 
-    }     
+        $this->_bIsNetworkAdmin = false; // disabled.
+        $this->_sOptionKey      = $_sOptionKey;
+        $this->_aOptions        = $this->_getFormattedOptions( $_sOptionKey );
+
+    }
         /**
          * Returns the formatted options array.
          * @remark  Override this method in an extended class.
          * @return  array
-         */    
-        protected function _getFormattedOptions( $sOptionKey ) {
+         */
+        protected function _getFormattedOptions( $_sOptionKey ) {
             return $this->uniteArrays(
                 $this->getAsArray(
-                    $this->bIsNetworkAdmin
-                        ? get_site_option( $sOptionKey, array() )
-                        : get_option( $sOptionKey, array() )
+                    $this->_bIsNetworkAdmin
+                        ? get_site_option( $_sOptionKey, array() )
+                        : get_option( $_sOptionKey, array() )
                 ),
-                $this->aDefault
+                apply_filters(
+                    CustomScrollbar_Registry::HOOK_SLUG . '_filter_default_options',
+                    CustomScrollbar_Registry::$aOptions[ 'custom_scrollbar' ]
+                )
             );
         }
-    
+
     /**
      * Checks the version number
-     * 
+     *
      * @since        1
      * @return      boolean        True if yes; otherwise, false.
      * @remrk       not used at the moment
      */
     public function hasUpgraded() {
-        
+
         $_sOptionVersion        = $this->get( 'version_saved' );
         if ( ! $_sOptionVersion ) {
             return false;
@@ -82,7 +76,7 @@ class CustomScrollbar_Option_Base extends CustomScrollbar_PluginUtility {
         $_sOptionVersion        = $this->_getVersionByDepth( $_sOptionVersion );
         $_sCurrentVersion       = $this->_getVersionByDepth( CustomScrollbar_Registry::VERSION );
         return version_compare( $_sOptionVersion, $_sCurrentVersion, '<' );
-        
+
     }
         /**
          * Returns a stating part of version by the given depth.
@@ -95,32 +89,29 @@ class CustomScrollbar_Option_Base extends CustomScrollbar_PluginUtility {
             $_aParts = explode( '.', $sVersion );
             $_aParts = array_slice( $_aParts, 0, $iDepth );
             return implode( '.', $_aParts );
-        }    
-    
+        }
+
     /**
      * Deletes the option from the database.
      */
     public function delete()  {
-        return $this->bIsNetworkAdmin
-            ? delete_site_option( $this->sOptionKey )
-            : delete_option( $this->sOptionKey );
+        return $this->_bIsNetworkAdmin
+            ? delete_site_option( $this->_sOptionKey )
+            : delete_option( $this->_sOptionKey );
     }
-    
+
     /**
      * Saves the options.
      */
     public function save( $aOptions=null ) {
-
-        $_aOptions = $aOptions 
-            ? $aOptions 
-            : $this->aOptions;
-        return $this->bIsNetworkAdmin
+        $_aOptions = $aOptions ? $aOptions : $this->_aOptions;
+        return $this->_bIsNetworkAdmin
             ? update_site_option(
-                $this->sOptionKey, 
+                $this->_sOptionKey,
                 $_aOptions
             )
-            : update_option( 
-                $this->sOptionKey, 
+            : update_option(
+                $this->_sOptionKey,
                 $_aOptions
             );
     }
@@ -139,13 +130,13 @@ class CustomScrollbar_Option_Base extends CustomScrollbar_PluginUtility {
         
         // string, integer, float, boolean
         if ( ! is_array( $_asKeys ) ) {
-            $this->aOptions[ $_asKeys ] = $_mValue;
+            $this->_aOptions[ $_asKeys ] = $_mValue;
             return;
         }
         
         // the keys are passed as an array
         $this->setMultiDimensionalArray( 
-            $this->aOptions, 
+            $this->_aOptions,
             $_asKeys,
             $_mValue 
         );
@@ -173,14 +164,14 @@ class CustomScrollbar_Option_Base extends CustomScrollbar_PluginUtility {
         $_mDefault     = null;
         $_aKeys        = func_get_args() + array( null );
         if ( ! isset( $_aKeys[ 0 ] ) ) {
-            return $this->aOptions;
+            return $this->_aOptions;
         }
         if ( is_array( $_aKeys[ 0 ] ) ) {
             $_mDefault = $_aKeys[ 1 ];
             $_aKeys    = $_aKeys[ 0 ];
         }
         return $this->getArrayValueByArrayKeys( 
-            $this->aOptions, 
+            $this->_aOptions,
             $_aKeys,
             $_mDefault
         );

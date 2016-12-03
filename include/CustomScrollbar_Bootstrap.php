@@ -126,22 +126,14 @@ final class CustomScrollbar_Bootstrap extends CustomScrollbar_AdminPageFramework
         if ( defined( 'DOING_PLUGIN_UNINSTALL' ) && DOING_PLUGIN_UNINSTALL ) {
             return;
         }
-            
-        // Include PHP files.
-        // $this->_include();
-            
+
         // Option Object - must be done before the template object.
         // The initial instantiation will handle formatting options from earlier versions of the plugin.
         CustomScrollbar_Option::getInstance();
      
         // Admin pages
-        if ( $this->bIsAdmin ) {            
-        
-            new CustomScrollbar_AdminPage( 
-                CustomScrollbar_Registry::$aOptionKeys[ 'setting' ], 
-                $this->sFilePath 
-            );
-
+        if ( $this->bIsAdmin ) {
+            new CustomScrollbar_AdminPage( CustomScrollbar_Registry::$aOptionKeys[ 'setting' ], $this->sFilePath );
         }
         
         // CSS & Scripts
@@ -150,13 +142,6 @@ final class CustomScrollbar_Bootstrap extends CustomScrollbar_AdminPageFramework
             new CustomScrollbar_ScriptLoader;
         }
         
-        // Events
-        // new CustomScrollbar_Event;    
-        
     }
-        /**
-         * Includes additional files.
-         */
-        private function _include() {}
-    
+
 }

@@ -48,7 +48,7 @@ class CustomScrollbar_InlineCSSLoader extends CustomScrollbar_PluginUtility {
          */
         private function getScrollbarCSSRules( array $aScrollbars ) {
             
-            $_sDelimiter = $this->oOption->isDebug()
+            $_sDelimiter = $this->oOption->isDebugMode()
                 ? PHP_EOL
                 : ' ';
             $_aCSS       = array();
@@ -102,7 +102,7 @@ class CustomScrollbar_InlineCSSLoader extends CustomScrollbar_PluginUtility {
      */
     public function replyToInsertInlineCSS() {
 
-        $_sCSS = $this->oOption->isDebug()
+        $_sCSS = $this->oOption->isDebugMode()
             ? $this->sCSS
             : $this->minifyCSS( $this->sCSS );
             

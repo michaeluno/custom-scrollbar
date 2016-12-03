@@ -35,7 +35,7 @@ class CustomScrollbar_AdminPage extends CustomScrollbar_AdminPageFramework {
          */
         public function replyToSetOptions( $aOptions ) {
             $_oOption    = CustomScrollbar_Option::getInstance();
-            return $aOptions + $_oOption->aDefault;            
+            return $aOptions + $_oOption->get();
         }
 
     /**
@@ -45,15 +45,8 @@ class CustomScrollbar_AdminPage extends CustomScrollbar_AdminPageFramework {
         
         $this->setRootMenuPage( 'Appearance' );
                     
-        // Add pages      
-        new CustomScrollbar_AdminPage_Setting( 
-            $this,
-            array(
-                'page_slug'     => CustomScrollbar_Registry::$aAdminPages[ 'setting' ],
-                'title'         => __( 'Scrollbars', 'custom-scrollbar' ),
-                // 'screen_icon'   => CustomScrollbar_Registry::getPluginURL( "asset/image/screen_icon_32x32.png" ),
-            )
-        );
+        // Add pages
+        new CustomScrollbar_AdminPage__Page_Setting( $this );
 
         $this->_doPageSettings();
 
@@ -65,15 +58,13 @@ class CustomScrollbar_AdminPage extends CustomScrollbar_AdminPageFramework {
 
         /**
          * Page styling
-         * @since        1
+         * @since       1
          * @return      void
          */
         private function _doPageSettings() {
                         
             $this->setPageTitleVisibility( false ); // disable the page title of a specific page.
-            $this->setInPageTabTag( 'h2' );                
-            // $this->setPluginSettingsLinkLabel( '' ); // pass an empty string to disable it.
-            
+            $this->setInPageTabTag( 'h2' );
             $this->enqueueStyle( CustomScrollbar_Registry::getPluginURL( 'asset/css/admin.css' ) );
         
         }

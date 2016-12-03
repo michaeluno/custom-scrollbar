@@ -62,7 +62,7 @@ class CustomScrollbar_ScriptLoader extends CustomScrollbar_PluginUtility {
      */
     public function replyToEnqueueScripts() {
 
-        $_iDebugMode = ( integer ) $this->oOption->isDebug();
+        $_iDebugMode = ( integer ) $this->oOption->isDebugMode();
         $_aFiles     = array(
             0 => '/asset/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css',
             1 => '/asset/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css',

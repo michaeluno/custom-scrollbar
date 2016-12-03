@@ -1,47 +1,58 @@
 <?php
 /**
  * Custom Scrollbar
- * 
+ *
  * http://en.michaeluno.jp/custom-scrollbar/
  * Copyright (c) 2015-2016 Michael Uno; Licensed GPLv2
+ *
  */
 
 /**
- * Adds the 'Scrollbars' form section to the 'Scrollbars' tab.
- * 
- * @since        1
+ * Defines the `Scrollbars` form section.
+ *
+ * @since        1.3.0
  */
-class CustomScrollbar_AdminPage_Setting_Scrollbars_Scrollbars extends CustomScrollbar_AdminPage_Section_Base {
-    
-    /**
-     * A user constructor.
-     * 
-     * @since        1
-     * @return      void
-     */
-    protected function construct( $oFactory ) {}
-    
-    /**
-     * Adds form fields.
-     * @since       1
-     * @return      void
-     */
-    public function addFields( $oFactory, $sSectionID ) {
+class CustomScrollbar_AdminPage__FormSection_Scrollbar extends CustomScrollbar_AdminPage__FormSection_Base {
 
-        $oFactory->addSettingFields(
-            $sSectionID, // the target section id
+    /**
+     * @param $oFactory
+     * @return array
+     */
+    protected function _getArguments( $oFactory ) {
+        return array(
+            'section_id'    => 'scrollbars',
+            'title'         => __( 'Scrollbars', 'custom-scrollbar' ),
+            'description'   => array(
+                __( 'Define scrollbars.', 'custom-scrollbar' ),
+            ),
+            'collapsible'       => array(
+                'toggle_all_button' => array( 'top-left', 'bottom-left' ),
+                'container'         => 'section',
+                'is_collapsed'      => true,
+            ),
+            'repeatable'        => true, // this makes the section repeatable
+            'sortable'          => true,
+        );
+    }
+
+    /**
+     * @param $oFactory
+     * @return array
+     */
+    protected function _getFields( $oFactory ){
+        return array(
             array(
                 'field_id'         => 'name',
                 'type'             => 'section_title',
                 'before_input'     => "<strong>"
-                    . __( 'Name', 'custom-scrollbar' ) 
+                    . __( 'Name', 'custom-scrollbar' )
                     . "</strong>:&nbsp; ",
-                'attributes'       => array(              
+                'attributes'       => array(
                     'size'          => 48,
                     'style'         => 'width: auto;',
                     'placeholder'   => __( 'Enter a scrollbar name', 'custom-scrollbar' ),
                 ),
-            ),   
+            ),
             array(
                 'field_id'         => 'status',
                 'type'             => 'radio',
@@ -52,18 +63,18 @@ class CustomScrollbar_AdminPage_Setting_Scrollbars_Scrollbars extends CustomScro
                 'default'          => 1,
                 'placement'        => 'section_title',
                 'label_min_width'  => 40,
-            ),                        
+            ),
             array(
                 'field_id'         => 'selector',
                 'type'             => 'text',
                 'title'            => __( 'Target Element Selector', 'custom-scrollbar' ),
                 'tip'              => "<p>"
-                        . __( 'Define the CSS (jQuery) target selector of the element.', 'custom-scrollbar' )
-                        . ' e.g. <code>aside.widget</code>'
+                    . __( 'Define the CSS (jQuery) target selector of the element.', 'custom-scrollbar' )
+                    . ' e.g. <code>aside.widget</code>'
                     . "</p>"
                     . "<p>"
-                        . __( 'For multiple selectors, delimit them by commas.', 'custom-scrollbar' )
-                        . ' e.g. <code>div.widget > ul, div.widget > div</code>'
+                    . __( 'For multiple selectors, delimit them by commas.', 'custom-scrollbar' )
+                    . ' e.g. <code>div.widget > ul, div.widget > div</code>'
                     . "</p>",
                 'attributes'       => array(
                     'size'  => 52,
@@ -90,7 +101,7 @@ class CustomScrollbar_AdminPage_Setting_Scrollbars_Scrollbars extends CustomScro
                     'px'    => 'px',
                     '%'    => '%',
                 ),
-            ),            
+            ),
             array(
                 'field_id'          => 'position',
                 'type'              => 'radio',
@@ -100,7 +111,7 @@ class CustomScrollbar_AdminPage_Setting_Scrollbars_Scrollbars extends CustomScro
                     'outside'    => 'outside',
                 ),
                 'default'           => 'inside',
-            ),    
+            ),
             array(
                 'field_id'          => 'inline_css',
                 'type'              => 'text',
@@ -115,11 +126,11 @@ class CustomScrollbar_AdminPage_Setting_Scrollbars_Scrollbars extends CustomScro
                     ),
                 ),
                 'tip'               => "<p>"
-                        . __( 'Apply these inline CSS rules to the target elements.', 'custom-scrollbar' )
-                        . ' e.g. ' . '<code>white-space</code>: <code>nowrap</code>'
+                    . __( 'Apply these inline CSS rules to the target elements.', 'custom-scrollbar' )
+                    . ' e.g. ' . '<code>white-space</code>: <code>nowrap</code>'
                     . "</p>",
                 'repeatable'        => true,
-            ),               
+            ),
             array(
                 'field_id'          => 'theme',
                 'type'              => 'select',
@@ -153,19 +164,19 @@ class CustomScrollbar_AdminPage_Setting_Scrollbars_Scrollbars extends CustomScro
                     '3d-thick-dark'         => __( '3D Thick Dark', 'custom-scrollbar' ),
                 ),
                 'default'           => 'light',
-            ),   
+            ),
             array(
                 'field_id'          => 'mCSB_draggerContainer',
                 'type'              => 'color',
                 'title'             => '.mCSB_draggerContainer',
                 'default'           => '',
-            ),         
+            ),
             array(
                 'field_id'          => 'mCSB_dragger',
                 'type'              => 'color',
                 'title'             => '.mCSB_dragger',
                 'default'           => '',
-            ),            
+            ),
             array(
                 'field_id'          => 'mCSB_dragger_bar',
                 'type'              => 'color',
@@ -177,38 +188,14 @@ class CustomScrollbar_AdminPage_Setting_Scrollbars_Scrollbars extends CustomScro
                 'type'              => 'color',
                 'title'             => '.mCSB_draggerRail',
                 'default'           => '',
-            ),            
+            ),
             array(
                 'field_id'          => 'mCSB_scrollTools',
                 'type'              => 'color',
                 'title'             => '.mCSB_scrollTools',
                 'default'           => '',
-            ),            
-            array()            
+            ),
         );
-    
     }
-        
-    
-    /**
-     * Validates the submitted form data.
-     * 
-     * @since        1
-     */
-    public function validate( $aInput, $aOldInput, $oAdminPage, $aSubmitInfo ) {
-    
-        $_bVerified = true;
-        $_aErrors   = array();
-        
-        // An invalid value is found. Set a field error array and an admin notice and return the old values.
-        if ( ! $_bVerified ) {
-            $oAdminPage->setFieldErrors( $_aErrors );     
-            $oAdminPage->setSettingNotice( __( 'There was something wrong with your input.', 'custom-scrollbar' ) );
-            return $aOldInput;
-        }
-                
-        return $aInput;     
-        
-    }
-   
+
 }

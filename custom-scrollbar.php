@@ -5,7 +5,7 @@
  *  Description:    Adds a custom scrollbar to specified HTML elements.
  *  Author:         Michael Uno (miunosoft)
  *  Author URI:     http://michaeluno.jp
- *  Version:        1.3.0b01
+ *  Version:        1.3.0b02
  */
 
 /**
@@ -15,7 +15,7 @@
  */
 class CustomScrollbar_Registry_Base {
  
-	const VERSION        = '1.3.0b01';    // <--- DON'T FORGET TO CHANGE THIS AS WELL!!
+	const VERSION        = '1.3.0b02';    // <--- DON'T FORGET TO CHANGE THIS AS WELL!!
 	const NAME           = 'Custom Scrollbar';
 	const DESCRIPTION    = 'Adds a custom scrollbar to specified HTML elements.';
 	const URI            = 'http://en.michaeluno.jp/custom-scrollbar';
@@ -74,12 +74,70 @@ final class CustomScrollbar_Registry extends CustomScrollbar_Registry_Base {
     static public $sDirPath;    
     
     /**
+     * Stores used option keys.
      * @since        1
      */
     static public $aOptionKeys = array(    
         'setting'           => 'custom_scrollbar', 
     );
-        
+
+    /**
+     * Stores the plugin option structures and their keys.
+     * ```
+     * array(
+     *      'option_key1' => array( 'option structure' ),
+     *      'option_key2' => array( 'option structure' ),
+     * );
+     * ```
+     * @since       1.3.0
+     */
+    static public $aOptions = array(
+        'custom_scrollbar'  => array(
+            // 1.2.0+
+            'load'     => array(
+                'ajax_initialization'   => false,
+            ),
+
+            'delete'    => array(
+                'delete_upon_uninstall'    => false,
+            ),
+
+            'css'       => array(
+                'custom_css' => '',
+            ),
+
+            'scrollbars' => array(
+                0   => array(
+                    'status'    => true,    // or false
+                    'name'      => '', // just a label for the user to remember
+                    'selector'  => '',
+                    'width'     => array(
+                        'size'  => null,
+                        'unit'  => null,
+                    ),
+                    'height'    => array(
+                        'size'  => null,
+                        'unit'  => null,
+                    ),
+                    'position'  => 'inside', // or outside
+
+                    'inline_css'    => array(), // 1.1+
+
+                    // @see http://manos.malihu.gr/repository/custom-scrollbar/demo/examples/scrollbar_themes_demo.html
+                    'theme'     => 'light',
+
+                    // custom colors
+                    'mCSB_draggerContainer' => '',
+                    'mCSB_dragger'          => '',
+                    'mCSB_dragger_bar'      => '',
+                    'mCSB_draggerRail'      => '',
+                    'mCSB_scrollTools'      => '',
+
+                ),
+            ),
+        ),
+    );
+
     /**
      * Used admin pages.
      * @since        1
@@ -192,7 +250,7 @@ CustomScrollbar_Registry::setUp( __FILE__ );
 
 
 include( dirname( __FILE__ ).'/include/library/apf/admin-page-framework.php' );
-include( dirname( __FILE__ ).'/include/class/CustomScrollbar_Bootstrap.php' );
+include( dirname( __FILE__ ).'/include/CustomScrollbar_Bootstrap.php' );
 new CustomScrollbar_Bootstrap(
     CustomScrollbar_Registry::$sFilePath,
     CustomScrollbar_Registry::HOOK_SLUG    // hook prefix    
