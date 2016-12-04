@@ -35,7 +35,11 @@ class CustomScrollbar_AdminPage extends CustomScrollbar_AdminPageFramework {
          */
         public function replyToSetOptions( $aOptions ) {
             $_oOption    = CustomScrollbar_Option::getInstance();
-            return $aOptions + $_oOption->get();
+            // return $aOptions + $_oOption->get();
+            return $this->oUtil->uniteArrays(
+                $aOptions,
+                $_oOption->get()
+            );
         }
 
     /**

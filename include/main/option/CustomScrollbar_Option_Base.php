@@ -47,7 +47,7 @@ class CustomScrollbar_Option_Base extends CustomScrollbar_PluginUtility {
          * @return  array
          */
         protected function _getFormattedOptions( $_sOptionKey ) {
-            return $this->uniteArrays(
+            $_aOptions = $this->uniteArrays(
                 $this->getAsArray(
                     $this->_bIsNetworkAdmin
                         ? get_site_option( $_sOptionKey, array() )
@@ -58,6 +58,16 @@ class CustomScrollbar_Option_Base extends CustomScrollbar_PluginUtility {
                     CustomScrollbar_Registry::$aOptions[ 'custom_scrollbar' ]
                 )
             );
+
+            // Format each scrollbar option array.
+            $_aScrollbars = array();
+            foreach( $this->getElementAsArray( $_aOptions, array( 'scrollbars' ) ) as $_iIndex => $_aScrollbar ) {
+                $_aScrollbars[ $_iIndex ] = $_aScrollbar
+                    + CustomScrollbar_Registry::$aOptions[ 'custom_scrollbar' ][ 'scrollbars' ][ 0 ];
+            }
+            $_aOptions[ 'scrollbars' ] = $_aScrollbars;
+
+            return $_aOptions;
         }
 
     /**

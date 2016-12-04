@@ -166,6 +166,90 @@ class CustomScrollbar_AdminPage__FormSection_Scrollbar extends CustomScrollbar_A
                 'default'           => 'light',
             ),
             array(
+                'field_id'          => 'mouseWheel',
+                'title'             => __( 'Mouse Wheel', 'custom-scrollbar' ),
+                'tip'               => __( 'Decide whether to enable or disable content scrolling via the mouse-wheel.', 'custom-scrollbar' ),
+                'content'           => array(
+                    array(
+                        'field_id'  => 'enable',
+                        'type'      => 'radio',
+                        'label'     => array(
+                            1   => __( 'On', 'custom-scrollbar' ),
+                            0   => __( 'Off', 'custom-scrollbar' ),
+                        ),
+                    ),
+                    array(
+                        'field_id'      => 'scrollAmount',
+                        'title'         => __( 'Scroll Amount', 'custom-scrollbar' ),
+                        'type'          => 'number',
+                        'after_input'   => ' ' . __( 'pixels', 'custom-scrollbar' ),
+                        'description'   => __( 'Leave it empty to be automatically configured.', 'custom-scrollbar' ),
+                        'attributes'    => array(
+                            'min'   => 0,
+                        ),
+                    ),
+                ),
+            ),
+            array(
+                'field_id'          => 'keyboard',
+                'title'             => __( 'Keyboard', 'custom-scrollbar' ),
+                'tip'               => __( 'Decide whether to enable or disable content scrolling via the keyboard. The following keys are supported: top, left, right and down, page-up (PgUp), page-down (PgDn), Home and End.', 'custom-scrollbar' ),
+                'content'           => array(
+                    array(
+                        'field_id'  => 'enable',
+                        'type'      => 'radio',
+                        'label'     => array(
+                            1   => __( 'On', 'custom-scrollbar' ),
+                            0   => __( 'Off', 'custom-scrollbar' ),
+                        ),
+                    ),
+                    array(
+                        'field_id'      => 'scrollAmount',
+                        'title'         => __( 'Scroll Amount', 'custom-scrollbar' ),
+                        'type'          => 'number',
+                        'after_input'   => ' ' . __( 'pixels', 'custom-scrollbar' ),
+                        'description'   => __( 'Leave it empty to be automatically configured.', 'custom-scrollbar' ),
+                        'attributes'    => array(
+                            'min'   => 0,
+                        ),
+                    ),
+                ),
+            ),
+            array(
+                'field_id'          => 'scrollButtons',
+                'title'             => __( 'Scroll Buttons', 'custom-scrollbar' ),
+                'tip'               => __( 'Decide whether to enable or disable scrollbar buttons.', 'custom-scrollbar' ),
+                'content'           => array(
+                    array(
+                        'field_id'  => 'enable',
+                        'type'      => 'radio',
+                        'label'     => array(
+                            1   => __( 'On', 'custom-scrollbar' ),
+                            0   => __( 'Off', 'custom-scrollbar' ),
+                        ),
+                    ),
+                    array(
+                        'field_id'      => 'scrollAmount',
+                        'title'         => __( 'Scroll Amount', 'custom-scrollbar' ),
+                        'type'          => 'number',
+                        'after_input'   => ' ' . __( 'pixels', 'custom-scrollbar' ),
+                        'description'   => __( 'Leave it empty to be automatically configured.', 'custom-scrollbar' ),
+                        'attributes'    => array(
+                            'min'   => 0,
+                        ),
+                    ),
+                    array(
+                        'field_id'      => 'scrollType',
+                        'title'         => __( 'Scroll Type', 'custom-scrollbar' ),
+                        'type'          => 'radio',
+                        'label'         => array(
+                            'stepless' => __( 'Scrolls the content continuously while pressing the button.', 'custom-scrollbar' ),
+                            'stepped'  => __( 'Each button click scrolls the content by the amount set in the Scroll Amount option.', 'custom-scrollbar' ),
+                        ),
+                    ),
+                ),
+            ),
+            array(
                 'field_id'          => 'mCSB_draggerContainer',
                 'type'              => 'color',
                 'title'             => '.mCSB_draggerContainer',

@@ -58,6 +58,9 @@ Pick you favorite style from a list.
 
 == Changelog ==
 
+= 1.3.0 =
+- Added the `Scroll Buttons`, `Keyboard`, `Mouse Wheel` options.
+
 = 1.2.0 - 10/10/2015 =
 - Added the `Ajax Handling` option that determines whether to initialize plugin scripts on Ajax page loads.
 - Added the ability to export and import settings.

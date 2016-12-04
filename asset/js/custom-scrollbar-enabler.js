@@ -86,12 +86,13 @@
                     setHeight           : _bisHeight, // (integer) px, (string) %, (boolean) false
                     scrollbarPosition   : _aScrollbar[ 'position' ]
                 };
-                return $.extend(
+                $_aOptions = $.extend(
                     true,   // recursive
                     _aDefaults,
                     _aScrollbar,
                     _aOptions
                 );
+                return $_aOptions;
 
             }
             function _setInlineCSS( _aScrollbar ) {

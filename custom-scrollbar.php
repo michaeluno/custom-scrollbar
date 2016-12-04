@@ -133,6 +133,20 @@ final class CustomScrollbar_Registry extends CustomScrollbar_Registry_Base {
                     'mCSB_draggerRail'      => '',
                     'mCSB_scrollTools'      => '',
 
+                    // 1.3.0+
+                    'scrollButtons' => array(
+                        'enable'        => 0,
+                        'scrollAmount'  => '',  // auto
+                        'scrollType'    => 'stepless',
+                    ),
+                    'mouseWheel'    => array(
+                        'enable'        => 1,
+                        'scrollAmount'  => '',  // auto
+                    ),
+                    'keyboard'      => array(
+                        'enable'        => 1,
+                        'scrollAmount'  => '',  // auto
+                    ),
                 ),
             ),
         ),

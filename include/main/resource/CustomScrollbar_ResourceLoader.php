@@ -70,17 +70,57 @@ class CustomScrollbar_ResourceLoader extends CustomScrollbar_PluginUtility {
              * @return      array
              */
             private function ___getActivatedScrollbars( array $aScrollbars ) {
+
                 $_aDefault = $this->getElementAsArray(
                     CustomScrollbar_Registry::$aOptions,
                     array( 'custom-scrollbar.php', 'scrollbars', 0 )
                 );
+
                 foreach( $aScrollbars as $_iIndex => &$_aScrollbar ) {
+
                     $_aScrollbar = $_aScrollbar + $_aDefault;
+
                     if ( ! $_aScrollbar[ 'status' ] ) {
                         unset( $aScrollbars[ $_iIndex ] );
+                        continue;
                     }
+
+                    // Some options need to be formatted individually.
+                    $_aScrollbar[ 'status' ] = ( boolean ) $_aScrollbar[ 'status' ];
+
+                    // mouseWheel
+                    $_aScrollbar[ 'mouseWheel' ][ 'enable' ] = ( boolean ) $_aScrollbar[ 'mouseWheel' ][ 'enable' ];
+                    $_isMouseWheelScrollAmount = $this->getElement(
+                        $_aScrollbar,
+                        array( 'mouseWheel', 'scrollAmount' )
+                    );
+                    $_aScrollbar[ 'mouseWheel' ][ 'scrollAmount' ] = $_isMouseWheelScrollAmount
+                        ? ( integer ) $_isMouseWheelScrollAmount
+                        : 'auto';
+
+                    // keyboard
+                    $_aScrollbar[ 'keyboard' ][ 'enable' ] = ( boolean ) $_aScrollbar[ 'keyboard' ][ 'enable' ];
+                    $_isMouseWheelScrollAmount = $this->getElement(
+                        $_aScrollbar,
+                        array( 'keyboard', 'scrollAmount' )
+                    );
+                    $_aScrollbar[ 'keyboard' ][ 'scrollAmount' ] = $_isMouseWheelScrollAmount
+                        ? ( integer ) $_isMouseWheelScrollAmount
+                        : 'auto';
+
+                    // scrollButtons
+                    $_aScrollbar[ 'scrollButtons' ][ 'enable' ] = ( boolean ) $_aScrollbar[ 'scrollButtons' ][ 'enable' ];
+                    $_isScrollButtonScrollAmount = $this->getElement(
+                        $_aScrollbar,
+                        array( 'scrollButtons', 'scrollAmount' )
+                    );
+                    $_aScrollbar[ 'scrollButtons' ][ 'scrollAmount' ] = $_isScrollButtonScrollAmount
+                        ? ( integer ) $_isScrollButtonScrollAmount
+                        : 'auto';
+
                 }
                 return $aScrollbars;
+
             }
 
 }
