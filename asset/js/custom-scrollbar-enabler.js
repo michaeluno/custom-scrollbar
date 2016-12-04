@@ -66,7 +66,7 @@
                     } 
                 };
                 
-                // We add custom class name to the target element.
+                // We add a custom class name to the target element.
                 var _sElementClassName = 'custom_scrollbar_' + String( _iIndex );
                 $( _aScrollbar[ 'selector' ] ).addClass( _sElementClassName );
 

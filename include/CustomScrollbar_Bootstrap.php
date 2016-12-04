@@ -138,8 +138,7 @@ final class CustomScrollbar_Bootstrap extends CustomScrollbar_AdminPageFramework
         
         // CSS & Scripts
         if ( ! $this->bIsAdmin ) {
-            new CustomScrollbar_InlineCSSLoader;
-            new CustomScrollbar_ScriptLoader;
+            new CustomScrollbar_ResourceLoader;
         }
         
     }
