@@ -11,6 +11,7 @@
  * Defines the `Load` form section.
  *
  * @since        1.3.0
+ * @deprecated   1.3.0
  */
 class CustomScrollbar_AdminPage__FormSection_Load extends CustomScrollbar_AdminPage__FormSection_Base {
 

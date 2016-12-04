@@ -20,20 +20,12 @@
             }
         }        
 
-        function _initalizeCustomScrollbars() {
+        function _initalizeCustomScrollbars( $aScrollbars ) {
 
-            if ( 'undefined' === typeof custom_scrollbar_enabler ) {
-                return true;
-            }
-            $.each( custom_scrollbar_enabler[ 'scrollbars' ], function( _iIndex, _aScrollbar ) {
-                            
-                if ( 'undefined' === typeof _aScrollbar[ 'selector' ] ) {
-                    return true; // continue
-                }
+            $.each( $aScrollbars, function( _iIndex, _aScrollbar ) {
 
                 _setInlineCSS( _aScrollbar );
-                                
-                // Initialize the scrollbar.
+
                 $( _aScrollbar[ 'selector' ] ).mCustomScrollbar( _getScrollbarOptions( _aScrollbar ) );
 
                 _setCustomColors( _aScrollbar, _iIndex );
@@ -140,15 +132,25 @@
 
             }
 
-        // Start initialization.
-        _initalizeCustomScrollbars();
+        // Start the main routine.
+        if ( 'undefined' === typeof custom_scrollbar_enabler ) {
+            return true;
+        }
+
+        _initalizeCustomScrollbars( custom_scrollbar_enabler[ 'scrollbars' ] );
         
         // For AJAX page loads,
         $( document ).ajaxStop( function() {
-            if ( ! _getBoolean( custom_scrollbar_enabler[ 'load' ][ 'ajax_initialization' ] ) ) {
-                return;
-            }
-            _initalizeCustomScrollbars();
+
+            var _aScrollbars = {};
+            $.each( custom_scrollbar_enabler[ 'scrollbars' ], function( _iIndex, _aScrollbar ) {
+                if ( ! _aScrollbar[ 'initialize_on_ajax_load' ] ) {
+                    return true;    // continue
+                }
+                _aScrollbars[ _iIndex ] = _aScrollbar;
+            } );
+            _initalizeCustomScrollbars( _aScrollbars );
+
         });        
         
     }); // .ready()

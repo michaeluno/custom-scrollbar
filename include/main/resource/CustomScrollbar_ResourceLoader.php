@@ -71,7 +71,9 @@ class CustomScrollbar_ResourceLoader extends CustomScrollbar_PluginUtility {
              */
             private function ___getActivatedScrollbars( array $aScrollbars ) {
 
-                $_aDefault = $this->getElementAsArray(
+                $_oOption               = CustomScrollbar_Option::getInstance();
+                $_bInitializeOnAjaxLoad = ( boolean ) $_oOption->get( 'load', 'ajax_initialization' );  // backward compatibility
+                $_aDefault              = $this->getElementAsArray(
                     CustomScrollbar_Registry::$aOptions,
                     array( 'custom-scrollbar.php', 'scrollbars', 0 )
                 );
@@ -80,21 +82,42 @@ class CustomScrollbar_ResourceLoader extends CustomScrollbar_PluginUtility {
 
                     $_aScrollbar = $_aScrollbar + $_aDefault;
 
-                    if ( ! $_aScrollbar[ 'status' ] ) {
+
+                    if ( ! $this->___isValidScrollbar( $_aScrollbar ) ) {
                         unset( $aScrollbars[ $_iIndex ] );
                         continue;
                     }
 
                     // Some options need to be formatted individually.
-                    $_aScrollbar[ 'status' ]        = ( boolean ) $_aScrollbar[ 'status' ];
-                    $_aScrollbar[ 'mouseWheel' ]    = $this->___getScrollElementOptionsFormatted( $_aScrollbar[ 'mouseWheel' ] );
-                    $_aScrollbar[ 'keyboard' ]      = $this->___getScrollElementOptionsFormatted( $_aScrollbar[ 'keyboard' ] );
-                    $_aScrollbar[ 'scrollButtons' ] = $this->___getScrollElementOptionsFormatted( $_aScrollbar[ 'scrollButtons' ] );
+                    // Note that the variable types are important as boolean and integer values are directly evaluated in JavaScript.
+                    $_aScrollbar[ 'status' ]                  = ( boolean ) $_aScrollbar[ 'status' ];
+                    $_aScrollbar[ 'mouseWheel' ]              = $this->___getScrollElementOptionsFormatted( $_aScrollbar[ 'mouseWheel' ] );
+                    $_aScrollbar[ 'keyboard' ]                = $this->___getScrollElementOptionsFormatted( $_aScrollbar[ 'keyboard' ] );
+                    $_aScrollbar[ 'scrollButtons' ]           = $this->___getScrollElementOptionsFormatted( $_aScrollbar[ 'scrollButtons' ] );
+                    $_aScrollbar[ 'initialize_on_ajax_load' ] = ( boolean ) $this->getElement(
+                        $_aScrollbar,
+                        array( 'initialize_on_ajax_load' ),
+                        $_bInitializeOnAjaxLoad
+                    );
 
                 }
                 return $aScrollbars;
 
             }
+                /**
+                 * Checks whether the scrollbar of the given options is processable.
+                 * @param array $aScrollbar
+                 * @return bool
+                 */
+                private function ___isValidScrollbar( array $aScrollbar ) {
+                    if ( ! $aScrollbar[ 'status' ] ) {
+                        return false;
+                    }
+                    if ( ! $aScrollbar[ 'selector' ] ) {
+                        return false;
+                    }
+                    return true;
+                }
                 /**
                  * Formats scroll element options such as `mouseWheel`, `keyboard`, and `ScrollButtons`.
                  * @param array $aScrollElement

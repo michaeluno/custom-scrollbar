@@ -279,6 +279,12 @@ class CustomScrollbar_AdminPage__FormSection_Scrollbar extends CustomScrollbar_A
                 'title'             => '.mCSB_scrollTools',
                 'default'           => '',
             ),
+            array(
+                'field_id'          => 'initialize_on_ajax_load',
+                'title'             => __( 'Ajax Handling', 'custom-scrollbar' ),
+                'type'              => 'checkbox',
+                'label'             => __( 'Initialize scrollbars when Ajax requests are performed.', 'custom-scrollbar' ),
+            ),
         );
     }
 

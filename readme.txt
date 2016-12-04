@@ -60,6 +60,7 @@ Pick you favorite style from a list.
 
 = 1.3.0 =
 - Added the `Scroll Buttons`, `Keyboard`, `Mouse Wheel` options.
+- Changed the `Ajax Handling` option in the `General` setting section by moving it to each scrollbar option item.
 
 = 1.2.0 - 10/10/2015 =
 - Added the `Ajax Handling` option that determines whether to initialize plugin scripts on Ajax page loads.

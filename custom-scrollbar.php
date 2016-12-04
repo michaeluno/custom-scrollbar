@@ -93,10 +93,12 @@ final class CustomScrollbar_Registry extends CustomScrollbar_Registry_Base {
      */
     static public $aOptions = array(
         'custom_scrollbar'  => array(
+
             // 1.2.0+
-            'load'     => array(
-                'ajax_initialization'   => false,
-            ),
+            // @deprecated  1.3.0
+//            'load'     => array(
+//                'ajax_initialization'   => false,
+//            ),
 
             'delete'    => array(
                 'delete_upon_uninstall'    => false,
@@ -147,6 +149,8 @@ final class CustomScrollbar_Registry extends CustomScrollbar_Registry_Base {
                         'enable'        => 1,
                         'scrollAmount'  => '',  // auto
                     ),
+
+                    'initialize_on_ajax_load'   => false,
                 ),
             ),
         ),

@@ -22,6 +22,7 @@ class CustomScrollbar_AdminPage__InPageTab_General extends CustomScrollbar_Admin
     }
 
     protected function _load( $oFactory ) {
+        // @deprecated  1.3.0
         new CustomScrollbar_AdminPage__FormSection_Load( $oFactory, $this->_sPageSlug, $this->_sTabSlug );
         new CustomScrollbar_AdminPage__FormSection_Delete( $oFactory, $this->_sPageSlug, $this->_sTabSlug );
     }
