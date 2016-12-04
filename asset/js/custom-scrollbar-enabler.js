@@ -19,10 +19,9 @@
                 default: return Boolean(string);
             }
         }        
-        
+
         function _initalizeCustomScrollbars() {
-         
-            // parse the passed data
+
             if ( 'undefined' === typeof custom_scrollbar_enabler ) {
                 return true;
             }
@@ -32,7 +31,20 @@
                     return true; // continue
                 }
 
-                var _iWidth  = Number( _aScrollbar[ 'width' ][ 'size' ] );                        
+                _setInlineCSS( _aScrollbar );
+                                
+                // Initialize the scrollbar.
+                $( _aScrollbar[ 'selector' ] ).mCustomScrollbar( _getScrollbarOptions( _aScrollbar ) );
+
+                _setCustomColors( _aScrollbar, _iIndex );
+                
+            } );
+         
+        } // _initalizeCustomScrollbars()
+
+            function _getScrollbarOptions( _aScrollbar ) {
+
+                var _iWidth  = Number( _aScrollbar[ 'width' ][ 'size' ] );
                 var _iHeight = Number( _aScrollbar[ 'height' ][ 'size' ] );
                 var _sAxis = '';
                 if ( _iHeight ) {
@@ -40,80 +52,94 @@
                 }
                 if ( _iWidth ) {
                     _sAxis += 'x';
-                }    
-                
+                }
+
                 var _bisWidth = _iWidth
-                    ? ( 'px' === _aScrollbar[ 'width' ][ 'unit' ] 
+                    ? ( 'px' === _aScrollbar[ 'width' ][ 'unit' ]
                         ? _iWidth
                         : String( _iWidth ) + '%'
                     )
                     : false;
                 var _bisHeight = _iHeight
-                    ? ( 'px' === _aScrollbar[ 'height' ][ 'unit' ] 
+                    ? ( 'px' === _aScrollbar[ 'height' ][ 'unit' ]
                         ? _iHeight
                         : String( _iHeight ) + '%'
                     )
-                    : false;   
-                    
+                    : false;
+
+                var _aDefaults = {
+                    advanced            : {
+                        autoExpandHorizontalScroll  : true  // required for horizontal scrollbar
+                    },
+                    mouseWheel          : {
+                        scrollAmount: 'auto'  // `auto` by default
+                    },
+                    scrollButtons       : {
+                        enable: true,
+                        scrollAmount: 1000
+                    }
+                };
                 var _aOptions = {
                     axis                : _sAxis, // vertical/horizontal scrollbar. e.g. 'x', 'y', 'xy'
                     theme               : _aScrollbar[ 'theme' ],
                     setWidth            : _bisWidth,  // (integer) px, (string) %, (boolean) false
                     setHeight           : _bisHeight, // (integer) px, (string) %, (boolean) false
-                    scrollbarPosition   : _aScrollbar[ 'position' ],
-                    advanced            : {
-                        autoExpandHorizontalScroll  : true  // required for horizontal scrollbar
-                    } 
+                    scrollbarPosition   : _aScrollbar[ 'position' ]
                 };
-                
+                return $.extend(
+                    true,   // recursive
+                    _aDefaults,
+                    _aScrollbar,
+                    _aOptions
+                );
+
+            }
+            function _setInlineCSS( _aScrollbar ) {
+
+                $.each( _aScrollbar[ 'inline_css' ], function( _iIndex, _aInlineCSS ) {
+
+                    if ( 'undefined' === typeof _aInlineCSS[ 'property' ] ) {
+                        return true; // continue
+                    }
+                    if ( '' === _aInlineCSS[ 'property' ] ) {
+                        return true; // continue
+                    }
+                    if ( 'undefined' === typeof _aInlineCSS[ 'value' ] ) {
+                        return true; // continue
+                    }
+                    $( _aScrollbar[ 'selector' ] ).css(
+                        _aInlineCSS[ 'property' ], _aInlineCSS[ 'value' ]
+                    );
+
+                } );
+
+            }
+            function _setCustomColors( _aScrollbar, _iIndex ) {
+
                 // We add a custom class name to the target element.
                 var _sElementClassName = 'custom_scrollbar_' + String( _iIndex );
                 $( _aScrollbar[ 'selector' ] ).addClass( _sElementClassName );
 
-                // Custom inline CSS rules.
-                $.each( _aScrollbar[ 'inline_css' ], function( _iIndex, _aInlineCSS ) {
-                    
-                    if ( 'undefined' === typeof _aInlineCSS[ 'property' ] ) {
-                        return true; // continue
-                    }   
-                    if ( '' === _aInlineCSS[ 'property' ] ) {
-                        return true; // continue
-                    }                      
-                    if ( 'undefined' === typeof _aInlineCSS[ 'value' ] ) {
-                        return true; // continue
-                    }
-                    $( _aScrollbar[ 'selector' ] ).css( _aInlineCSS[ 'property' ], _aInlineCSS[ 'value' ] );
-                    
-                    
-                } );            
-                                
-                // Initialize the scrollbar.
-                $( _aScrollbar[ 'selector' ] ).mCustomScrollbar( 
-                    _aOptions 
-                );
-
-                // Custom colors 
                 var _sSelector = '.' + _sElementClassName;
                 if ( _aScrollbar[ 'mCSB_draggerContainer' ] ) {
                     $( _sSelector + ' .mCSB_draggerContainer' ).css( 'background-color', _aScrollbar[ 'mCSB_draggerContainer' ] );
-                }            
+                }
                 if ( _aScrollbar[ 'mCSB_dragger' ] ) {
                     $( _sSelector + ' .mCSB_dragger' ).css( 'background-color', _aScrollbar[ 'mCSB_dragger' ] );
                 }
                 if ( _aScrollbar[ 'mCSB_dragger_bar' ] ) {
-                    $( _sSelector + ' .mCSB_dragger_bar' ).css( 'background-color', _aScrollbar[ 'mCSB_dragger_bar' ] );
+                    $( _sSelector + ' .mCSB_dragger_bar').css( 'background-color', _aScrollbar[ 'mCSB_dragger_bar' ] );
                 }
                 if ( _aScrollbar[ 'mCSB_draggerRail' ] ) {
                     $( _sSelector + ' .mCSB_draggerRail' ).css( 'background-color', _aScrollbar[ 'mCSB_draggerRail' ] );
-                }            
+                }
                 if ( _aScrollbar[ 'mCSB_scrollTools' ] ) {
                     $( _sSelector + ' .mCSB_scrollTools' ).css( 'background-color', _aScrollbar[ 'mCSB_scrollTools' ] );
-                }                        
-                
-            }); // .each()       
-         
-        } // _initalizeCustomScrollbars()
-        
+                }
+
+            }
+
+        // Start initialization.
         _initalizeCustomScrollbars();
         
         // For AJAX page loads,
