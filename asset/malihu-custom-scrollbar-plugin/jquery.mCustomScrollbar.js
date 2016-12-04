@@ -1,6 +1,6 @@
 /*
 == malihu jquery custom scrollbar plugin == 
-Version: 3.1.1 
+Version: 3.1.5 
 Plugin URI: http://manos.malihu.gr/jquery-custom-content-scroller 
 Author: malihu
 Author URI: http://manos.malihu.gr
@@ -37,7 +37,9 @@ and dependencies (minified).
 */
 
 (function(factory){
-	if(typeof module!=="undefined" && module.exports){
+	if(typeof define==="function" && define.amd){
+		define(["jquery"],factory);
+	}else if(typeof module!=="undefined" && module.exports){
 		module.exports=factory;
 	}else{
 		factory(jQuery,window,document);
@@ -140,7 +142,7 @@ and dependencies (minified).
 			alwaysShowScrollbar:0,
 			/*
 			scrolling always snaps to a multiple of this number in pixels
-			values: integer
+			values: integer, array ([y,x])
 				option						default
 				-------------------------------------
 				snapAmount					null
@@ -295,6 +297,12 @@ and dependencies (minified).
 					option						default
 					-------------------------------------
 					updateOnSelectorChange		null
+				*/
+				/*
+				extra selectors that'll allow scrollbar dragging upon mousemove/up, pointermove/up, touchend etc. (e.g. "selector-1, selector-2")
+					option						default
+					-------------------------------------
+					extraDraggableSelectors		null
 				*/
 				/*
 				extra selectors that'll release scrollbar dragging upon mouseup, pointerup, touchend etc. (e.g. "selector-1, selector-2")
@@ -654,7 +662,7 @@ and dependencies (minified).
 							to[1]*=d.scrollRatio.x;
 						}
 						
-						methodOptions.dur=dur;
+						methodOptions.dur=_isTabHidden() ? 0 : dur; //skip animations if browser tab is hidden
 						
 						setTimeout(function(){ 
 							/* do the scrolling */
@@ -854,7 +862,7 @@ and dependencies (minified).
 		_pluginMarkup=function(){
 			var $this=$(this),d=$this.data(pluginPfx),o=d.opt,
 				expandClass=o.autoExpandScrollbar ? " "+classes[1]+"_expand" : "",
-				scrollbar=["<div id='mCSB_"+d.idx+"_scrollbar_vertical' class='mCSB_scrollTools mCSB_"+d.idx+"_scrollbar mCS-"+o.theme+" mCSB_scrollTools_vertical"+expandClass+"'><div class='"+classes[12]+"'><div id='mCSB_"+d.idx+"_dragger_vertical' class='mCSB_dragger' style='position:absolute;' oncontextmenu='return false;'><div class='mCSB_dragger_bar' /></div><div class='mCSB_draggerRail' /></div></div>","<div id='mCSB_"+d.idx+"_scrollbar_horizontal' class='mCSB_scrollTools mCSB_"+d.idx+"_scrollbar mCS-"+o.theme+" mCSB_scrollTools_horizontal"+expandClass+"'><div class='"+classes[12]+"'><div id='mCSB_"+d.idx+"_dragger_horizontal' class='mCSB_dragger' style='position:absolute;' oncontextmenu='return false;'><div class='mCSB_dragger_bar' /></div><div class='mCSB_draggerRail' /></div></div>"],
+				scrollbar=["<div id='mCSB_"+d.idx+"_scrollbar_vertical' class='mCSB_scrollTools mCSB_"+d.idx+"_scrollbar mCS-"+o.theme+" mCSB_scrollTools_vertical"+expandClass+"'><div class='"+classes[12]+"'><div id='mCSB_"+d.idx+"_dragger_vertical' class='mCSB_dragger' style='position:absolute;'><div class='mCSB_dragger_bar' /></div><div class='mCSB_draggerRail' /></div></div>","<div id='mCSB_"+d.idx+"_scrollbar_horizontal' class='mCSB_scrollTools mCSB_"+d.idx+"_scrollbar mCS-"+o.theme+" mCSB_scrollTools_horizontal"+expandClass+"'><div class='"+classes[12]+"'><div id='mCSB_"+d.idx+"_dragger_horizontal' class='mCSB_dragger' style='position:absolute;'><div class='mCSB_dragger_bar' /></div><div class='mCSB_draggerRail' /></div></div>"],
 				wrapperClass=o.axis==="yx" ? "mCSB_vertical_horizontal" : o.axis==="x" ? "mCSB_horizontal" : "mCSB_vertical",
 				scrollbars=o.axis==="yx" ? scrollbar[0]+scrollbar[1] : o.axis==="x" ? scrollbar[1] : scrollbar[0],
 				contentWrapper=o.axis==="yx" ? "<div id='mCSB_"+d.idx+"_container_wrapper' class='mCSB_container_wrapper' />" : "",
@@ -863,7 +871,7 @@ and dependencies (minified).
 			if(o.setWidth){$this.css("width",o.setWidth);} /* set element width */
 			if(o.setHeight){$this.css("height",o.setHeight);} /* set element height */
 			o.setLeft=(o.axis!=="y" && d.langDir==="rtl") ? "989999px" : o.setLeft; /* adjust left position for rtl direction */
-			$this.addClass(pluginNS+" _"+pluginPfx+"_"+d.idx+autoHideClass+scrollbarDirClass).wrapInner("<div id='mCSB_"+d.idx+"' class='mCustomScrollBox mCS-"+o.theme+" "+wrapperClass+"'><div id='mCSB_"+d.idx+"_container' class='mCSB_container' style='position:relative; top:"+o.setTop+"; left:"+o.setLeft+";' dir="+d.langDir+" /></div>");
+			$this.addClass(pluginNS+" _"+pluginPfx+"_"+d.idx+autoHideClass+scrollbarDirClass).wrapInner("<div id='mCSB_"+d.idx+"' class='mCustomScrollBox mCS-"+o.theme+" "+wrapperClass+"'><div id='mCSB_"+d.idx+"_container' class='mCSB_container' style='position:relative; top:"+o.setTop+"; left:"+o.setLeft+";' dir='"+d.langDir+"' /></div>");
 			var mCustomScrollBox=$("#mCSB_"+d.idx),
 				mCSB_container=$("#mCSB_"+d.idx+"_container");
 			if(o.axis!=="y" && !o.advanced.autoExpandHorizontalScroll){
@@ -935,10 +943,10 @@ and dependencies (minified).
 				mCSB_scrollTools=$(".mCSB_"+d.idx+"_scrollbar:first"),
 				tabindex=!_isNumeric(o.scrollButtons.tabindex) ? "" : "tabindex='"+o.scrollButtons.tabindex+"'",
 				btnHTML=[
-					"<a href='#' class='"+classes[13]+"' oncontextmenu='return false;' "+tabindex+" />",
-					"<a href='#' class='"+classes[14]+"' oncontextmenu='return false;' "+tabindex+" />",
-					"<a href='#' class='"+classes[15]+"' oncontextmenu='return false;' "+tabindex+" />",
-					"<a href='#' class='"+classes[16]+"' oncontextmenu='return false;' "+tabindex+" />"
+					"<a href='#' class='"+classes[13]+"' "+tabindex+" />",
+					"<a href='#' class='"+classes[14]+"' "+tabindex+" />",
+					"<a href='#' class='"+classes[15]+"' "+tabindex+" />",
+					"<a href='#' class='"+classes[16]+"' "+tabindex+" />"
 				],
 				btn=[(o.axis==="x" ? btnHTML[2] : btnHTML[0]),(o.axis==="x" ? btnHTML[3] : btnHTML[1]),btnHTML[2],btnHTML[3]];
 			if(o.scrollButtons.enable){
@@ -1086,9 +1094,10 @@ and dependencies (minified).
 				sel=$("#mCSB_"+d.idx+",#mCSB_"+d.idx+"_container,#mCSB_"+d.idx+"_container_wrapper,"+sb+" ."+classes[12]+",#mCSB_"+d.idx+"_dragger_vertical,#mCSB_"+d.idx+"_dragger_horizontal,"+sb+">a"),
 				mCSB_container=$("#mCSB_"+d.idx+"_container");
 			if(o.advanced.releaseDraggableSelectors){sel.add($(o.advanced.releaseDraggableSelectors));}
+			if(o.advanced.extraDraggableSelectors){sel.add($(o.advanced.extraDraggableSelectors));}
 			if(d.bindEvents){ /* check if events are bound */
 				/* unbind namespaced events from document/selectors */
-				$(document).unbind("."+namespace);
+				$(document).add($(!_canAccessIFrame() || top.document)).unbind("."+namespace);
 				sel.each(function(){
 					$(this).unbind("."+namespace);
 				});
@@ -1150,10 +1159,11 @@ and dependencies (minified).
 		
 		/* returns input coordinates of pointer, touch and mouse events (relative to document) */
 		_coordinates=function(e){
-			var t=e.type;
+			var t=e.type,o=e.target.ownerDocument!==document && frameElement!==null ? [$(frameElement).offset().top,$(frameElement).offset().left] : null,
+				io=_canAccessIFrame() && e.target.ownerDocument!==top.document && frameElement!==null ? [$(e.view.frameElement).offset().top,$(e.view.frameElement).offset().left] : [0,0];
 			switch(t){
 				case "pointerdown": case "MSPointerDown": case "pointermove": case "MSPointerMove": case "pointerup": case "MSPointerUp":
-					return e.target.ownerDocument!==document ? [e.originalEvent.screenY,e.originalEvent.screenX,false] : [e.originalEvent.pageY,e.originalEvent.pageX,false];
+					return o ? [e.originalEvent.pageY-o[0]+io[0],e.originalEvent.pageX-o[1]+io[1],false] : [e.originalEvent.pageY,e.originalEvent.pageX,false];
 					break;
 				case "touchstart": case "touchmove": case "touchend":
 					var touch=e.originalEvent.touches[0] || e.originalEvent.changedTouches[0],
@@ -1161,7 +1171,7 @@ and dependencies (minified).
 					return e.target.ownerDocument!==document ? [touch.screenY,touch.screenX,touches>1] : [touch.pageY,touch.pageX,touches>1];
 					break;
 				default:
-					return [e.pageY,e.pageX,false];
+					return o ? [e.pageY-o[0]+io[0],e.pageX-o[1]+io[1],false] : [e.pageY,e.pageX,false];
 			}
 		},
 		/* -------------------- */
@@ -1178,14 +1188,17 @@ and dependencies (minified).
 				mCSB_container=$("#mCSB_"+d.idx+"_container"),
 				mCSB_dragger=$("#"+draggerId[0]+",#"+draggerId[1]),
 				draggable,dragY,dragX,
-				rds=o.advanced.releaseDraggableSelectors ? mCSB_dragger.add($(o.advanced.releaseDraggableSelectors)) : mCSB_dragger;
-			mCSB_dragger.bind("mousedown."+namespace+" touchstart."+namespace+" pointerdown."+namespace+" MSPointerDown."+namespace,function(e){
+				rds=o.advanced.releaseDraggableSelectors ? mCSB_dragger.add($(o.advanced.releaseDraggableSelectors)) : mCSB_dragger,
+				eds=o.advanced.extraDraggableSelectors ? $(!_canAccessIFrame() || top.document).add($(o.advanced.extraDraggableSelectors)) : $(!_canAccessIFrame() || top.document);
+			mCSB_dragger.bind("contextmenu."+namespace,function(e){
+				e.preventDefault(); //prevent right click
+			}).bind("mousedown."+namespace+" touchstart."+namespace+" pointerdown."+namespace+" MSPointerDown."+namespace,function(e){
 				e.stopImmediatePropagation();
 				e.preventDefault();
 				if(!_mouseBtnLeft(e)){return;} /* left mouse button only */
 				touchActive=true;
 				if(oldIE){document.onselectstart=function(){return false;}} /* disable text selection for IE < 9 */
-				_iframe(false); /* enable scrollbar dragging over iframes by disabling their events */
+				_iframe.call(mCSB_container,false); /* enable scrollbar dragging over iframes by disabling their events */
 				_stop($this);
 				draggable=$(this);
 				var offset=draggable.offset(),y=_coordinates(e)[0]-offset.top,x=_coordinates(e)[1]-offset.left,
@@ -1201,7 +1214,7 @@ and dependencies (minified).
 				var offset=draggable.offset(),y=_coordinates(e)[0]-offset.top,x=_coordinates(e)[1]-offset.left;
 				_drag(dragY,dragX,y,x);
 			});
-			$(document).bind("mousemove."+namespace+" pointermove."+namespace+" MSPointerMove."+namespace,function(e){
+			$(document).add(eds).bind("mousemove."+namespace+" pointermove."+namespace+" MSPointerMove."+namespace,function(e){
 				if(draggable){
 					var offset=draggable.offset(),y=_coordinates(e)[0]-offset.top,x=_coordinates(e)[1]-offset.left;
 					if(dragY===y && dragX===x){return;} /* has it really moved? */
@@ -1214,14 +1227,8 @@ and dependencies (minified).
 				}
 				touchActive=false;
 				if(oldIE){document.onselectstart=null;} /* enable text selection for IE < 9 */
-				_iframe(true); /* enable iframes events */
+				_iframe.call(mCSB_container,true); /* enable iframes events */
 			});
-			function _iframe(evt){
-				var el=mCSB_container.find("iframe");
-				if(!el.length){return;} /* check if content contains iframes */
-				var val=!evt ? "none" : "auto";
-				el.css("pointer-events",val); /* for IE11, iframe's display property should not be "block" */
-			}
 			function _drag(dragY,dragX,y,x){
 				mCSB_container[0].idleTimer=o.scrollInertia<233 ? 250 : 0;
 				if(draggable.attr("id")===draggerId[1]){
@@ -1254,7 +1261,7 @@ and dependencies (minified).
 					"touchmove."+namespace+" pointermove."+namespace+" MSPointerMove."+namespace, //move
 					"touchend."+namespace+" pointerup."+namespace+" MSPointerUp."+namespace //end
 				],
-				touchAction=document.body.style.touchAction!==undefined;
+				touchAction=document.body.style.touchAction!==undefined && document.body.style.touchAction!=="";
 			mCSB_container.bind(events[0],function(e){
 				_onTouchstart(e);
 			}).bind(events[1],function(e){
@@ -1267,7 +1274,7 @@ and dependencies (minified).
 			});
 			if(iframe.length){
 				iframe.each(function(){
-					$(this).load(function(){
+					$(this).bind("load",function(){
 						/* bind events on accessible iframes */
 						if(_canAccessIFrame(this)){
 							$(this.contentDocument || this.contentWindow.document).bind(events[0],function(e){
@@ -1450,7 +1457,7 @@ and dependencies (minified).
 				iframe=$("#mCSB_"+d.idx+"_container").find("iframe");
 			if(iframe.length){
 				iframe.each(function(){
-					$(this).load(function(){
+					$(this).bind("load",function(){
 						/* bind events on accessible iframes */
 						if(_canAccessIFrame(this)){
 							$(this.contentDocument || this.contentWindow.document).bind("mousewheel."+namespace,function(e,delta){
@@ -1475,7 +1482,7 @@ and dependencies (minified).
 						contentPos=Math.abs($("#mCSB_"+d.idx+"_container")[0].offsetLeft),
 						draggerPos=mCSB_dragger[1][0].offsetLeft,
 						limit=mCSB_dragger[1].parent().width()-mCSB_dragger[1].width(),
-						dlt=e.deltaX || e.deltaY || delta;
+						dlt=o.mouseWheel.axis==="y" ? (e.deltaY || delta) : e.deltaX;
 				}else{
 					var dir="y",
 						px=[Math.round(deltaFactor*d.scrollRatio.y),parseInt(o.mouseWheel.scrollAmount)],
@@ -1492,7 +1499,7 @@ and dependencies (minified).
 					e.stopImmediatePropagation();
 					e.preventDefault();
 				}
-				if(e.deltaFactor<2 && !o.mouseWheel.normalizeDelta){
+				if(e.deltaFactor<5 && !o.mouseWheel.normalizeDelta){
 					//very low deltaFactor values mean some kind of delta acceleration (e.g. osx trackpad), so adjusting scrolling accordingly
 					amount=e.deltaFactor; dur=17;
 				}
@@ -1503,13 +1510,42 @@ and dependencies (minified).
 		
 		
 		/* checks if iframe can be accessed */
+		_canAccessIFrameCache=new Object(),
 		_canAccessIFrame=function(iframe){
-			var html=null;
-			try{
-				var doc=iframe.contentDocument || iframe.contentWindow.document;
-				html=doc.body.innerHTML;
-			}catch(err){/* do nothing */}
-			return(html!==null);
+		    var result=false,cacheKey=false,html=null;
+		    if(iframe===undefined){
+				cacheKey="#empty";
+		    }else if($(iframe).attr("id")!==undefined){
+				cacheKey=$(iframe).attr("id");
+		    }
+			if(cacheKey!==false && _canAccessIFrameCache[cacheKey]!==undefined){
+				return _canAccessIFrameCache[cacheKey];
+			}
+			if(!iframe){
+				try{
+					var doc=top.document;
+					html=doc.body.innerHTML;
+				}catch(err){/* do nothing */}
+				result=(html!==null);
+			}else{
+				try{
+					var doc=iframe.contentDocument || iframe.contentWindow.document;
+					html=doc.body.innerHTML;
+				}catch(err){/* do nothing */}
+				result=(html!==null);
+			}
+			if(cacheKey!==false){_canAccessIFrameCache[cacheKey]=result;}
+			return result;
+		},
+		/* -------------------- */
+		
+		
+		/* switches iframe's pointer-events property (drag, mousewheel etc. over cross-domain iframes) */
+		_iframe=function(evt){
+			var el=this.find("iframe");
+			if(!el.length){return;} /* check if content contains iframes */
+			var val=!evt ? "none" : "auto";
+			el.css("pointer-events",val); /* for IE11, iframe's display property should not be "block" */
 		},
 		/* -------------------- */
 		
@@ -1625,7 +1661,9 @@ and dependencies (minified).
 				namespace=pluginPfx+"_"+d.idx,
 				sel=".mCSB_"+d.idx+"_scrollbar",
 				btn=$(sel+">a");
-			btn.bind("mousedown."+namespace+" touchstart."+namespace+" pointerdown."+namespace+" MSPointerDown."+namespace+" mouseup."+namespace+" touchend."+namespace+" pointerup."+namespace+" MSPointerUp."+namespace+" mouseout."+namespace+" pointerout."+namespace+" MSPointerOut."+namespace+" click."+namespace,function(e){
+			btn.bind("contextmenu."+namespace,function(e){
+				e.preventDefault(); //prevent right click
+			}).bind("mousedown."+namespace+" touchstart."+namespace+" pointerdown."+namespace+" MSPointerDown."+namespace+" mouseup."+namespace+" touchend."+namespace+" pointerup."+namespace+" MSPointerUp."+namespace+" mouseout."+namespace+" pointerout."+namespace+" MSPointerOut."+namespace+" click."+namespace,function(e){
 				e.preventDefault();
 				if(!_mouseBtnLeft(e)){return;} /* left mouse button only */
 				var btnClass=$(this).attr("class");
@@ -1649,7 +1687,7 @@ and dependencies (minified).
 						break;
 				}
 				function _seq(a,c){
-					seq.scrollAmount=o.snapAmount || o.scrollButtons.scrollAmount;
+					seq.scrollAmount=o.scrollButtons.scrollAmount;
 					_sequentialScroll($this,a,c);
 				}
 			});
@@ -1673,7 +1711,7 @@ and dependencies (minified).
 				events=["blur."+namespace+" keydown."+namespace+" keyup."+namespace];
 			if(iframe.length){
 				iframe.each(function(){
-					$(this).load(function(){
+					$(this).bind("load",function(){
 						/* bind events on accessible iframes */
 						if(_canAccessIFrame(this)){
 							$(this.contentDocument || this.contentWindow.document).bind(events[0],function(e){
@@ -1739,7 +1777,7 @@ and dependencies (minified).
 				}
 				function _seq(a,c){
 					seq.type=o.keyboard.scrollType;
-					seq.scrollAmount=o.snapAmount || o.keyboard.scrollAmount;
+					seq.scrollAmount=o.keyboard.scrollAmount;
 					if(seq.type==="stepped" && d.tweenRunning){return;}
 					_sequentialScroll($this,a,c);
 				}
@@ -1772,8 +1810,10 @@ and dependencies (minified).
 					}
 					break;
 			}
+			
 			/* starts sequence */
 			function _on(once){
+				if(o.snapAmount){seq.scrollAmount=!(o.snapAmount instanceof Array) ? o.snapAmount : seq.dir[0]==="x" ? o.snapAmount[1] : o.snapAmount[0];} /* scrolling snapping */
 				var c=seq.type!=="stepped", /* continuous scrolling */
 					t=s ? s : !once ? 1000/60 : c ? steplessSpeed/1.5 : steppedSpeed, /* timer */
 					m=!once ? 2.5 : c ? 7.5 : 40, /* multiplier */
@@ -1834,7 +1874,7 @@ and dependencies (minified).
 				wrapper=mCSB_container.parent(),
 				t=typeof val;
 			if(!dir){dir=o.axis==="x" ? "x" : "y";}
-			var contentLength=dir==="x" ? mCSB_container.outerWidth(false) : mCSB_container.outerHeight(false),
+			var contentLength=dir==="x" ? mCSB_container.outerWidth(false)-wrapper.width() : mCSB_container.outerHeight(false)-wrapper.height(),
 				contentPos=dir==="x" ? mCSB_container[0].offsetLeft : mCSB_container[0].offsetTop,
 				cssProp=dir==="x" ? "left" : "top";
 			switch(t){
@@ -1917,7 +1957,7 @@ and dependencies (minified).
 					}
 					/* update on main element and scrollbar size changes */
 					if(o.advanced.updateOnContentResize){
-						d.poll.size.n=$this[0].scrollHeight+$this[0].scrollWidth+mCSB_container[0].offsetHeight+$this[0].offsetHeight;
+						d.poll.size.n=$this[0].scrollHeight+$this[0].scrollWidth+mCSB_container[0].offsetHeight+$this[0].offsetHeight+$this[0].offsetWidth;
 						if(d.poll.size.n!==d.poll.size.o){
 							d.poll.size.o=d.poll.size.n;
 							doUpd(1);
@@ -2040,7 +2080,10 @@ and dependencies (minified).
 				if(_cb("onOverflowX")){o.callbacks.onOverflowX.call(el[0]);}
 				d.contentReset.x=null;
 			}
-			if(o.snapAmount){to=_snapAmount(to,o.snapAmount,o.snapOffset);} /* scrolling snapping */
+			if(o.snapAmount){ /* scrolling snapping */
+				var snapAmount=!(o.snapAmount instanceof Array) ? o.snapAmount : options.dir==="x" ? o.snapAmount[1] : o.snapAmount[0];
+				to=_snapAmount(to,snapAmount,o.snapOffset);
+			}
 			switch(options.dir){
 				case "x":
 					var mCSB_dragger=$("#mCSB_"+d.idx+"_dragger_horizontal"),
@@ -2083,8 +2126,8 @@ and dependencies (minified).
 				if(_cb("onInit")){o.callbacks.onInit.call(el[0]);} /* callbacks: onInit */
 			}
 			clearTimeout(mCSB_container[0].onCompleteTimeout);
-			if(!d.tweenRunning && ((contentPos===0 && scrollTo[0]>=0) || (contentPos===limit[0] && scrollTo[0]<=limit[0]))){return;}
 			_tweenTo(mCSB_dragger[0],property,Math.round(scrollTo[1]),dur[1],options.scrollEasing);
+			if(!d.tweenRunning && ((contentPos===0 && scrollTo[0]>=0) || (contentPos===limit[0] && scrollTo[0]<=limit[0]))){return;}
 			_tweenTo(mCSB_container[0],property,Math.round(scrollTo[0]),dur[0],options.scrollEasing,options.overwrite,{
 				onStart:function(){
 					if(options.callbacks && options.onStart && !d.tweenRunning){
@@ -2310,6 +2353,24 @@ and dependencies (minified).
 		_childPos=function(el){
 			var p=el.parents(".mCSB_container");
 			return [el.offset().top-p.offset().top,el.offset().left-p.offset().left];
+		},
+		/* -------------------- */
+		
+		
+		/* checks if browser tab is hidden/inactive via Page Visibility API */
+		_isTabHidden=function(){
+			var prop=_getHiddenProp();
+			if(!prop) return false;
+			return document[prop];
+			function _getHiddenProp(){
+				var pfx=["webkit","moz","ms","o"];
+				if("hidden" in document) return "hidden"; //natively supported
+				for(var i=0; i<pfx.length; i++){ //prefixed
+				    if((pfx[i]+"Hidden") in document) 
+				        return pfx[i]+"Hidden";
+				}
+				return null; //not supported
+			}
 		};
 		/* -------------------- */
 		
@@ -2357,7 +2418,7 @@ and dependencies (minified).
 	*/
 	window[pluginNS]=true;
 	
-	$(window).load(function(){
+	$(window).bind("load",function(){
 		
 		$(defaultSelector)[pluginNS](); /* add scrollbars automatically on default selector */
 		
@@ -2371,6 +2432,18 @@ and dependencies (minified).
 				cPos=[content[0].offsetTop,content[0].offsetLeft];
 				return 	cPos[0]+_childPos($el)[0]>=0 && cPos[0]+_childPos($el)[0]<wrapper.height()-$el.outerHeight(false) && 
 						cPos[1]+_childPos($el)[1]>=0 && cPos[1]+_childPos($el)[1]<wrapper.width()-$el.outerWidth(false);
+			},
+			/* checks if element or part of element is in view of scrollable viewport */
+			mcsInSight:$.expr[":"].mcsInSight || function(el,i,m){
+				var $el=$(el),elD,content=$el.parents(".mCSB_container"),wrapperView,pos,wrapperViewPct,
+					pctVals=m[3]==="exact" ? [[1,0],[1,0]] : [[0.9,0.1],[0.6,0.4]];
+				if(!content.length){return;}
+				elD=[$el.outerHeight(false),$el.outerWidth(false)];
+				pos=[content[0].offsetTop+_childPos($el)[0],content[0].offsetLeft+_childPos($el)[1]];
+				wrapperView=[content.parent()[0].offsetHeight,content.parent()[0].offsetWidth];
+				wrapperViewPct=[elD[0]<wrapperView[0] ? pctVals[0] : pctVals[1],elD[1]<wrapperView[1] ? pctVals[0] : pctVals[1]];
+				return 	pos[0]-(wrapperView[0]*wrapperViewPct[0][0])<0 && pos[0]+elD[0]-(wrapperView[0]*wrapperViewPct[0][1])>=0 && 
+						pos[1]-(wrapperView[1]*wrapperViewPct[1][0])<0 && pos[1]+elD[1]-(wrapperView[1]*wrapperViewPct[1][1])>=0;
 			},
 			/* checks if element is overflowed having visible scrollbar(s) */
 			mcsOverflow:$.expr[":"].mcsOverflow || function(el){
