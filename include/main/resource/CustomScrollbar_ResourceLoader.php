@@ -86,41 +86,33 @@ class CustomScrollbar_ResourceLoader extends CustomScrollbar_PluginUtility {
                     }
 
                     // Some options need to be formatted individually.
-                    $_aScrollbar[ 'status' ] = ( boolean ) $_aScrollbar[ 'status' ];
-
-                    // mouseWheel
-                    $_aScrollbar[ 'mouseWheel' ][ 'enable' ] = ( boolean ) $_aScrollbar[ 'mouseWheel' ][ 'enable' ];
-                    $_isMouseWheelScrollAmount = $this->getElement(
-                        $_aScrollbar,
-                        array( 'mouseWheel', 'scrollAmount' )
-                    );
-                    $_aScrollbar[ 'mouseWheel' ][ 'scrollAmount' ] = $_isMouseWheelScrollAmount
-                        ? ( integer ) $_isMouseWheelScrollAmount
-                        : 'auto';
-
-                    // keyboard
-                    $_aScrollbar[ 'keyboard' ][ 'enable' ] = ( boolean ) $_aScrollbar[ 'keyboard' ][ 'enable' ];
-                    $_isMouseWheelScrollAmount = $this->getElement(
-                        $_aScrollbar,
-                        array( 'keyboard', 'scrollAmount' )
-                    );
-                    $_aScrollbar[ 'keyboard' ][ 'scrollAmount' ] = $_isMouseWheelScrollAmount
-                        ? ( integer ) $_isMouseWheelScrollAmount
-                        : 'auto';
-
-                    // scrollButtons
-                    $_aScrollbar[ 'scrollButtons' ][ 'enable' ] = ( boolean ) $_aScrollbar[ 'scrollButtons' ][ 'enable' ];
-                    $_isScrollButtonScrollAmount = $this->getElement(
-                        $_aScrollbar,
-                        array( 'scrollButtons', 'scrollAmount' )
-                    );
-                    $_aScrollbar[ 'scrollButtons' ][ 'scrollAmount' ] = $_isScrollButtonScrollAmount
-                        ? ( integer ) $_isScrollButtonScrollAmount
-                        : 'auto';
+                    $_aScrollbar[ 'status' ]        = ( boolean ) $_aScrollbar[ 'status' ];
+                    $_aScrollbar[ 'mouseWheel' ]    = $this->___getScrollElementOptionsFormatted( $_aScrollbar[ 'mouseWheel' ] );
+                    $_aScrollbar[ 'keyboard' ]      = $this->___getScrollElementOptionsFormatted( $_aScrollbar[ 'keyboard' ] );
+                    $_aScrollbar[ 'scrollButtons' ] = $this->___getScrollElementOptionsFormatted( $_aScrollbar[ 'scrollButtons' ] );
 
                 }
                 return $aScrollbars;
 
             }
+                /**
+                 * Formats scroll element options such as `mouseWheel`, `keyboard`, and `ScrollButtons`.
+                 * @param array $aScrollElement
+                 * @return array
+                 * @since 1.3.0
+                 */
+                private function ___getScrollElementOptionsFormatted( array $aScrollElement ) {
+
+                    $aScrollElement[ 'enable' ] = ( boolean ) $aScrollElement[ 'enable' ];
+                    $_isMouseWheelScrollAmount = $this->getElement(
+                        $aScrollElement,
+                        array( 'scrollAmount' )
+                    );
+                    $aScrollElement[ 'scrollAmount' ] = $_isMouseWheelScrollAmount
+                        ? ( integer ) $_isMouseWheelScrollAmount
+                        : 'auto';
+                    return $aScrollElement;
+
+                }
 
 }

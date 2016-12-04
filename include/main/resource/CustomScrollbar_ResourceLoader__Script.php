@@ -72,9 +72,12 @@ class CustomScrollbar_ResourceLoader__Script extends CustomScrollbar_PluginUtili
 
         $_aData = array(
               'scrollbars' => $this->___aScrollbars,
-              'css'        => '__dropped',
-              'reset'      => '__dropped',
-          ) + $_oOption->get();
+         ) + $_oOption->get();
+        unset(
+            $_aData[ 'css' ],
+            $_aData[ 'reset' ],
+            $_aData[ 'delete' ]
+        );
 
         wp_localize_script(
             'custom_scrollbar_enabler',  // handle id - the above used enqueue handle id
