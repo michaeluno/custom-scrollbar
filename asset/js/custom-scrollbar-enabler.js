@@ -26,7 +26,9 @@
 
                 _setInlineCSS( _aScrollbar );
 
-                $( _aScrollbar[ 'selector' ] ).mCustomScrollbar( _getScrollbarOptions( _aScrollbar ) );
+                $( _aScrollbar[ 'selector' ] )
+                    .mCustomScrollbar( 'destroy' )
+                    .mCustomScrollbar( _getScrollbarOptions( _aScrollbar ) );
 
                 _setCustomColors( _aScrollbar, _iIndex );
                 
