@@ -63,6 +63,7 @@ If you want to disable your scrollbars in certain screen widths, you can do so a
 = 1.3.0 - 12/16/2016 =
 - Added the `Scroll Buttons`, `Keyboard`, `Mouse Wheel` options.
 - Changed the `Ajax Handling` option in the `General` setting section by moving it to each scrollbar option item.
+- Deprecated the ability of creating multiple scrollbars.
 
 = 1.2.0 - 10/10/2016 =
 - Added the `Ajax Handling` option that determines whether to initialize plugin scripts on Ajax page loads.
