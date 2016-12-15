@@ -129,6 +129,7 @@ $aClassFiles = array(
     "CustomScrollbar_AdminPageFramework_Form_Model___Format_EachSection"=> CustomScrollbar_AdminPageFramework_Registry::$sDirPath . "/factory/_common/form/_model/formatter/AdminPageFramework_Form_Model___Format_EachSection.php", 
     "CustomScrollbar_AdminPageFramework_Form_Model___Format_Fields"=> CustomScrollbar_AdminPageFramework_Registry::$sDirPath . "/factory/_common/form/_model/formatter/AdminPageFramework_Form_Model___Format_Fields.php", 
     "CustomScrollbar_AdminPageFramework_Form_Model___Format_FieldsetOutput"=> CustomScrollbar_AdminPageFramework_Registry::$sDirPath . "/factory/_common/form/_model/formatter/AdminPageFramework_Form_Model___Format_FieldsetOutput.php", 
+    "CustomScrollbar_AdminPageFramework_Form_Model___Format_RepeatableField"=> CustomScrollbar_AdminPageFramework_Registry::$sDirPath . "/factory/_common/form/_model/formatter/AdminPageFramework_Form_Model___Format_RepeatableField.php", 
     "CustomScrollbar_AdminPageFramework_Form_Model___Modifier_FilterRepeatableElements"=> CustomScrollbar_AdminPageFramework_Registry::$sDirPath . "/factory/_common/form/_model/modifier/AdminPageFramework_Form_Model___Modifier_FilterRepeatableElements.php", 
     "CustomScrollbar_AdminPageFramework_Form_Model___Modifier_SortInput"=> CustomScrollbar_AdminPageFramework_Registry::$sDirPath . "/factory/_common/form/_model/modifier/AdminPageFramework_Form_Model___Modifier_SortInput.php", 
     "CustomScrollbar_AdminPageFramework_Form_View___DebugInfo"=> CustomScrollbar_AdminPageFramework_Registry::$sDirPath . "/factory/_common/form/_view/AdminPageFramework_Form_View___DebugInfo.php", 
@@ -278,6 +279,7 @@ $aClassFiles = array(
     "CustomScrollbar_AdminPageFramework_Form_Model___SectionConditioner"=> CustomScrollbar_AdminPageFramework_Registry::$sDirPath . "/factory/_common/form/_model/element_definition/AdminPageFramework_Form_Model___FieldConditioner.php", 
     "CustomScrollbar_AdminPageFramework_Form_Model___Format_FormField_Base"=> CustomScrollbar_AdminPageFramework_Registry::$sDirPath . "/factory/_common/form/_model/formatter/AdminPageFramework_Form_Model___Format_EachField.php", 
     "CustomScrollbar_AdminPageFramework_Form_Model___Format_Fieldset"=> CustomScrollbar_AdminPageFramework_Registry::$sDirPath . "/factory/_common/form/_model/formatter/AdminPageFramework_Form_Model___Format_FieldsetOutput.php", 
+    "CustomScrollbar_AdminPageFramework_Form_Model___Format_RepeatableSection"=> CustomScrollbar_AdminPageFramework_Registry::$sDirPath . "/factory/_common/form/_model/formatter/AdminPageFramework_Form_Model___Format_RepeatableField.php", 
     "CustomScrollbar_AdminPageFramework_Form_Model___Modifier_Base"=> CustomScrollbar_AdminPageFramework_Registry::$sDirPath . "/factory/_common/form/_model/modifier/AdminPageFramework_Form_Model___Modifier_FilterRepeatableElements.php", 
     "CustomScrollbar_AdminPageFramework_Form_View___Attribute_Base"=> CustomScrollbar_AdminPageFramework_Registry::$sDirPath . "/factory/_common/form/_view/attribute/AdminPageFramework_Form_View___Attribute_Field.php", 
     "CustomScrollbar_AdminPageFramework_Form_View___Attribute_FieldContainer_Base"=> CustomScrollbar_AdminPageFramework_Registry::$sDirPath . "/factory/_common/form/_view/attribute/AdminPageFramework_Form_View___Attribute_Field.php", 
@@ -321,5 +323,6 @@ $aClassFiles = array(
     "CustomScrollbar_AdminPageFramework_Factory_Model"=> CustomScrollbar_AdminPageFramework_Registry::$sDirPath . "/factory/_common/_abstract/AdminPageFramework_Factory.php", 
     "CustomScrollbar_AdminPageFramework_Factory_View"=> CustomScrollbar_AdminPageFramework_Registry::$sDirPath . "/factory/_common/_abstract/AdminPageFramework_Factory.php", 
     "CustomScrollbar_AdminPageFramework_Factory_Controller"=> CustomScrollbar_AdminPageFramework_Registry::$sDirPath . "/factory/_common/_abstract/AdminPageFramework_Factory.php", 
-
+    "CustomScrollbar_RevealerCustomFieldType" => CustomScrollbar_AdminPageFramework_Registry::$sDirPath . "/custom-field-types/revealer-custom-field-type/RevealerCustomFieldType.php",
+    "CustomScrollbar_NoUISliderCustomFieldType" => CustomScrollbar_AdminPageFramework_Registry::$sDirPath . "/custom-field-types/nouislider-custom-field-type/NoUISliderCustomFieldType.php",
 );
