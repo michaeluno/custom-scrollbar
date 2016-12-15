@@ -14,6 +14,11 @@
  */
 class CustomScrollbar_AdminPage__FormSection_Scrollbar extends CustomScrollbar_AdminPage__FormSection_Base {
 
+    protected function _construct( $oFactory ) {
+        new CustomScrollbar_RevealerCustomFieldType( $oFactory->oProp->sClassName );
+        new CustomScrollbar_NoUISliderCustomFieldType( $oFactory->oProp->sClassName );
+    }
+
     /**
      * @param $oFactory
      * @return array
@@ -30,7 +35,15 @@ class CustomScrollbar_AdminPage__FormSection_Scrollbar extends CustomScrollbar_A
                 'container'         => 'section',
                 'is_collapsed'      => true,
             ),
-            'repeatable'        => true, // this makes the section repeatable
+            'repeatable'        => array(
+                'disabled'  => array(
+                    'message' => sprintf(
+                        __( "Please upgrade to <a href='%1\$s' target='_blank'>Pro</a> to enable this feature.", 'custom-scrollbar' ),
+                        esc_url( CustomScrollbar_Registry::PRO_URI )
+                    ),
+                    'caption' => CustomScrollbar_Registry::NAME,
+                ),
+            ),
             'sortable'          => true,
         );
     }
@@ -40,6 +53,9 @@ class CustomScrollbar_AdminPage__FormSection_Scrollbar extends CustomScrollbar_A
      * @return array
      */
     protected function _getFields( $oFactory ){
+
+        $oFactory->oMsg->set( 'allowed_maximum_number_of_fields', __( 'Not allowed.', 'custom-scrollbar' ) );
+
         return array(
             array(
                 'field_id'         => 'name',
@@ -120,11 +136,7 @@ class CustomScrollbar_AdminPage__FormSection_Scrollbar extends CustomScrollbar_A
                     'property' => __( 'Property', 'custom-scrollbar' ),
                     'value'    => __( 'Value', 'custom-scrollbar' ),
                 ),
-                'attributes'        => array(
-                    'field' => array(
-                        'style' => 'width: 100%;'
-                    ),
-                ),
+                'label_min_width'   => '60px',
                 'tip'               => "<p>"
                     . __( 'Apply these inline CSS rules to the target elements.', 'custom-scrollbar' )
                     . ' e.g. ' . '<code>white-space</code>: <code>nowrap</code>'
@@ -171,12 +183,18 @@ class CustomScrollbar_AdminPage__FormSection_Scrollbar extends CustomScrollbar_A
                 'tip'               => __( 'Decide whether to enable or disable content scrolling via the mouse-wheel.', 'custom-scrollbar' ),
                 'content'           => array(
                     array(
-                        'field_id'  => 'enable',
-                        'type'      => 'radio',
+                        'field_id'    => 'enable',
+                        'type'        => 'revealer',
+                        'select_type' => 'radio',
                         'label'     => array(
                             1   => __( 'On', 'custom-scrollbar' ),
                             0   => __( 'Off', 'custom-scrollbar' ),
                         ),
+                        'selectors'   => array(
+                            1   => '.mouse-wheel',
+                            0   => '.mouse-wheel-off', // non-existent element
+                        ),
+                        'default'       => 1,
                     ),
                     array(
                         'field_id'      => 'scrollAmount',
@@ -186,6 +204,9 @@ class CustomScrollbar_AdminPage__FormSection_Scrollbar extends CustomScrollbar_A
                         'description'   => __( 'Leave it empty to be automatically configured.', 'custom-scrollbar' ),
                         'attributes'    => array(
                             'min'   => 0,
+                        ),
+                        'class'         => array(
+                            'fieldset'  => 'mouse-wheel',
                         ),
                     ),
                 ),
@@ -196,11 +217,16 @@ class CustomScrollbar_AdminPage__FormSection_Scrollbar extends CustomScrollbar_A
                 'tip'               => __( 'Decide whether to enable or disable content scrolling via the keyboard. The following keys are supported: top, left, right and down, page-up (PgUp), page-down (PgDn), Home and End.', 'custom-scrollbar' ),
                 'content'           => array(
                     array(
-                        'field_id'  => 'enable',
-                        'type'      => 'radio',
+                        'field_id'      => 'enable',
+                        'type'          => 'revealer',
+                        'select_type'   => 'radio',
                         'label'     => array(
                             1   => __( 'On', 'custom-scrollbar' ),
                             0   => __( 'Off', 'custom-scrollbar' ),
+                        ),
+                        'selectors'   => array(
+                            1   => '.keyboard',
+                            0   => '.keyboard-off', // non-existent element
                         ),
                     ),
                     array(
@@ -211,6 +237,9 @@ class CustomScrollbar_AdminPage__FormSection_Scrollbar extends CustomScrollbar_A
                         'description'   => __( 'Leave it empty to be automatically configured.', 'custom-scrollbar' ),
                         'attributes'    => array(
                             'min'   => 0,
+                        ),
+                        'class'         => array(
+                            'fieldset'  => 'keyboard',
                         ),
                     ),
                 ),
@@ -221,11 +250,16 @@ class CustomScrollbar_AdminPage__FormSection_Scrollbar extends CustomScrollbar_A
                 'tip'               => __( 'Decide whether to enable or disable scrollbar buttons.', 'custom-scrollbar' ),
                 'content'           => array(
                     array(
-                        'field_id'  => 'enable',
-                        'type'      => 'radio',
-                        'label'     => array(
+                        'field_id'      => 'enable',
+                        'type'          => 'revealer',
+                        'select_type'   => 'radio',
+                        'label'         => array(
                             1   => __( 'On', 'custom-scrollbar' ),
                             0   => __( 'Off', 'custom-scrollbar' ),
+                        ),
+                        'selectors'   => array(
+                            1   => '.scroll-buttons',
+                            0   => '.scroll-buttons-off', // non-existent element
                         ),
                     ),
                     array(
@@ -237,6 +271,9 @@ class CustomScrollbar_AdminPage__FormSection_Scrollbar extends CustomScrollbar_A
                         'attributes'    => array(
                             'min'   => 0,
                         ),
+                        'class'         => array(
+                            'fieldset'  => 'scroll-buttons',
+                        ),
                     ),
                     array(
                         'field_id'      => 'scrollType',
@@ -246,6 +283,9 @@ class CustomScrollbar_AdminPage__FormSection_Scrollbar extends CustomScrollbar_A
                             'stepless' => __( 'Scrolls the content continuously while pressing the button.', 'custom-scrollbar' ),
                             'stepped'  => __( 'Each button click scrolls the content by the amount set in the Scroll Amount option.', 'custom-scrollbar' ),
                         ),
+                        'class'         => array(
+                            'fieldset'  => 'scroll-buttons',
+                        ),
                     ),
                 ),
             ),
@@ -254,36 +294,113 @@ class CustomScrollbar_AdminPage__FormSection_Scrollbar extends CustomScrollbar_A
                 'type'              => 'color',
                 'title'             => '.mCSB_draggerContainer',
                 'default'           => '',
+                'class'             => array(
+                    'fieldrow'  => 'custom-colors',
+                ),
             ),
             array(
                 'field_id'          => 'mCSB_dragger',
                 'type'              => 'color',
                 'title'             => '.mCSB_dragger',
                 'default'           => '',
+                'class'             => array(
+                    'fieldrow'  => 'custom-colors',
+                ),
             ),
             array(
                 'field_id'          => 'mCSB_dragger_bar',
                 'type'              => 'color',
                 'title'             => '.mCSB_dragger_bar',
                 'default'           => '',
+                'class'             => array(
+                    'fieldrow'  => 'custom-colors',
+                ),
             ),
             array(
                 'field_id'          => 'mCSB_draggerRail',
                 'type'              => 'color',
                 'title'             => '.mCSB_draggerRail',
                 'default'           => '',
+                'class'             => array(
+                    'fieldrow'  => 'custom-colors',
+                ),
             ),
             array(
                 'field_id'          => 'mCSB_scrollTools',
                 'type'              => 'color',
                 'title'             => '.mCSB_scrollTools',
                 'default'           => '',
+                'class'             => array(
+                    'fieldrow'  => 'custom-colors',
+                ),
             ),
             array(
                 'field_id'          => 'initialize_on_ajax_load',
                 'title'             => __( 'Ajax Handling', 'custom-scrollbar' ),
                 'type'              => 'checkbox',
                 'label'             => __( 'Initialize scrollbars when Ajax requests are performed.', 'custom-scrollbar' ),
+            ),
+            array(
+                'field_id'          => 'responsive',
+                'title'             => __( 'Responsive', 'custom-scrollbar' ),
+                'content'           => array(
+                    array(
+                        'field_id'    => 'enable',
+                        'type'        => 'revealer',
+                        'select_type' => 'radio',
+                        'label'     => array(
+                            1   => __( 'On', 'custom-scrollbar' ),
+                            0   => __( 'Off', 'custom-scrollbar' ),
+                        ),
+                        'selectors'   => array(
+                            1   => '.screen-width-range',
+                            0   => '.screen-width-range-off', // non-existent element
+                        ),
+                        'default'       => 0,
+                    ),
+                    array(
+                        'field_id'      => 'screen_width_range',
+                        'type'          => 'no_ui_slider',
+                        'title'         => __( 'Visible Screen Width Ranges', 'custom-scrollbar' ),
+                        'description'   => __( 'The scrollbar will appear in the specified screen width ranges. The values are in pixels. Set empty for no limit.', 'custom-scrollbar' ),
+                        'repeatable'    => true,
+                        'sortable'      => true,
+                        'disabled'      => true,
+                        'disable'       => true,
+                        'class'         => array(
+                            'fieldset' => 'screen-width-range',
+                        ),
+                        'label_min_width'       => '40px',
+                        'label'                 => array(
+                            0   => __( 'Min' ),
+                            1   => __( 'Max' ),
+                        ),
+                        'options'               => array(
+                            'start' => array(
+                                1, 1200
+                            ),
+                            'range'             => array(
+                                'min'   => 1,
+                                'max'   => 1200,
+                            ),
+                            'connect'           => array(
+                                false, true, false,
+                            ),
+                            'interactive'       => array(
+                                true, true
+                            ),
+                            'can_exceed_min'    => false,
+                            'can_exceed_max'    => true,
+                            'allow_empty'       => true,
+                        ),
+                        'attributes'    => array(
+                            'fieldset' => array(
+                                'style' => 'min-width: 30%;'
+                            ),
+                        ),
+
+                    ),
+                ),
             ),
         );
     }

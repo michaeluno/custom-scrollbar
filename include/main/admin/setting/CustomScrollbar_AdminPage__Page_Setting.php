@@ -28,6 +28,7 @@ class CustomScrollbar_AdminPage__Page_Setting extends CustomScrollbar_AdminPage_
         new CustomScrollbar_AdminPage__InPageTab_CSS( $oFactory, $this->_sPageSlug );
         new CustomScrollbar_AdminPage__InPageTab_General( $oFactory, $this->_sPageSlug );
         new CustomScrollbar_AdminPage__InPageTab_Data( $oFactory, $this->_sPageSlug );
+        new CustomScrollbar_AdminPage__InPageTab_Pro( $oFactory, $this->_sPageSlug );
 
     }
         

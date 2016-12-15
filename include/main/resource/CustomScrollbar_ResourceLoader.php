@@ -62,6 +62,7 @@ class CustomScrollbar_ResourceLoader extends CustomScrollbar_PluginUtility {
                 CustomScrollbar_Registry::HOOK_SLUG . '_filter_activated_scrollbars',
                 $_aScrollbars
             );
+
             return $_aScrollbars;
 
         }
@@ -82,7 +83,6 @@ class CustomScrollbar_ResourceLoader extends CustomScrollbar_PluginUtility {
 
                     $_aScrollbar = $_aScrollbar + $_aDefault;
 
-
                     if ( ! $this->___isValidScrollbar( $_aScrollbar ) ) {
                         unset( $aScrollbars[ $_iIndex ] );
                         continue;
@@ -99,6 +99,7 @@ class CustomScrollbar_ResourceLoader extends CustomScrollbar_PluginUtility {
                         array( 'initialize_on_ajax_load' ),
                         $_bInitializeOnAjaxLoad
                     );
+                    $_aScrollbar[ 'responsive' ]              = $this->___getResponsiveOptionsFormatted( $_aScrollbar[ 'responsive' ] );
 
                 }
                 return $aScrollbars;
@@ -113,7 +114,7 @@ class CustomScrollbar_ResourceLoader extends CustomScrollbar_PluginUtility {
                     if ( ! $aScrollbar[ 'status' ] ) {
                         return false;
                     }
-                    if ( ! $aScrollbar[ 'selector' ] ) {
+                    if ( ! trim( $aScrollbar[ 'selector' ] ) ) {
                         return false;
                     }
                     return true;
@@ -136,6 +137,20 @@ class CustomScrollbar_ResourceLoader extends CustomScrollbar_PluginUtility {
                         : 'auto';
                     return $aScrollElement;
 
+                }
+
+                /**
+                 * @param array $aResponsive
+                 * @return array
+                 * @since 1.3.0
+                 */
+                private function ___getResponsiveOptionsFormatted( array $aResponsive ) {
+                    $aResponsive [ 'enable' ] = ( boolean ) $aResponsive [ 'enable' ];
+                    foreach( $aResponsive[ 'screen_width_range' ] as &$_aRange ) {
+                        $_aRange[ 0 ] = ( integer ) $_aRange[ 0 ];
+                        $_aRange[ 1 ] = ( integer ) $_aRange[ 1 ];
+                    }
+                    return $aResponsive;
                 }
 
 }

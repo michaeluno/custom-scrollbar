@@ -11,6 +11,7 @@ $_aClassFiles = array(
     "CustomScrollbar_AdminPage__FormSection_Delete"=> CustomScrollbar_Registry::$sDirPath . "/include/main/admin/setting/general/CustomScrollbar_AdminPage__FormSection_Delete.php", 
     "CustomScrollbar_AdminPage__FormSection_Load"=> CustomScrollbar_Registry::$sDirPath . "/include/main/admin/setting/general/CustomScrollbar_AdminPage__FormSection_Load.php", 
     "CustomScrollbar_AdminPage__InPageTab_General"=> CustomScrollbar_Registry::$sDirPath . "/include/main/admin/setting/general/CustomScrollbar_AdminPage__InPageTab_General.php", 
+    "CustomScrollbar_AdminPage__InPageTab_Pro"=> CustomScrollbar_Registry::$sDirPath . "/include/main/admin/setting/pro/CustomScrollbar_AdminPage__InPageTab_Pro.php", 
     "CustomScrollbar_AdminPage__FormSection_Scrollbar"=> CustomScrollbar_Registry::$sDirPath . "/include/main/admin/setting/scrollbar/CustomScrollbar_AdminPage__FormSection_Scrollbar.php", 
     "CustomScrollbar_AdminPage__InPageTab_Scrollbar"=> CustomScrollbar_Registry::$sDirPath . "/include/main/admin/setting/scrollbar/CustomScrollbar_AdminPage__InPageTab_Scrollbar.php", 
     "CustomScrollbar_AdminPage__Element_Base"=> CustomScrollbar_Registry::$sDirPath . "/include/main/admin/_abstract/CustomScrollbar_AdminPage__Element_Base.php", 

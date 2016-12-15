@@ -3,8 +3,8 @@ Contributors:       Michael Uno, miunosoft
 Donate link:        http://en.michaeluno.jp/donate
 Tags:               scroll, scrollbar, scrollbars, scroll bar, scroll bars, appearance, custom scrollbar, custom scrollbars, custom scroll, custom scroll bar, custom scroll bars
 Requires at least:  3.4
-Tested up to:       4.6.1
-Stable tag:         1.2.0
+Tested up to:       4.7.0
+Stable tag:         1.3.0
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,7 +12,7 @@ Adds a custom scrollbar to specified HTML elements.
 
 == Description ==
 
-<h4>Change the Look of Too Long Vertical Elements width a Scroolbar</h4>
+<h4>Change the Look of Too Long Vertical Elements width a Scrollbar</h4>
 Do you have too long elements sticking out and breaking the web site layout? 
 
 If you have such a problem, fix their height by adding a scrollbar to the element with this plugin.
@@ -36,6 +36,12 @@ Define custom CSS rules.
 
 <h4>Predefined Styles</h4>
 Pick you favorite style from a list.
+
+<h4>Ajax Page Load Handling</h4>
+Even if the elements is inside an element which loads with Ajax, your scrollbars will be initialized accordingly.
+
+<h4>Supports Responsive Design</h4>
+If you want to disable your scrollbars in certain screen widths, you can do so as well.
   
 = Supported Language =
 * English
@@ -47,10 +53,6 @@ Pick you favorite style from a list.
 1. Go to **Dashboard** -> **Appearance** -> **Scrollbars**.
 1. Configure the options by setting a selector and height.
 
-== Frequently asked questions ==
-
-== Other Notes ==
-
 == Screenshots ==
 
 1. **Front-end**
@@ -58,11 +60,11 @@ Pick you favorite style from a list.
 
 == Changelog ==
 
-= 1.3.0 =
+= 1.3.0 - 12/16/2016 =
 - Added the `Scroll Buttons`, `Keyboard`, `Mouse Wheel` options.
 - Changed the `Ajax Handling` option in the `General` setting section by moving it to each scrollbar option item.
 
-= 1.2.0 - 10/10/2015 =
+= 1.2.0 - 10/10/2016 =
 - Added the `Ajax Handling` option that determines whether to initialize plugin scripts on Ajax page loads.
 - Added the ability to export and import settings.
 - Refined the setting pages.

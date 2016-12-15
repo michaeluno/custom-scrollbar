@@ -18,6 +18,18 @@ class CustomScrollbar_AdminPage__InPageTab_Scrollbar extends CustomScrollbar_Adm
         return array(
             'tab_slug'  => 'scrollbars',
             'title'     => __( 'Scrollbars', 'custom-scrollbar' ),
+            'style'     => '.custom-scrollbar-field.custom-scrollbar-field.custom-scrollbar-field-text > .custom-scrollbar-input-label-container.custom-scrollbar-field-text-multiple-labels {
+    display: inline-block;
+    width: auto;
+    padding-right: 1em;
+}            
+.custom-scrollbar-field-no_ui_slider input {
+    max-width: 100px;
+}
+.custom-scrollbar-field-no_ui_slider .no-ui-sliders {
+    margin: 1em 1em 2em;
+}
+            ',
         );
     }
 

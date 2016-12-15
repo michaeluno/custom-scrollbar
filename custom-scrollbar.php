@@ -5,7 +5,7 @@
  *  Description:    Adds a custom scrollbar to specified HTML elements.
  *  Author:         Michael Uno (miunosoft)
  *  Author URI:     http://michaeluno.jp
- *  Version:        1.3.0b03
+ *  Version:        1.3.0
  */
 
 /**
@@ -15,7 +15,7 @@
  */
 class CustomScrollbar_Registry_Base {
  
-	const VERSION        = '1.3.0b03';    // <--- DON'T FORGET TO CHANGE THIS AS WELL!!
+	const VERSION        = '1.3.0';    // <--- DON'T FORGET TO CHANGE THIS AS WELL!!
 	const NAME           = 'Custom Scrollbar';
 	const DESCRIPTION    = 'Adds a custom scrollbar to specified HTML elements.';
 	const URI            = 'http://en.michaeluno.jp/custom-scrollbar';
@@ -60,7 +60,9 @@ final class CustomScrollbar_Registry extends CustomScrollbar_Registry_Base {
      * @remark      Up to 8 characters as transient name allows 45 characters or less ( 40 for site transients ) so that md5 (32 characters) can be added
      */    
 	const TRANSIENT_PREFIX          = 'CSB';
-    
+
+    const PRO_URI                   = 'http://en.michaeluno.jp/custom-scrollbar/custom-scrollbar-pro';
+
     /**
      * 
      * @since       1
@@ -136,21 +138,29 @@ final class CustomScrollbar_Registry extends CustomScrollbar_Registry_Base {
                     'mCSB_scrollTools'      => '',
 
                     // 1.3.0+
-                    'scrollButtons' => array(
+                    'scrollButtons'             => array(
                         'enable'        => 0,
                         'scrollAmount'  => '',  // auto
                         'scrollType'    => 'stepless',
                     ),
-                    'mouseWheel'    => array(
+                    'mouseWheel'                => array(
                         'enable'        => 1,
                         'scrollAmount'  => '',  // auto
                     ),
-                    'keyboard'      => array(
+                    'keyboard'                  => array(
                         'enable'        => 1,
                         'scrollAmount'  => '',  // auto
                     ),
-
                     'initialize_on_ajax_load'   => false,
+                    'responsive'                => array(
+                        'enable'             => 0,
+                        'screen_width_range' => array(
+                            array(
+                                1,      // min
+                                '',     // max (empty - no limit)
+                            )
+                        ),
+                    ),
                 ),
             ),
         ),

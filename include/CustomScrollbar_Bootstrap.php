@@ -41,6 +41,7 @@ final class CustomScrollbar_Bootstrap extends CustomScrollbar_AdminPageFramework
      * Sets up constants.
      */
     public function setConstants() {
+        CustomScrollbar_AdminPageFramework_Debug::$iLegibleStringCharacterLimit= 1000000;
     }    
     
     /**
