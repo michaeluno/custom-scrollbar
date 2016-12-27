@@ -60,6 +60,9 @@ If you want to disable your scrollbars in certain screen widths, you can do so a
 
 == Changelog ==
 
+= 1.3.1 - 12/27/2016 =
+- Fixed a bug that debug log was shown in the browser console.
+
 = 1.3.0 - 12/16/2016 =
 - Added the `Scroll Buttons`, `Keyboard`, `Mouse Wheel` options.
 - Changed the `Ajax Handling` option in the `General` setting section by moving it to each scrollbar option item.

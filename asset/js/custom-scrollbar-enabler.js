@@ -151,8 +151,7 @@
          * @private
          */
         var _aResponsiveScrollbars = _getScrollbarsByEnabledOption( 'responsive', 'enable' );
-console.log( '_aResponsiveScrollbars' );
-console.log( _aResponsiveScrollbars );
+
         // $( window ).on( 'load resize', function(){
         $( window ).on( 'resize', function(){
 
@@ -168,8 +167,7 @@ console.log( _aResponsiveScrollbars );
                     });
                 }
             } );
-console.log( _iClientWidth );
-console.log( _aScrollbarsInRange );
+
             $( this ).initalizeCustomScrollbars( _aScrollbarsInRange );
 
             /**
@@ -180,7 +178,7 @@ console.log( _aScrollbarsInRange );
             function _isInTheRanges( aRanges, iClientWidth ) {
                 var _bInRange = false;
                 $.each( aRanges, function( _iIndex, _aRange ) {
-console.log( _aRange );
+
                     // No max-limit?
                     if ( 0 === _aRange[ 1 ] ) {
                         if ( _aRange[ 0 ] <= iClientWidth ) {
@@ -197,7 +195,7 @@ console.log( _aRange );
                     }
 
                 } );
-console.log( '_bInRange: ' + _bInRange );
+
                 return _bInRange;
 
             }
@@ -219,7 +217,7 @@ console.log( '_bInRange: ' + _bInRange );
         if ( 'undefined' === typeof custom_scrollbar_enabler[ 'scrollbars' ] ) {
             return _aScrollbars;
         }
-// console.log( 'sOptionName ' + sOptionName );
+
         $.each( custom_scrollbar_enabler[ 'scrollbars' ], function( _iIndex, _aScrollbar ) {
             if ( $sSecondKey ) {
                 if ( ! _aScrollbar[ sOptionName ][ $sSecondKey ] ) {
@@ -230,7 +228,6 @@ console.log( '_bInRange: ' + _bInRange );
                     return true;    // continue
                 }
             }
-// console.log( _aScrollbar );
             _aScrollbars[ _iIndex ] = _aScrollbar;
         } );
         return _aScrollbars;
