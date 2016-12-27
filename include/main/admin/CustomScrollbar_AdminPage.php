@@ -55,7 +55,7 @@ class CustomScrollbar_AdminPage extends CustomScrollbar_AdminPageFramework {
         $this->_doPageSettings();
 
         $this->addLinkToPluginDescription(
-           "<a href='http://en.michaeluno.jp/contact/custom-order/'>" . __( 'Custom Order', 'custom-scrollbar' ) . "</a>"
+           "<a href='http://en.michaeluno.jp/contact/custom-order/'>" . __( 'Order custom plugin', 'custom-scrollbar' ) . "</a>"
         );
 
     }
