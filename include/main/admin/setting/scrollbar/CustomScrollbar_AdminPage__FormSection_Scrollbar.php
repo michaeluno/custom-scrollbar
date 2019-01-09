@@ -101,7 +101,7 @@ class CustomScrollbar_AdminPage__FormSection_Scrollbar extends CustomScrollbar_A
                 'type'              => 'size',
                 'title'             => __( 'Element Height', 'custom-scrollbar' ),
                 'tip'               => __( 'The target element maximum height.', 'custom-scrollbar' )
-                    . ' ' . __( 'HTMNL elements that exceed this value will have a scrollbar.', 'custom-scrollbar' ),
+                    . ' ' . __( 'HTML elements that exceed this value will have a scrollbar.', 'custom-scrollbar' ),
                 'units'             => array(
                     'px'    => 'px',
                     '%'    => '%',
@@ -112,7 +112,7 @@ class CustomScrollbar_AdminPage__FormSection_Scrollbar extends CustomScrollbar_A
                 'type'              => 'size',
                 'title'             => __( 'Element Width', 'custom-scrollbar' ),
                 'tip'               => __( 'The target element maximum width.', 'custom-scrollbar' )
-                    . ' ' . __( 'HTMNL elements that exceed this value will have a scrollbar.', 'custom-scrollbar' ),
+                    . ' ' . __( 'HTML elements that exceed this value will have a scrollbar.', 'custom-scrollbar' ),
                 'units'             => array(
                     'px'    => 'px',
                     '%'    => '%',
