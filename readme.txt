@@ -3,8 +3,8 @@ Contributors:       Michael Uno, miunosoft
 Donate link:        http://en.michaeluno.jp/donate
 Tags:               scroll, scrollbar, scrollbars, scroll bar, scroll bars, appearance, custom scrollbar, custom scrollbars, custom scroll, custom scroll bar, custom scroll bars
 Requires at least:  3.4
-Tested up to:       4.7.0
-Stable tag:         1.3.1
+Tested up to:       5.0.2
+Stable tag:         1.3.2
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -59,6 +59,10 @@ If you want to disable your scrollbars in certain screen widths, you can do so a
 2. **Setting Page**
 
 == Changelog ==
+
+= 1.3.2 - 01/10/2019 =
+- Added the Japanese translation.
+- Added the default language template file.
 
 = 1.3.1 - 12/27/2016 =
 - Fixed a bug that debug log was shown in the browser console.
