@@ -1,7 +1,7 @@
 === Custom Scrollbar ===
 Contributors:       Michael Uno, miunosoft
 Donate link:        http://en.michaeluno.jp/donate
-Tags:               scroll, scrollbar, scrollbars, scroll bar, scroll bars, appearance, custom scrollbar, custom scrollbars, custom scroll, custom scroll bar, custom scroll bars
+Tags:               scroll, scrollbar, scrollbars, scroll bar, scroll bars, appearance, custom scrollbar, custom scrollbars, custom scroll, custom scroll bar, custom scroll bars, responsive
 Requires at least:  3.4
 Tested up to:       5.0.2
 Stable tag:         1.3.2
@@ -28,6 +28,9 @@ Notes: you need a basic understanding of CSS/jQuery selectors to use this plugin
 <h4>Multiple Selectors</h4>
 By specifying selectors, you can define multiple scrollbars.
 
+<h4>Responsive</h4>
+Supports responsive design by defining the range of browser screen widths for the scrollbar to appear.
+
 <h4>Custom Colors</h4>
 Pick custom colors for the scrollbar elements.
 
@@ -45,7 +48,8 @@ If you want to disable your scrollbars in certain screen widths, you can do so a
   
 = Supported Language =
 * English
-  
+* Japanese
+
 == Installation ==
 
 1. Upload **`custom-scrollbar.php`** and other files compressed in the zip folder to the **`/wp-content/plugins/`** directory.
