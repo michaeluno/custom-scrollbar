@@ -64,6 +64,9 @@ If you want to disable your scrollbars in certain screen widths, you can do so a
 
 == Changelog ==
 
+= 1.3.3 - 08/19/2020 =
+- Fixed an incompatibility issue with WordPress 5.5 regarding radio input buttons.
+
 = 1.3.2 - 01/10/2019 =
 - Added the Japanese translation.
 - Added the default language template file.
