@@ -44,11 +44,7 @@ class CustomScrollbar_ResourceLoader__Script extends CustomScrollbar_PluginUtili
             CustomScrollbar_Registry::getPluginURL( $_sPath ) // file url
         );
 
-        $_aFiles     = array(
-            0 => '/asset/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js',
-            1 => '/asset/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.js',
-        );
-        $_sPath       = $_aFiles[ $_iDebugMode ];
+        $_sPath       = '/asset/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js';
         wp_enqueue_script(
             'malihu-custom-scrollbar',     // handle id
             CustomScrollbar_Registry::getPluginURL( $_sPath ),  // file url
