@@ -7,7 +7,7 @@
  */
 (function($){
 
-    $.fn.initalizeCustomScrollbars = function( $aScrollbars ) {
+    $.fn.initializeCustomScrollbars = function( $aScrollbars ) {
 
         $.each( $aScrollbars, function( _iIndex, _aScrollbar ) {
 
@@ -21,7 +21,7 @@
 
         } );
 
-    } // initalizeCustomScrollbars()
+    } // initializeCustomScrollbars()
 
     function _getScrollbarOptions( _aScrollbar ) {
 
@@ -133,7 +133,7 @@
         /**
          * Initialize active scrollbars.
          */
-        $( this ).initalizeCustomScrollbars( custom_scrollbar_enabler[ 'scrollbars' ] );
+        $( this ).initializeCustomScrollbars( custom_scrollbar_enabler[ 'scrollbars' ] );
 
         /**
          * Initializes scrollbars on AJAX page loads.
@@ -142,7 +142,7 @@
          */
         var _aScrollbarsThatInitializeOnAjaxLoad = _getScrollbarsByEnabledOption( 'initialize_on_ajax_load' );
         $( document ).ajaxStop( function() {
-            $( this ).initalizeCustomScrollbars( _aScrollbarsThatInitializeOnAjaxLoad );
+            $( this ).initializeCustomScrollbars( _aScrollbarsThatInitializeOnAjaxLoad );
         });
 
         /**
@@ -168,7 +168,7 @@
                 }
             } );
 
-            $( this ).initalizeCustomScrollbars( _aScrollbarsInRange );
+            $( this ).initializeCustomScrollbars( _aScrollbarsInRange );
 
             /**
              *
@@ -208,10 +208,11 @@
     /**
      *
      * @param sOptionName
+     * @param $sSecondKey
      * @return array
      * @private
      */
-    function _getScrollbarsByEnabledOption( sOptionName, $sSecondKey) {
+    function _getScrollbarsByEnabledOption( sOptionName, $sSecondKey ) {
 
         var _aScrollbars = {};
         if ( 'undefined' === typeof custom_scrollbar_enabler[ 'scrollbars' ] ) {
