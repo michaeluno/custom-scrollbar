@@ -76,7 +76,7 @@ class CustomScrollbar_ResourceLoader extends CustomScrollbar_PluginUtility {
                 $_bInitializeOnAjaxLoad = ( boolean ) $_oOption->get( 'load', 'ajax_initialization' );  // backward compatibility
                 $_aDefault              = $this->getElementAsArray(
                     CustomScrollbar_Registry::$aOptions,
-                    array( 'custom-scrollbar.php', 'scrollbars', 0 )
+                    array( 'custom-scrollbar', 'scrollbars', 0 )
                 );
 
                 foreach( $aScrollbars as $_iIndex => &$_aScrollbar ) {
