@@ -1,3 +1,3 @@
 #!/usr/bin/php
-php js-files-minifoer.php
+php js-files-minifier.php
 $SHELL
