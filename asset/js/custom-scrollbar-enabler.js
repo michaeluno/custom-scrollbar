@@ -2,7 +2,7 @@
  * Custom Scrollbar
  * 
  * http://en.michaeluno.jp/custom-scrollbar/
- * Copyright (c) 2015-2016 Michael Uno
+ * Copyright (c) 2015-2020 Michael Uno
  * 
  */
 (function($){
@@ -13,11 +13,14 @@
 
             _setInlineCSS( _aScrollbar );
 
-            $( _aScrollbar[ 'selector' ] )
-                .mCustomScrollbar( 'destroy' )
-                .mCustomScrollbar( _getScrollbarOptions( _aScrollbar ) );
+            var _aScrollbarOptions = _getScrollbarOptions( _aScrollbar );
+            $( _aScrollbar[ 'selector' ] ).mCustomScrollbar( 'destroy' ).mCustomScrollbar( _aScrollbarOptions );
 
             _setCustomColors( _aScrollbar, _iIndex );
+
+            if ( 'undefined' !== typeof custom_scrollbar_enabler && custom_scrollbar_enabler.debugMode ) {
+                console.log( 'Custom Scrollbar Option', _aScrollbarOptions );
+            }
 
         } );
 
@@ -128,6 +131,10 @@
 
         if ( 'undefined' === typeof custom_scrollbar_enabler ) {
             return true;
+        }
+
+        if ( custom_scrollbar_enabler.debugMode ) {
+            console.log( 'Custom Scrollbar', custom_scrollbar_enabler );
         }
 
         /**

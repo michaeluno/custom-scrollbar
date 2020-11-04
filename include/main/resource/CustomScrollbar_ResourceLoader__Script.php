@@ -71,8 +71,9 @@ class CustomScrollbar_ResourceLoader__Script extends CustomScrollbar_PluginUtili
         );
 
         $_aData = array(
-              'scrollbars' => $this->___aScrollbars,
-         ) + $_oOption->get();
+            'scrollbars' => $this->___aScrollbars,
+            'debugMode'  => $_iDebugMode,
+        ) + $_oOption->get();
         unset(
             $_aData[ 'css' ],
             $_aData[ 'reset' ],
