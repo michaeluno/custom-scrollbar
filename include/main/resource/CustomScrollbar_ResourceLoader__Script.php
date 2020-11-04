@@ -73,7 +73,8 @@ class CustomScrollbar_ResourceLoader__Script extends CustomScrollbar_PluginUtili
         unset(
             $_aData[ 'css' ],
             $_aData[ 'reset' ],
-            $_aData[ 'delete' ]
+            $_aData[ 'delete' ],
+            $_aData[ 'pro' ]
         );
 
         wp_localize_script(
