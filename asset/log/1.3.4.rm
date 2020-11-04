@@ -1,1 +1,2 @@
+- Fixed a bug that scrollbar options were not passed properly when the target element is not found. 
 - Fixed a bug that the default options were not applied properly.

@@ -7,19 +7,29 @@
  */
 (function($){
 
-    $.fn.initializeCustomScrollbars = function( $aScrollbars ) {
+    // function _initializeCustomScrollbar( subjectElement, aScrollbarOptions ) {
+    //
+    // }
 
-        $.each( $aScrollbars, function( _iIndex, _aScrollbar ) {
+    $.fn.initializeCustomScrollbars = function( aScrollbars ) {
+
+        $.each( aScrollbars, function( _iIndex, _aScrollbar ) {
+
+            var _subjectElement    = $( _aScrollbar[ 'selector' ] );
+            if ( ! _subjectElement.length ) {
+                return true; // skip;
+            }
 
             _setInlineCSS( _aScrollbar );
 
+            // Initialize the scrollbar
             var _aScrollbarOptions = _getScrollbarOptions( _aScrollbar );
             $( _aScrollbar[ 'selector' ] ).mCustomScrollbar( 'destroy' ).mCustomScrollbar( _aScrollbarOptions );
 
             _setCustomColors( _aScrollbar, _iIndex );
 
-            if ( 'undefined' !== typeof custom_scrollbar_enabler && custom_scrollbar_enabler.debugMode ) {
-                console.log( 'Custom Scrollbar Option', _aScrollbarOptions );
+            if ( 'undefined' !== typeof customScrollbarEnabler && customScrollbarEnabler.debugMode ) {
+                console.log( customScrollbarEnabler.pluginName, _aScrollbarOptions.name, _aScrollbarOptions );
             }
 
         } );
@@ -42,13 +52,13 @@
             ? ( 'px' === _aScrollbar[ 'width' ][ 'unit' ]
                 ? _iWidth
                 : String( _iWidth ) + '%'
-        )
+            )
             : false;
         var _bisHeight = _iHeight
             ? ( 'px' === _aScrollbar[ 'height' ][ 'unit' ]
                 ? _iHeight
                 : String( _iHeight ) + '%'
-        )
+            )
             : false;
 
         var _aDefaults = {
@@ -64,7 +74,7 @@
             }
         };
         var _aOptions = {
-            axis                : _sAxis, // vertical/horizontal scrollbar. e.g. 'x', 'y', 'xy'
+            axis                : _sAxis, // vertical/horizontal scrollbar. e.g. 'x', 'y', 'yx'
             theme               : _aScrollbar[ 'theme' ],
             setWidth            : _bisWidth,  // (integer) px, (string) %, (boolean) false
             setHeight           : _bisHeight, // (integer) px, (string) %, (boolean) false
@@ -129,18 +139,18 @@
      */
     $( document ).ready( function() {
 
-        if ( 'undefined' === typeof custom_scrollbar_enabler ) {
+        if ( 'undefined' === typeof customScrollbarEnabler ) {
             return true;
         }
 
-        if ( custom_scrollbar_enabler.debugMode ) {
-            console.log( 'Custom Scrollbar', custom_scrollbar_enabler );
+        if ( customScrollbarEnabler.debugMode ) {
+            console.log( customScrollbarEnabler.pluginName, customScrollbarEnabler );
         }
 
         /**
          * Initialize active scrollbars.
          */
-        $( this ).initializeCustomScrollbars( custom_scrollbar_enabler[ 'scrollbars' ] );
+        $( this ).initializeCustomScrollbars( customScrollbarEnabler[ 'scrollbars' ] );
 
         /**
          * Initializes scrollbars on AJAX page loads.
@@ -159,7 +169,6 @@
          */
         var _aResponsiveScrollbars = _getScrollbarsByEnabledOption( 'responsive', 'enable' );
 
-        // $( window ).on( 'load resize', function(){
         $( window ).on( 'resize', function(){
 
             var _iClientWidth       = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
@@ -175,7 +184,7 @@
                 }
             } );
 
-            $( this ).initializeCustomScrollbars( _aScrollbarsInRange );
+            $( this ).initializeCustomScrollbars( _aScrollbarsInRange ); // on window resize
 
             /**
              *
@@ -222,11 +231,11 @@
     function _getScrollbarsByEnabledOption( sOptionName, $sSecondKey ) {
 
         var _aScrollbars = {};
-        if ( 'undefined' === typeof custom_scrollbar_enabler[ 'scrollbars' ] ) {
+        if ( 'undefined' === typeof customScrollbarEnabler[ 'scrollbars' ] ) {
             return _aScrollbars;
         }
 
-        $.each( custom_scrollbar_enabler[ 'scrollbars' ], function( _iIndex, _aScrollbar ) {
+        $.each( customScrollbarEnabler[ 'scrollbars' ], function( _iIndex, _aScrollbar ) {
             if ( $sSecondKey ) {
                 if ( ! _aScrollbar[ sOptionName ][ $sSecondKey ] ) {
                     return true;    // continue

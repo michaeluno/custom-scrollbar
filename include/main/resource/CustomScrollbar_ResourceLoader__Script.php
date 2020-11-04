@@ -69,6 +69,7 @@ class CustomScrollbar_ResourceLoader__Script extends CustomScrollbar_PluginUtili
         $_aData = array(
             'scrollbars' => $this->___aScrollbars,
             'debugMode'  => $_iDebugMode,
+            'pluginName' => CustomScrollbar_Registry::NAME . ' ' . CustomScrollbar_Registry::VERSION ,
         ) + $_oOption->get();
         unset(
             $_aData[ 'css' ],
@@ -79,7 +80,7 @@ class CustomScrollbar_ResourceLoader__Script extends CustomScrollbar_PluginUtili
 
         wp_localize_script(
             'custom_scrollbar_enabler',  // handle id - the above used enqueue handle id
-            'custom_scrollbar_enabler',  // name of the data loaded in the script
+            'customScrollbarEnabler',  // name of the data loaded in the script
             $_aData // translation array
         );
 
