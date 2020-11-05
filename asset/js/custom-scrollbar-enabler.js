@@ -7,10 +7,6 @@
  */
 (function($){
 
-    // function _initializeCustomScrollbar( subjectElement, aScrollbarOptions ) {
-    //
-    // }
-
     $.fn.initializeCustomScrollbars = function( aScrollbars ) {
 
         $.each( aScrollbars, function( _iIndex, _aScrollbar ) {
