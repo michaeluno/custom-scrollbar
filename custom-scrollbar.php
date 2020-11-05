@@ -216,7 +216,7 @@ final class CustomScrollbar_Registry extends CustomScrollbar_Registry_Base {
     
     /**
      * Sets up class properties.
-     * @return      void
+     * @param  string $sPluginFilePath
      */
 	static function setUp( $sPluginFilePath ) {
         self::$sFilePath = $sPluginFilePath; 
@@ -224,9 +224,11 @@ final class CustomScrollbar_Registry extends CustomScrollbar_Registry_Base {
 	}	
 	
     /**
-     * @return      string
+     * @param  string $sRelativePath
+     * @return string
      */
 	public static function getPluginURL( $sRelativePath='' ) {
+	    $sRelativePath = ltrim( $sRelativePath, '/\\' );
         if ( isset( self::$_sPluginURLCache ) ) {
             return self::$_sPluginURLCache . $sRelativePath;
         }

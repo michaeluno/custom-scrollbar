@@ -39,8 +39,8 @@ class CustomScrollbar_AdminPage__InPageTab_Scrollbar extends CustomScrollbar_Adm
 
     protected function _do( $oFactory ) {
 
-        $_sImageURL = CustomScrollbar_Registry::getPluginURL( '/asset/image/scrollbar_parts_names.png' );
-        echo "<img class='scroll-bar-parts' src='{$_sImageURL}' />";
+        $_sImageURL = CustomScrollbar_Registry::getPluginURL( 'asset/image/scrollbar_parts_names.png' );
+        echo "<img class='scroll-bar-parts' src='{$_sImageURL}' alt='Scrollbar Parts'/>";
         echo "<div class='right-submit-button'>"
             . get_submit_button()
             . "</div>";

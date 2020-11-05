@@ -35,8 +35,8 @@ class CustomScrollbar_ResourceLoader__Script extends CustomScrollbar_PluginUtili
         $_oOption    = CustomScrollbar_Option::getInstance();
         $_iDebugMode = ( integer ) $_oOption->isDebugMode();
         $_aFiles     = array(
-            0 => '/asset/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css',
-            1 => '/asset/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css',
+            0 => 'asset/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.min.css',
+            1 => 'asset/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css',
         );
         $_sPath       = $_aFiles[ $_iDebugMode ];
         wp_enqueue_style(
@@ -44,7 +44,7 @@ class CustomScrollbar_ResourceLoader__Script extends CustomScrollbar_PluginUtili
             CustomScrollbar_Registry::getPluginURL( $_sPath ) // file url
         );
 
-        $_sPath       = '/asset/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js';
+        $_sPath       = 'asset/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js';
         wp_enqueue_script(
             'malihu-custom-scrollbar',     // handle id
             CustomScrollbar_Registry::getPluginURL( $_sPath ),  // file url
@@ -54,8 +54,8 @@ class CustomScrollbar_ResourceLoader__Script extends CustomScrollbar_PluginUtili
         );
 
         $_aFiles     = array(
-            0 => '/asset/js/custom-scrollbar-enabler.min.js',
-            1 => '/asset/js/custom-scrollbar-enabler.js',
+            0 => 'asset/js/custom-scrollbar-enabler.min.js',
+            1 => 'asset/js/custom-scrollbar-enabler.js',
         );
         $_sPath       = $_aFiles[ $_iDebugMode ];
         wp_enqueue_script(
