@@ -4,7 +4,7 @@ Donate link:        http://en.michaeluno.jp/donate
 Tags:               scroll, scrollbar, scrollbars, scroll bar, scroll bars, appearance, custom scrollbar, custom scrollbars, custom scroll, custom scroll bar, custom scroll bars, responsive
 Requires at least:  3.4
 Tested up to:       5.5.3
-Stable tag:         1.3.3
+Stable tag:         1.3.4
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -63,6 +63,12 @@ If you want to disable your scrollbars in certain screen widths, you can do so a
 2. **Setting Page**
 
 == Changelog ==
+
+= 1.3.4 - 11/06/2020 =
+- Tweaked the style of some UI elements.
+- Fixed a bug of double slashes on resource URLs.
+- Fixed a bug that scrollbar options were not passed properly when the target element is not found.
+- Fixed a bug that the default options were not applied properly.
 
 = 1.3.3 - 08/19/2020 =
 - Fixed an incompatibility issue with WordPress 5.5 regarding radio input buttons.
