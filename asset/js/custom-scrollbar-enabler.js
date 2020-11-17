@@ -24,6 +24,8 @@
 
             _setCustomColors( _aScrollbar, _iIndex );
 
+            _subjectElement.trigger( 'cs_initialized_scrollbar', _aScrollbar ); // [1.3.5+]
+
             if ( 'undefined' !== typeof customScrollbarEnabler && customScrollbarEnabler.debugMode ) {
                 console.log( customScrollbarEnabler.pluginName, _aScrollbarOptions.name, _aScrollbarOptions );
             }
