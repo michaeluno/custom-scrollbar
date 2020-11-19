@@ -4,7 +4,7 @@ Donate link:        http://en.michaeluno.jp/donate
 Tags:               scroll, scrollbar, scrollbars, scroll bar, scroll bars, appearance, custom scrollbar, custom scrollbars, custom scroll, custom scroll bar, custom scroll bars, responsive
 Requires at least:  3.4
 Tested up to:       5.5.3
-Stable tag:         1.3.4
+Stable tag:         1.3.5
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -63,6 +63,10 @@ If you want to disable your scrollbars in certain screen widths, you can do so a
 2. **Setting Page**
 
 == Changelog ==
+
+= 1.3.5 - 11/19/2020 =
+- Added a custom JavaScript event that is triggered right after a scrollbar is initialized.
+- Fixed some non-sanitized raw HTTP request arrays handled when the setting form is submitted.
 
 = 1.3.4 - 11/06/2020 =
 - Tweaked the style of some UI elements.
