@@ -64,7 +64,8 @@ If you want to disable your scrollbars in certain screen widths, you can do so a
 
 == Changelog ==
 
-= 1.3.6 - 03/01/2020 =
+= 1.3.6 - 03/01/2021 =
+- Fixed an incompatibility issue with PHP 8.0, which the setting UI did not load.
 - Fixed an incompatibility issue with WordPress 5.6 which comes with jQuery 3.5.
 
 = 1.3.5 - 11/19/2020 =
