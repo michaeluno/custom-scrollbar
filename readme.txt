@@ -64,6 +64,9 @@ If you want to disable your scrollbars in certain screen widths, you can do so a
 
 == Changelog ==
 
+= 1.3.6 - 03/01/2020 =
+- Fixed an incompatibility issue with WordPress 5.6 which comes with jQuery 3.5.
+
 = 1.3.5 - 11/19/2020 =
 - Added a custom JavaScript event that is triggered right after a scrollbar is initialized.
 - Fixed some non-sanitized raw HTTP request arrays handled when the setting form is submitted.

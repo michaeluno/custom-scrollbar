@@ -143,6 +143,7 @@
 
         if ( customScrollbarEnabler.debugMode ) {
             console.log( customScrollbarEnabler.pluginName, customScrollbarEnabler );
+            console.log( 'jquery:', jQuery.fn.jquery );
         }
 
         /**
