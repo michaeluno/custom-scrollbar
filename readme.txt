@@ -4,7 +4,7 @@ Donate link:        http://en.michaeluno.jp/donate
 Tags:               scroll, scrollbar, scrollbars, scroll bar, scroll bars, appearance, custom scrollbar, custom scrollbars, custom scroll, custom scroll bar, custom scroll bars, responsive
 Requires at least:  3.4
 Tested up to:       5.7.2
-Stable tag:         1.3.7
+Stable tag:         1.3.8
 License:            GPLv2 or later
 License URI:        http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -64,7 +64,10 @@ If you want to disable your scrollbars in certain screen widths, you can do so a
 
 == Changelog ==
 
-= 1.3.7 - 07/09/2021=
+= 1.3.8 - 07/09/2021 =
+- Fixed a bug that caused a PHP syntax error in PHP below 7.3.
+
+= 1.3.7 - 07/09/2021 =
 - Fixed dynamic UI elements which did not toggle the visibility.
 - Fixed JQMIGRATE warnings in the browser console.
 
