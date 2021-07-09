@@ -5,7 +5,7 @@
  *  Description:    Adds a custom scrollbar to specified HTML elements.
  *  Author:         Michael Uno (miunosoft)
  *  Author URI:     http://michaeluno.jp
- *  Version:        1.3.7
+ *  Version:        1.3.8
  */
 
 /**
@@ -15,7 +15,7 @@
  */
 class CustomScrollbar_Registry_Base {
  
-	const VERSION        = '1.3.7';    // <--- DON'T FORGET TO CHANGE THIS AS WELL!!
+	const VERSION        = '1.3.8';    // <--- DON'T FORGET TO CHANGE THIS AS WELL!!
 	const NAME           = 'Custom Scrollbar';
 	const DESCRIPTION    = 'Adds a custom scrollbar to specified HTML elements.';
 	const URI            = 'http://en.michaeluno.jp/custom-scrollbar';
